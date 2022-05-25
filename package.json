@@ -1,0 +1,62 @@
+{
+  "name": "yandex-practicum-2-mega-game",
+  "version": "0.0.1",
+  "description": "Yandex Practicum Middle Frontend. Twin Peaks Team. Mega Game Project",
+  "scripts": {
+    "start": "npm run build && node index.js",
+    "dev": "cp -R static dist && webpack serve --mode development",
+    "build": "webpack --mode production",
+    "lint": "eslint --fix --ext .js,.ts src"
+  },
+  "repository": {
+    "url": "git@github.com:Yandex-Twin-Peaks/mega-game.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "author": "Twin Peaks Team",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@babel/preset-env": "7.17.10",
+    "@babel/preset-typescript": "7.16.7",
+    "@babel/register": "7.17.7",
+    "@typescript-eslint/eslint-plugin": "5.26.0",
+    "@typescript-eslint/parser": "5.26.0",
+    "autoprefixer": "10.4.7",
+    "babel": "6.23.0",
+    "babel-loader": "8.2.5",
+    "css-loader": "6.7.1",
+    "css-minimizer-webpack-plugin": "3.4.1",
+    "eslint": "8.15.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-typescript": "17.0.0",
+    "html-webpack-plugin": "5.5.0",
+    "husky": "8.0.1",
+    "jsdom": "19.0.0",
+    "jsdom-global": "3.0.2",
+    "mini-css-extract-plugin": "2.6.0",
+    "postcss": "8.4.13",
+    "postcss-loader": "6.2.1",
+    "postcss-nested": "5.0.6",
+    "postcss-preset-env": "7.5.0",
+    "style-loader": "3.3.1",
+    "stylelint": "14.8.2",
+    "stylelint-config-standard": "25.0.0",
+    "terser-webpack-plugin": "5.3.1",
+    "ts-loader": "9.3.0",
+    "typescript": "4.7.2",
+    "webpack": "5.72.1",
+    "webpack-cli": "4.9.2",
+    "webpack-dev-server": "4.9.0"
+  },
+  "dependencies": {
+    "@babel/core": "7.18.2",
+    "express": "4.18.1",
+    "express-history-api-fallback": "2.2.1"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}
