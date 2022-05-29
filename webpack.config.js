@@ -1,67 +1,96 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const config = {
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
+  output: {
+    path: path.join(__dirname, "/dist"),
+    filename: "[name].js"
+  },
+  resolve: {
+    extensions: [".js", ".ts", ".tsx"],
+  },
   module: {
     rules: [
       {
-        test: /\.ts$/i,
-        use: 'ts-loader',
-        exclude: ['/node_modules/', '/.spec.ts$/'],
+        test: /\.(ts|tsx|js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: { presets: ['@babel/env','@babel/preset-react', '@babel/preset-typescript'] }
+        },
       },
       {
-        test: /\.(pcss|css)$/i,
+        test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
           {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [
-                  [
-                    'autoprefixer',
-                  ],
-                ],
-              },
-            },
-          },
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          }, {
+            loader: 'postcss-loader'
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          }, {
+            loader: 'postcss-loader'
+          }, {
+            loader: 'sass-loader',
+            options: { sourceMap: true }
+          }
         ],
+        sideEffects: true
       },
       {
-        test: /\.(woff)$/i,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/',
-          },
-        }],
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader?limit=10000',
+            options: { name: 'assets/img/[name].[ext]' }
+          }
+        ]
       },
       {
-        test: /\.(svg|png)$/i,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'images/',
-          },
-        }],
+        test: /\.(svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: { name: 'assets/svg/[name].[ext]' }
+          }
+        ]
       },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: {
+          loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+          options: { name: 'assets/fonts/[name].[ext]' }
+        }
+      },
+      {
+        test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: {
+          loader: 'file-loader',
+          options: { name: 'assets/fonts/[name].[ext]' }
+        }
+      }
     ],
   },
-  output: {
-    filename: '[name].[contenthash].js',
-    path: path.join(__dirname, 'dist'),
-    clean: true,
-  },
-  plugins: [new HtmlWebpackPlugin({
-    template: 'src/index.html',
-  }), new CssMinimizerPlugin(), new MiniCssExtractPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html'
+    }),
+    new MiniCssExtractPlugin()
+  ],
   optimization: {
     minimize: true,
     minimizer: [
@@ -77,21 +106,19 @@ const config = {
       chunks: 'all',
     },
   },
+  // Настройка сервера
   devServer: {
     hot: true,
     compress: true,
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, 'build'),
     },
-    port: 1234,
+    port: 8000,
     historyApiFallback: true,
   },
   performance: {
     hints: false,
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
-  },
+  }
 };
 
 module.exports = (env, argv) => {
