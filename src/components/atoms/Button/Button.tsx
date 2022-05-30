@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './Button.scss';
+import './Button.pcss';
 
 export interface IButtonProps {
   text: string;
@@ -9,7 +9,7 @@ export interface IButtonProps {
 const Button: FC<IButtonProps> = ({ text, onClick }: IButtonProps) => {
   return (
     <div className='button' onClick={onClick ? onClick : () => {}}>
-      {text}
+      {`${text}!`}
     </div>
   );
 };
