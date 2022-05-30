@@ -5,8 +5,7 @@ const app = express();
 const PORT = 3000;
 
 app.use('/', express.static(`${__dirname}/build`));
-app.use('/favicon.ico', express.static(`${__dirname}/build`));
-app.use('/assets/', express.static(`${__dirname}/assets`));
+app.use('/favicon.ico', express.static(`${__dirname}/build/assets/favicon.ico`));
 app.use(fallback('/', {root: `${__dirname}/build`}));
 
 app.listen(PORT, () => {

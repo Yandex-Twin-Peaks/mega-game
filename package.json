@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Yandex Practicum Middle Frontend. Twin Peaks Team. Mega Game Project",
   "scripts": {
-    "start": "yarn build && node index.js",
-    "dev": "webpack --mode development && mkdir dist/assets/ && cp -R static/* dist/assets/ && webpack serve --mode development --open",
-    "build": "webpack --mode production && mkdir dist/assets/ && cp -R static/* build/assets/",
+    "start": "npm run build && node index.js",
+    "dev": "webpack --mode development && cp -R static dist/assets && webpack serve --mode development --open",
+    "build": "webpack --mode production && cp -R static build/assets",
     "lint": "eslint --fix --ext .js,.ts src"
   },
   "repository": {
@@ -13,7 +13,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint"
+      "pre-commit": "npm run lint"
     }
   },
   "author": "Twin Peaks Team",

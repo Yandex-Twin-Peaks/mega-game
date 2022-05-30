@@ -16,7 +16,7 @@ const config = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: { presets: ['@babel/env','@babel/preset-react', '@babel/preset-typescript'] }
+          options: {presets: ['@babel/env', '@babel/preset-react', '@babel/preset-typescript']}
         },
       },
       {
@@ -43,7 +43,7 @@ const config = {
         use: [
           {
             loader: 'file-loader?limit=10000',
-            options: { name: 'assets/img/[name].[ext]' }
+            options: {name: 'assets/img/[name].[ext]'}
           }
         ]
       },
@@ -52,7 +52,7 @@ const config = {
         use: [
           {
             loader: 'file-loader',
-            options: { name: 'assets/svg/[name].[ext]' }
+            options: {name: 'assets/svg/[name].[ext]'}
           }
         ]
       },
@@ -60,7 +60,7 @@ const config = {
         test: /\.woff(2)?$/,
         use: {
           loader: 'file-loader-loader',
-          options: { name: 'assets/fonts/[name].[ext]' }
+          options: {name: 'assets/fonts/[name].[ext]'}
         }
       }
     ],
@@ -86,7 +86,6 @@ const config = {
       chunks: 'all',
     },
   },
-  // Настройка сервера
   devServer: {
     hot: true,
     compress: true,
@@ -106,7 +105,7 @@ module.exports = (env, argv) => {
     config.devtool = 'eval-source-map';
     config.output = {
       path: path.join(__dirname, "/dist"),
-        filename: "[name].js"
+      filename: "[name].js"
     }
   }
 
