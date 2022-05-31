@@ -6,57 +6,44 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const config = {
   entry: './src/index.tsx',
-  output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "[name].js"
-  },
   resolve: {
     extensions: [".js", ".ts", ".tsx"],
   },
   module: {
     rules: [
       {
-        test: /\.(ts|tsx|js|jsx)$/,
+        test: /\.(ts|tsx|js)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: { presets: ['@babel/env','@babel/preset-react', '@babel/preset-typescript'] }
+          options: {presets: ['@babel/env', '@babel/preset-react', '@babel/preset-typescript']}
         },
       },
       {
-        test: /\.css$/,
+        test: /\.(pcss|css)$/i,
         use: [
           MiniCssExtractPlugin.loader,
+          'css-loader',
           {
-            loader: 'css-loader',
-            options: { sourceMap: true }
-          }, {
-            loader: 'postcss-loader'
-          }
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: { sourceMap: true }
-          }, {
-            loader: 'postcss-loader'
-          }, {
-            loader: 'sass-loader',
-            options: { sourceMap: true }
-          }
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'autoprefixer',
+                  ],
+                ],
+              },
+            },
+          },
         ],
-        sideEffects: true
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/,
+        test: /\.(png|jpg)$/,
         use: [
           {
             loader: 'file-loader?limit=10000',
-            options: { name: 'assets/img/[name].[ext]' }
+            options: {name: 'assets/img/[name].[ext]'}
           }
         ]
       },
@@ -65,29 +52,22 @@ const config = {
         use: [
           {
             loader: 'file-loader',
-            options: { name: 'assets/svg/[name].[ext]' }
+            options: {name: 'assets/svg/[name].[ext]'}
           }
         ]
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.woff(2)?$/,
         use: {
-          loader: 'url-loader?limit=10000&mimetype=application/font-woff',
-          options: { name: 'assets/fonts/[name].[ext]' }
-        }
-      },
-      {
-        test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: {
-          loader: 'file-loader',
-          options: { name: 'assets/fonts/[name].[ext]' }
+          loader: 'file-loader-loader',
+          options: {name: 'assets/fonts/[name].[ext]'}
         }
       }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './src/index.html'
     }),
     new MiniCssExtractPlugin()
   ],
@@ -106,12 +86,11 @@ const config = {
       chunks: 'all',
     },
   },
-  // Настройка сервера
   devServer: {
     hot: true,
     compress: true,
     static: {
-      directory: path.join(__dirname, 'build'),
+      directory: path.join(__dirname, 'dist'),
     },
     port: 8000,
     historyApiFallback: true,
@@ -124,10 +103,18 @@ const config = {
 module.exports = (env, argv) => {
   if (argv.mode === 'development') {
     config.devtool = 'eval-source-map';
+    config.output = {
+      path: path.join(__dirname, "/dist"),
+      filename: "[name].js"
+    }
   }
 
   if (argv.mode === 'production') {
     config.devtool = false;
+    config.output = {
+      path: path.join(__dirname, "/build"),
+      filename: "[name].js"
+    }
   }
 
   return config;
