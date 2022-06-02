@@ -1,12 +1,10 @@
 import React from 'react';
-import Button from './components/atoms/Button';
+import Router from './router/Router';
+import { routes } from './router/config';
 
 const Main = () => {
   return (
-    <>
-      <h1>Main</h1>
-      <Button text='hello world' />
-    </>
+    <Router routes={routes} />
   );
 };
 
