@@ -51,6 +51,7 @@
     "path": "0.12.7",
     "postcss-loader": "7.0.0",
     "postcss-nested": "5.0.6",
+    "react-error-boundary": "3.1.4",
     "sass-loader": "13.0.0",
     "style-loader": "3.3.1",
     "terser-webpack-plugin": "5.3.1",
