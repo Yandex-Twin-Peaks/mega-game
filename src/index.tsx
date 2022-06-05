@@ -13,9 +13,7 @@ const container = document.getElementById('root')!;
 const app = (
   <ErrorBoundary
     FallbackComponent={Error}
-    onReset={() => {
-      // reset the state of your app so the error doesn't happen again
-    }}
+    onReset={() => {}}
   >
     <HashRouter>
       <Main />
