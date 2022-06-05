@@ -34,5 +34,29 @@ export const words = [
     num: 6,
     text: 'собака',
     category: 'Животные'
-  }
+  },
+  {
+    id: 7,
+    num: 6,
+    text: 'машина',
+    category: 'Транспорт'
+  },
+  {
+    id: 8,
+    num: 5,
+    text: 'катер',
+    category: 'Транспорт'
+  },
+  {
+    id: 9,
+    num: 7,
+    text: 'слизень',
+    category: 'Животные'
+  },
+  {
+    id: 10,
+    num: 8,
+    text: 'квартира',
+    category: 'Недвижимость'
+  },
 ];

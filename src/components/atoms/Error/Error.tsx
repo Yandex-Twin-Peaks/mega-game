@@ -9,7 +9,7 @@ export interface IErrorProps {
 
 function Error({ error, resetErrorBoundary }: IErrorProps) {
   return (
-    <div className='Error-Wrapper' role='alert'>
+    <div className='error' role='alert'>
       <p> 💥 CABOOM 💥 Что-то пошло не так</p>
       <pre>{error.message}</pre>
       <button onClick={resetErrorBoundary}>Перезагрузка</button>

@@ -1,5 +1,5 @@
 
-export default function drawlogic(ctx:any, errorCount:number) {
+export default function getCanvasPic(ctx:any, errorCount:number) {
 
   for (let ind = 0; ind < errorCount; ind++) {
 
