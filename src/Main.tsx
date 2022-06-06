@@ -1,11 +1,17 @@
 import React from 'react';
-import Router from './router/Router';
-import { routes } from './router/config';
+import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
+
+import { store } from './_store';
+import App from './App';
 
 const Main = () => {
   return (
-    <Router routes={routes} />
-  );
+    <Provider store={store}>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Provider>);
 };
 
 export default Main;
