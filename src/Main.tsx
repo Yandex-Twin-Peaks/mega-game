@@ -17,7 +17,7 @@ const Main = () => {
         <HashRouter>
           <App />
         </HashRouter>
-      </Provider>;
+      </Provider>
     </ErrorBoundary>
   );
 };
