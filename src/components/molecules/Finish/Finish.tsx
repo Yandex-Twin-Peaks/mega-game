@@ -9,8 +9,6 @@ export interface IFinishProps {
   gameStatus: GAMESTATUS;
 }
 
-function Finish({ gameStatus }:IFinishProps) {
+const Finish = ({ gameStatus }:IFinishProps) => gameStatus === GAMESTATUS.win ? <Win /> : <Fail />;
 
-  return gameStatus === GAMESTATUS.win ? <Win /> : <Fail />;
-}
 export default Finish;

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import GameDash from '../GameDash/GameDash';
-import './Start.pcss';
+import GameDash from '../GameDash';
 
 import getRandomWord from '../../../utils/getRandomWord';
 import { words } from '../../../utils/worddata/abbyy';
+
+import './Start.pcss';
 
 function Start() {
   const [oneFinalWord, setOneFinalWord] = useState('');
@@ -36,13 +37,9 @@ function Start() {
     </form>
   </div>;
 
-  return (
-    <>
-      {submitted ?
-        <GameDash charCount={charCount} text={oneFinalWord} category={oneFinalCategory} /> :
-        startJSX
-      }
-    </>
-  );
+  return submitted ?
+    <GameDash charCount={charCount} text={oneFinalWord} category={oneFinalCategory} /> :
+    startJSX;
 }
+
 export default Start;

@@ -2,10 +2,7 @@ import React from 'react';
 import './Win.pcss';
 import Button from '../../atoms/Button';
 
-
 function Win() {
-
-
   return (
     <>
       <div>Вы выиграли</div>
