@@ -19,27 +19,29 @@ function Start() {
   };
   const [charCount, setCharCount] = useState(0);
   const [submitted, setSubmit] = useState(false);
+
+  const startJSX = <div className='start-container'>
+    <span className='start-container__title'>Игра начинается введите количество буковок</span>
+    <form className='start-container__form' onSubmit={submitForm}>
+      <input
+        value={charCount}
+        onChange={(e) => setCharCount(Number(e.target.value))}
+        type='number'
+        placeholder='Enter a term'
+        className='start-container__input'
+      />
+      <button type='submit' className='start-container__button'>
+        Ввод
+      </button>
+    </form>
+  </div>;
+
   return (
     <>
-      {submitted ? (
-        <GameDash charCount={charCount} textWord={oneFinalWord} category={oneFinalCategory} />
-      ) : (
-        <div className='start-container'>
-          <span className='start-container__title'>Игра начинается введите количество буковок</span>
-          <form className='start-container__form' onSubmit={submitForm}>
-            <input
-              value={charCount}
-              onChange={(e) => setCharCount(Number(e.target.value))}
-              type='number'
-              placeholder='Enter a term'
-              className='start-container__input'
-            />
-            <button type='submit' className='start-container__button'>
-              Ввод
-            </button>
-          </form>
-        </div>
-      )}
+      {submitted ?
+        <GameDash charCount={charCount} text={oneFinalWord} category={oneFinalCategory} /> :
+        startJSX
+      }
     </>
   );
 }

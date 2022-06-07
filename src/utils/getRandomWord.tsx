@@ -1,6 +1,8 @@
 
-interface IAbbyy {
+export interface IAbbyy {
+  /** Итоговое слово которое участвует в игре (рандомно выбрано в компоненте старт) */
   text: string;
+  /** Наименование категории угадываемого слова */
   category: string;
 }
 

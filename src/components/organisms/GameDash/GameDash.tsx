@@ -2,30 +2,25 @@ import React, { useState } from 'react';
 import Canvas from '../../molecules/Canvas';
 import getCanvasPic from '../../../utils/getCanvasPic';
 import Finish from '../../molecules/Finish';
-import Oneletter from '../../molecules/Oneletter';
+import OneLetter from '../../molecules/OneLetter';
+import { GAMESTATUS } from '../../../types/enums';
 import './GameDash.pcss';
+import { IAbbyy } from '../../../utils/getRandomWord';
 
 
-export interface IGameDash {
+export interface IGameDash extends IAbbyy{
   /** Количество букв в слове, которое нужно отгадать */
   charCount: number;
-  /** Итоговое слово которое участвует в игре (рандомно выбрано в компоненте старт) */
-  textWord: string;
-  /** Наименование категории угадываемого слова */
-  category: string
   }
 
-function GameDash(props: IGameDash) {
-
-  const { charCount, category, textWord } = props;
+function GameDash({ charCount, category, text }: IGameDash) {
 
   const starArray:Array<string> = new Array(charCount).fill('*');
   const [showText, setShowText] = useState(starArray);
   const [errorCount, setError] = useState(0);
   const [word, setLetter] = useState('');
-  /** Статусы игры: 0 - в процессе 1 - победа 2 - поражение */
-  const [gameStatus, setGameStatus] = useState(0);
-  const finalWord = textWord.split('');
+  const [gameStatus, setGameStatus] = useState(GAMESTATUS.ingame);
+  const finalWord = text.split('');
 
   function checkNextChar(event: React.FormEvent<HTMLFormElement>) {
     if (finalWord.filter((el) => el === word).length) {
@@ -51,7 +46,6 @@ function GameDash(props: IGameDash) {
     event.preventDefault();
   }
 
-
   const draw = (ctx: any) => {
     ctx.fillStyle = 'rgb(200, 0, 0)';
     ctx.fillRect(10, 10, 50, 50);
@@ -60,42 +54,43 @@ function GameDash(props: IGameDash) {
     getCanvasPic(ctx, errorCount);
   };
 
+  const gameJSX = <div className='gamedash'>
+    <Canvas draw={draw} heigth={200} width={200} />
+    <div>Количество ошибок {errorCount}</div>
+    <div>
+    Загаданное слово (открытое)
+      {finalWord.map((el) => (
+        <div>{el}</div>
+      ))}
+    </div>
+    <div>Категория: {category}</div>
+  Загаданное слово закрытое
+    <div className='gamedash__lettercontainer'>
+      {showText.map((el) => (
+        <OneLetter letter={el} />
+      ))}
+    </div>
+    <div>Введи букву</div>
+    <form onSubmit={checkNextChar}>
+      <input
+        value={word}
+        onChange={(e) => setLetter(e.target.value)}
+        type='text'
+        placeholder='Enter a term'
+        className='gamedash__input'
+      />
+      <button type='submit' className='gamedash__button'>
+      Ввод
+      </button>
+    </form>
+  </div>;
+
   return (
     <>
       {gameStatus === 0 ? (
-        <div className='gamedash'>
-          <Canvas draw={draw} heigth={200} width={200} />
-          <div>Количество ошибок {errorCount}</div>
-          <div>
-            Загаданное слово (открытое)
-            {finalWord.map((el) => (
-              <div>{el}</div>
-            ))}
-          </div>
-          <div>Категория: {category}</div>
-          Загаданное слово закрытое
-          <div className='gamedash__lettercontainer'>
-            {showText.map((el) => (
-              <Oneletter letter={el} />
-            ))}
-          </div>
-          <div>Введи букву</div>
-          <form onSubmit={checkNextChar}>
-            <input
-              value={word}
-              onChange={(e) => setLetter(e.target.value)}
-              type='text'
-              placeholder='Enter a term'
-              className='gamedash__input'
-            />
-            <button type='submit' className='gamedash__button'>
-              Ввод
-            </button>
-          </form>
-        </div>
-      ) : (
-        <Finish gamestatus={gameStatus} />
-      )}
+        gameJSX
+      ) :
+        <Finish gameStatus={gameStatus} />}
     </>
   );
 }

@@ -1,16 +1,16 @@
 import React from 'react';
 import Fail from '../Fail';
 import Win from '../Win';
+import { GAMESTATUS } from '../../../types/enums';
 import './Finish.pcss';
 
 export interface IFinishProps {
-  gamestatus: number;
+  /** Статус игры */
+  gameStatus: GAMESTATUS;
 }
 
-function Finish(props:IFinishProps) {
+function Finish({ gameStatus }:IFinishProps) {
 
-  const { gamestatus } = props;
-
-  return gamestatus === 1 ? <Win /> : <Fail />;
+  return gameStatus === GAMESTATUS.win ? <Win /> : <Fail />;
 }
 export default Finish;

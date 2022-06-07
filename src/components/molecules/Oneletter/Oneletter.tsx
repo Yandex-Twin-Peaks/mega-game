@@ -1,16 +1,15 @@
 import React from 'react';
-import './Oneletter.pcss';
+import './OneLetter.pcss';
 
 export interface IOneletterProps {
+  /** Одна буква */
   letter: string;
 }
 
-function Oneletter(props:IOneletterProps) {
-
-  const { letter } = props;
+function OneLetter({ letter }:IOneletterProps) {
 
   return (
     <div className={'card' + (letter === '*' ? '__open' : '')}>{letter}</div>
   );
 }
-export default Oneletter;
+export default OneLetter;
