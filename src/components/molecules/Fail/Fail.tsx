@@ -1,12 +1,11 @@
 import React from 'react';
 import './Fail.pcss';
-import Canvas from '../Canvas/Canvas';
+import Canvas from '../Canvas';
 import getCanvasPic from '../../../utils/getCanvasPic';
 import Button from '../../atoms/Button';
 
-
 function Fail() {
-
+// TODO: добавить интерфейс для функции
   const draw = (ctx: any) => {
     ctx.fillStyle = 'rgb(200, 0, 0)';
     ctx.fillRect(10, 10, 50, 50);

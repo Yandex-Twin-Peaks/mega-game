@@ -4,14 +4,14 @@ import getCanvasPic from '../../../utils/getCanvasPic';
 import Finish from '../../molecules/Finish';
 import OneLetter from '../../molecules/OneLetter';
 import { GAMESTATUS } from '../../../types/enums';
-import './GameDash.pcss';
 import { IAbbyy } from '../../../utils/getRandomWord';
 
+import './GameDash.pcss';
 
-export interface IGameDash extends IAbbyy{
+export interface IGameDash extends IAbbyy {
   /** Количество букв в слове, которое нужно отгадать */
   charCount: number;
-  }
+}
 
 function GameDash({ charCount, category, text }: IGameDash) {
 
@@ -19,7 +19,7 @@ function GameDash({ charCount, category, text }: IGameDash) {
   const [showText, setShowText] = useState(starArray);
   const [errorCount, setError] = useState(0);
   const [word, setLetter] = useState('');
-  const [gameStatus, setGameStatus] = useState(GAMESTATUS.ingame);
+  const [gameStatus, setGameStatus] = useState(GAMESTATUS.inGame);
   const finalWord = text.split('');
 
   function checkNextChar(event: React.FormEvent<HTMLFormElement>) {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+// TODO: ДОБАВИТЬ ИНТЕРФЕЙС ДЛЯ КОМПОНЕНТА
 const Canvas = ({ draw, height, width }:any) => {
   const canvas = React.useRef<HTMLCanvasElement>(null);
 

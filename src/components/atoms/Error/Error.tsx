@@ -1,7 +1,6 @@
 import React from 'react';
 import './Error.pcss';
 
-
 export interface IErrorProps {
   error: Error;
   resetErrorBoundary: () => void;
