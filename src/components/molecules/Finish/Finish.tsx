@@ -11,10 +11,6 @@ function Finish(props:IFinishProps) {
 
   const { gamestatus } = props;
 
-  return (
-    <>
-      {gamestatus === 1 ? <Win /> : <Fail />}
-    </>
-  );
+  return gamestatus === 1 ? <Win /> : <Fail />;
 }
 export default Finish;

@@ -1,16 +1,17 @@
-/* eslint-disable padding-line-between-statements */
 import React, { useState } from 'react';
-import Canvas from '../../../pages/Game/Canvas';
-import getCanvasPic from '../../../pages/Game/utils/getCanvasPic';
-import Finish from '../Finish';
-import Oneletter from '../Oneletter';
+import Canvas from '../../molecules/Canvas';
+import getCanvasPic from '../../../utils/getCanvasPic';
+import Finish from '../../molecules/Finish';
+import Oneletter from '../../molecules/Oneletter';
 import './GameDash.pcss';
 
 
 export interface IGameDash {
   /** Количество букв в слове, которое нужно отгадать */
   charCount: number;
+  /** Итоговое слово которое участвует в игре (рандомно выбрано в компоненте старт) */
   textWord: string;
+  /** Наименование категории угадываемого слова */
   category: string
   }
 
@@ -36,6 +37,7 @@ function GameDash(props: IGameDash) {
       });
     } else {
       setError(errorCount + 1);
+
       if (errorCount === 6) {
         setGameStatus(2);
       }
@@ -44,6 +46,7 @@ function GameDash(props: IGameDash) {
     if (!showText.filter((el) => el === '*').length) {
       setGameStatus(1);
     }
+
     setLetter('');
     event.preventDefault();
   }
@@ -71,7 +74,7 @@ function GameDash(props: IGameDash) {
           </div>
           <div>Категория: {category}</div>
           Загаданное слово закрытое
-          <div>
+          <div className='gamedash__lettercontainer'>
             {showText.map((el) => (
               <Oneletter letter={el} />
             ))}

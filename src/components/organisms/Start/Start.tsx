@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import GameDash from '../GameDash/GameDash';
 import './Start.pcss';
 
-import getRandomWord from './utils/getRandomWord';
-
-import { words } from '../../../pages/Game/worddata/abbyy';
+import getRandomWord from '../../../utils/getRandomWord';
+import { words } from '../../../utils/worddata/abbyy';
 
 function Start() {
   const [oneFinalWord, setOneFinalWord] = useState('');

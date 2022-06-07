@@ -1,5 +1,5 @@
 import React from 'react';
-import Start from '../../organisms/Game/Start/Start';
+import Start from '../../organisms/Start/Start';
 
 const Game = () => {
   return (

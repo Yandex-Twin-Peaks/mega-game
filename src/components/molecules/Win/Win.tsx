@@ -1,6 +1,6 @@
 import React from 'react';
 import './Win.pcss';
-import Button from '../../../atoms/Button';
+import Button from '../../atoms/Button';
 
 
 function Win() {

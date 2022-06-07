@@ -1,8 +1,8 @@
 import React from 'react';
 import './Fail.pcss';
-import Canvas from '../../../pages/Game/Canvas/Canvas';
-import getCanvasPic from '../../../pages/Game/utils/getCanvasPic';
-import Button from '../../../atoms/Button';
+import Canvas from '../Canvas/Canvas';
+import getCanvasPic from '../../../utils/getCanvasPic';
+import Button from '../../atoms/Button';
 
 
 function Fail() {
