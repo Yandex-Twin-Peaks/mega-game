@@ -1,8 +1,9 @@
 import React from 'react';
+import UserSettings from '../../organisms/UserSettings';
 
 const Profile = () => {
   return (
-    <h1>PROFILE</h1>
+    <UserSettings />
   );
 };
 

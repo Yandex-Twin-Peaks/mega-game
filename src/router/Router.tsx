@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import RouteWithSubRoutes from './RouteWithSubRoutes';
 import { IRoute } from './config';
+import NavBar from '../components/organisms/NavBar';
 
 interface IProps {
   routes: IRoute[];
@@ -9,9 +10,12 @@ interface IProps {
 
 const Router: React.FC<IProps> = ({ routes }: IProps) => {
   return (
-    <Switch>
-      {routes && routes.map((route: IRoute) => <RouteWithSubRoutes key={route.path} {...route} />)}
-    </Switch>
+    <>
+      <NavBar />
+      <Switch>
+        {routes && routes.map((route: IRoute) => <RouteWithSubRoutes key={route.path} {...route} />)}
+      </Switch>
+    </>
   );
 };
 
