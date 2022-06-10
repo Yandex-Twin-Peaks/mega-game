@@ -5,9 +5,24 @@ import {
 import { Observable } from 'rxjs';
 import { Action } from 'redux-actions';
 import { showErrorMessage } from '../_common/actions';
-import { ISignUpRequest, ISignUpResponse } from '../types/signUp.types';
-import { sendSignUpRequestPending, sendSignUpRequestSuccess } from '../actions/signUp.actions';
-import { sendSignUpRequest } from '../services/signUp.services';
+import {
+  ISignInRequest, ISignUpRequest, ISignUpResponse
+} from '../types/auth.types';
+import {
+  sendSignInRequestPending, sendSignInRequestSuccess, sendSignUpRequestPending, sendSignUpRequestSuccess
+} from '../actions/auth.actions';
+import { sendSignInRequest, sendSignUpRequest } from '../services/auth.services';
+
+/** ISignInRequest */
+export const sendSignInRequestEffect$ = (actions$: Observable<Action<ISignInRequest>>) =>
+  actions$.pipe(
+    ofType(sendSignInRequestPending.toString()),
+    switchMap(({ payload }) =>
+      sendSignInRequest(payload).pipe(
+        map((result: void) => sendSignInRequestSuccess(result)),
+        catchError(showErrorMessage)
+      ))
+  );
 
 /** Эффект, обрабатывающий запрос на добавление нового пользователя */
 export const sendSignUpRequestEffect$ = (actions$: Observable<Action<ISignUpRequest>>) =>
