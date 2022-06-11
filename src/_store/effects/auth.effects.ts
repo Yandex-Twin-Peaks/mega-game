@@ -6,12 +6,15 @@ import { Observable } from 'rxjs';
 import { Action } from 'redux-actions';
 import { showErrorMessage } from '../_common/actions';
 import {
-  ISignInRequest, ISignUpRequest, ISignUpResponse
+  ISignInRequest, ISignUpRequest, ISignUpResponse, IUser
 } from '../types/auth.types';
 import {
+  sendGetUserPending, sendGetUserSuccess,
   sendSignInRequestPending, sendSignInRequestSuccess, sendSignUpRequestPending, sendSignUpRequestSuccess
 } from '../actions/auth.actions';
-import { sendSignInRequest, sendSignUpRequest } from '../services/auth.services';
+import {
+  sendSignInRequest, sendSignUpRequest, sendUserRequest
+} from '../services/auth.services';
 
 /** ISignInRequest */
 export const sendSignInRequestEffect$ = (actions$: Observable<Action<ISignInRequest>>) =>
@@ -31,6 +34,17 @@ export const sendSignUpRequestEffect$ = (actions$: Observable<Action<ISignUpRequ
     switchMap(({ payload }) =>
       sendSignUpRequest(payload).pipe(
         map((result: ISignUpResponse) => sendSignUpRequestSuccess(result)),
+        catchError(showErrorMessage)
+      ))
+  );
+
+/** Эффект на получение пользователя */
+export const sendUserRequestEffect$ = (actions$: Observable<Action<void>>) =>
+  actions$.pipe(
+    ofType(sendGetUserPending.toString()),
+    switchMap(() =>
+      sendUserRequest().pipe(
+        map((result: IUser) => sendGetUserSuccess(result)),
         catchError(showErrorMessage)
       ))
   );
