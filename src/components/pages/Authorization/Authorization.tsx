@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  sendSignUpRequestPending, sendSignInRequestPending, sendGetUserPending
+  sendSignUpRequestPending, sendSignInRequestPending, sendGetUserPending, sendUserLogOutPending
 } from '../../../_store/actions/auth.actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IStore } from '../../../_store';
@@ -25,12 +25,17 @@ const Authorization = () => {
     dispatch(sendGetUserPending());
   };
 
+  const handleSignOut = () => {
+    dispatch(sendUserLogOutPending());
+  };
+
   return (
     <>
       <h1>SIGN IN</h1>
       <button onClick={() => handleSendSignUp()}>Зарегистрироваться</button>
       <button onClick={() => handleSignIn()}>Войти</button>
-      <button onClick={() => handleGetUser()}>Получить данные пользователя</button>
+      <button onClick={() => handleSignOut()}>Выйти</button>
+      {!user && <button onClick={() => handleGetUser()}>Получить данные пользователя</button>}
       {user && (
         <div>
           <p>{user.login}</p>

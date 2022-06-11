@@ -28,3 +28,9 @@ export const sendUserRequest = (): Observable<any> => {
 
   // return Axios.get(`${API_HOST}${paths.GET_USER}`).pipe(map(({ data }: AxiosResponse<IUser>) => data));
 };
+
+/** GET Запрос на разлогин */
+export const sendLogOutRequest = (): Observable<any> => {
+  return Axios.post(`${API_HOST}${paths.LOG_OUT}`)
+    .pipe(map(({ data }: AxiosResponse<void>) => data));
+};

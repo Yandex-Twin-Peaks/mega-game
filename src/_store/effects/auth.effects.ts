@@ -9,10 +9,12 @@ import {
   ISignInRequest, ISignUpRequest, ISignUpResponse, IUser
 } from '../types/auth.types';
 import {
+  sendUserLogOutPending, sendUserLogOutSuccess,
   sendGetUserPending, sendGetUserSuccess,
   sendSignInRequestPending, sendSignInRequestSuccess, sendSignUpRequestPending, sendSignUpRequestSuccess
 } from '../actions/auth.actions';
 import {
+  sendLogOutRequest,
   sendSignInRequest, sendSignUpRequest, sendUserRequest
 } from '../services/auth.services';
 
@@ -45,6 +47,17 @@ export const sendUserRequestEffect$ = (actions$: Observable<Action<void>>) =>
     switchMap(() =>
       sendUserRequest().pipe(
         map((result: IUser) => sendGetUserSuccess(result)),
+        catchError(showErrorMessage)
+      ))
+  );
+
+/** Эффект на разлогин */
+export const sendUserLogOutEffect$ = (actions$: Observable<Action<void>>) =>
+  actions$.pipe(
+    ofType(sendUserLogOutPending.toString()),
+    switchMap(() =>
+      sendLogOutRequest().pipe(
+        map(() => sendUserLogOutSuccess()),
         catchError(showErrorMessage)
       ))
   );

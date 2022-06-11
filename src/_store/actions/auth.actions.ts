@@ -11,3 +11,6 @@ export const sendSignUpRequestSuccess = createTypedAction<ISignUpResponse>('[Suc
 
 export const sendGetUserPending = createTypedAction<void>('[Pending] Получить пользователя');
 export const sendGetUserSuccess = createTypedAction<IUser>('[Success] Получить пользователя');
+
+export const sendUserLogOutPending = createTypedAction<void>('[Pending] Разлогиниться');
+export const sendUserLogOutSuccess = createTypedAction<void>('[Success] Разлогиниться');

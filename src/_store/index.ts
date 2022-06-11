@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 /** Авторизация */
 import authReducer, { IAuthState } from './reducers/auth.reducer';
 import {
-  sendSignInRequestEffect$, sendSignUpRequestEffect$, sendUserRequestEffect$
+  sendSignInRequestEffect$, sendSignUpRequestEffect$, sendUserLogOutEffect$, sendUserRequestEffect$
 } from './effects/auth.effects';
 
 export interface IStore {
@@ -28,5 +28,6 @@ observableMiddleware.run(combineEpics(
   // @ts-ignore
   sendSignInRequestEffect$,
   sendSignUpRequestEffect$,
-  sendUserRequestEffect$
+  sendUserRequestEffect$,
+  sendUserLogOutEffect$
 ));
