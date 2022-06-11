@@ -1,11 +1,12 @@
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import Axios from 'axios-observable';
 import { AxiosResponse } from 'axios';
 import {
   ISignInRequest, ISignUpRequest, ISignUpResponse, IUser
 } from '../types/auth.types';
 import { API_HOST, paths } from '../../api/constants';
+import { userMock } from '../mock/userMock';
 
 /** POST Запрос на вход пользователя */
 export const sendSignInRequest = (payload: ISignInRequest): Observable<void> => {
@@ -20,5 +21,10 @@ export const sendSignUpRequest = (payload: ISignUpRequest): Observable<any> => {
 
 /** GET Запрос на регистрацию пользователя */
 export const sendUserRequest = (): Observable<any> => {
-  return Axios.get(`${API_HOST}${paths.GET_USER}`).pipe(map(({ data }: AxiosResponse<IUser>) => data));
+  // TODO: из-за проблем с auth-cookie пришлось сделать мок данные,
+  // TODO: потому что куки на авторизацию не сохраниются :(
+  // TODO: ИСПРАВИТЬ КОГДА БУДЕТ СЕРВЕР
+  return of(userMock).pipe(map((data: unknown) => data as IUser));
+
+  // return Axios.get(`${API_HOST}${paths.GET_USER}`).pipe(map(({ data }: AxiosResponse<IUser>) => data));
 };
