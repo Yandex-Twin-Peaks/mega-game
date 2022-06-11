@@ -19,9 +19,9 @@
   "author": "Twin Peaks Team",
   "license": "GPL-3.0",
   "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/material": "^5.8.3",
+    "@emotion/react": "11.9.0",
+    "@emotion/styled": "11.8.1",
+    "@mui/material": "5.8.3",
     "axios": "0.27.2",
     "axios-observable": "1.5.0",
     "cors": "2.8.5",
