@@ -89,7 +89,6 @@ const config = {
   devServer: {
     hot: true,
     compress: true,
-    allowedHosts: "all",
     static: {
       directory: path.join(__dirname, 'dist'),
     },
