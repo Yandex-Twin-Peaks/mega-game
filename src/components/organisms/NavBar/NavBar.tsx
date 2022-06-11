@@ -1,70 +1,40 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { routes } from '../../../router/config';
 import './NavBar.pcss';
-import { AppBar } from '@material-ui/core';
+import { GiGamepad } from 'react-icons/gi';
+import { Link } from 'react-router-dom';
+import {
+  AppBar, Tab, Tabs, Toolbar, Button
+} from '@mui/material';
 
+const newLocal = '#063970';
 
 function NavBar() {
 
+  const [value, setPartMenu] = useState(0);
 
-  // const PAGES = [
-  //   '/',
-  //   '/home',
-  //   '/signin',
-  //   '/forum',
-  //   '/leaderboard',
-  //   '/game',
-  //   '/profile'
-  // ];
 
   return (
-  // <AppBar>
-  //   <Toolbar>
-
-
-  //     {/* <Link to='/' className='Nav__brand'>
-  //       <GiGamepad style={{
-  //         height: '80px',
-  //         width: '80px'
-  //       }} />
-  //     </Link> */}
-
-  //     {/* <Tabs textColor='inherit'>
-  //         {PAGES.map((page, index) => (<Tab key={index} label={page}/> ))}
-
-  //       </Tabs> */}
-
-  //     {/* <div className='Nav__right'>
-  //       <ul className='Nav__item-wrapper'>
-  //         <li className='Nav__item'>
-  //           <Link className='Nav__link' to='/home'>home</Link>
-  //         </li>
-  //         <li className='Nav__item'>
-  //           <Link className='Nav__link' to='/signin'>signin</Link>
-  //         </li>
-  //         <li className='Nav__item'>
-  //           <Link className='Nav__link' to='/forum'>forum</Link>
-  //         </li>
-  //         <li className='Nav__item'>
-  //           <Link className='Nav__link' to='/leaderboard'>leaderboard</Link>
-  //         </li>
-  //         <li className='Nav__item'>
-  //           <Link className='Nav__link' to='/game'>game</Link>
-  //         </li>
-  //         <li className='Nav__item'>
-  //           <Link className='Nav__link' to='/profile'>profile</Link>
-  //         </li>
-  //       </ul>
-  //     </div> */}
-  //   </Toolbar>
-  // </AppBar>
-
-    // <>
-    //   <AppBar>
-    //     хер
-    //   </AppBar>
-    // </>
-    <div>fff</div>
+    <>
+      <AppBar position='static' sx={{ background: newLocal }}>
+        <Toolbar>
+          <Tabs
+            sx={{ marginLeft: 'auto' }}
+            textColor='inherit' value={value}
+            onChange={(e, value) => setPartMenu(value)}
+            indicatorColor='secondary'
+          >
+            {routes.map((conf, index) => (index === 0 ? <Tab key={index} label={conf.pageName} icon={ <GiGamepad style={{
+              height: '80px',
+              width: '80px'
+            }} />} component={Link} to={conf.path} sx = {{ marginRight: '100px' }} /> :
+              <Tab key={index} label={conf.pageName} component={Link} to={conf.path} />))}
+          </Tabs>
+          <Button sx={{ marginLeft: 'auto' }} variant='contained'>Login{' '}</Button>
+          <Button sx={{ marginLeft: '10px' }} variant='contained'>Registry{' '}</Button>
+        </Toolbar>
+      </AppBar>
+    </>
   );
 }
 
