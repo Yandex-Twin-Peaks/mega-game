@@ -24,7 +24,7 @@ export const sendSignInRequestEffect$ = (actions$: Observable<Action<ISignInRequ
     ofType(sendSignInRequestPending.toString()),
     switchMap(({ payload }) =>
       sendSignInRequest(payload).pipe(
-        map((result: void) => sendSignInRequestSuccess(result)),
+        map((result: string) => sendSignInRequestSuccess(result)),
         catchError(showErrorMessage)
       ))
   );

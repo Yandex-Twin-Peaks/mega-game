@@ -33,9 +33,9 @@ export const routes: IRoute[] = [
     fallback: '...'
   },
   {
-    path: '/signin',
+    path: '/auth',
     exact: true,
-    component: lazy(() => import('../components/pages/Authorization/Authorization')),
+    component: lazy(() => import('../components/pages/Authorization')),
     fallback: null
   },
   {
