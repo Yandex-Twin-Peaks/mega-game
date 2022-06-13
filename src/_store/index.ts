@@ -4,26 +4,30 @@ import {
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import signUpReducer, { ISignUpState } from './reducers/signUp.reducer';
-import { sendSignUpRequestEffect$ } from './effects/signUp.effects';
-
-/* [imports:end] */
+/** Авторизация */
+import authReducer, { IAuthState } from './reducers/auth.reducer';
+import {
+  sendSignInRequestEffect$, sendSignUpRequestEffect$, sendUserLogOutEffect$, sendUserRequestEffect$
+} from './effects/auth.effects';
 
 export interface IStore {
-  signUp: ISignUpState;
-
-  /* [types:end] */
+  auth: IAuthState
 }
 
-const observableMiddleware = createEpicMiddleware();
 const rootReducer = combineReducers({
-  signUp: signUpReducer
-
-  /* [reducers:end] */
+  auth: authReducer
+  // @ts-ignore
 });
+
+const observableMiddleware = createEpicMiddleware();
+
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(observableMiddleware)));
 
 // @ts-ignore
 observableMiddleware.run(combineEpics(
   // @ts-ignore
-  sendSignUpRequestEffect$,));
+  sendSignInRequestEffect$,
+  sendSignUpRequestEffect$,
+  sendUserRequestEffect$,
+  sendUserLogOutEffect$
+));
