@@ -1,15 +1,101 @@
-import React from 'react';
-import Button from '@mui/material/Button';
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import TableRow from '@mui/material/TableRow';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
 
-const LeaderBoard = () => {
+export default function SimpleContainer() {
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: { fontSize: 14, },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': { backgroundColor: theme.palette.action.hover, },
+    '&:last-child td, &:last-child th': { border: 0, },
+  }));
+
+  function createData(
+    avatarURL: string,
+    name: string,
+    calories: number,
+    fat: number,
+    carbs: number,
+    protein: number,
+  ) {
+    return {
+      avatarURL,
+      name,
+      calories,
+      fat,
+      carbs,
+      protein
+    };
+  }
+
+  const rows = [
+    createData('https://mui.com/static/images/avatar/1.jpg', 'Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('https://mui.com/static/images/avatar/1.jpg', 'Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('https://mui.com/static/images/avatar/1.jpg', 'Eclair', 262, 16.0, 24, 6.0),
+    createData('https://mui.com/static/images/avatar/1.jpg', 'Cupcake', 305, 3.7, 67, 4.3),
+    createData('https://mui.com/static/images/avatar/1.jpg', 'Gingerbread', 356, 16.0, 49, 3.9),
+  ];
+
   return (
-    <>
-      <h1>LEADER BOARD</h1>
-      <Button variant='contained' color='primary'>
-        Hello World
-      </Button>
-    </>
+    <React.Fragment>
+      <CssBaseline/>
+      <Container maxWidth='lg'>
+        <Typography variant='h2' component='h2' gutterBottom>
+          Таблица результатов
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label='customized table'>
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+                <StyledTableCell align='right'>Calories</StyledTableCell>
+                <StyledTableCell align='right'>Fat&nbsp;(g)</StyledTableCell>
+                <StyledTableCell align='right'>Carbs&nbsp;(g)</StyledTableCell>
+                <StyledTableCell align='right'>Protein&nbsp;(g)</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component='th' scope='row'>
+                    <Box sx={{
+                      p: 1,
+                      display: 'flex'
+                    }}>
+                      <Avatar variant='rounded' alt={row.name} src={row.avatarURL}/>
+                      <Stack spacing={0.5}>
+                        <Typography fontWeight={700}>{row.name}</Typography>
+                      </Stack>
+                    </Box>
+                  </StyledTableCell>
+                  <StyledTableCell align='right'>{row.calories}</StyledTableCell>
+                  <StyledTableCell align='right'>{row.fat}</StyledTableCell>
+                  <StyledTableCell align='right'>{row.carbs}</StyledTableCell>
+                  <StyledTableCell align='right'>{row.protein}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    </React.Fragment>
   );
-};
-
-export default LeaderBoard;
+}
