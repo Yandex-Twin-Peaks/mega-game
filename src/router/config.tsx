@@ -17,6 +17,8 @@ export interface IRoute {
   redirect?: string;
   /** Прелоудер ф*/
   fallback: NonNullable<ReactNode> | null;
+  /** Наименование страницы */
+  pageName?: string;
 }
 
 export const routes: IRoute[] = [
@@ -30,36 +32,42 @@ export const routes: IRoute[] = [
     path: '/home',
     exact: false,
     component: lazy(() => import('../components/pages/Home')),
-    fallback: '...'
+    fallback: '...',
+    pageName: 'Home',
   },
   {
-    path: '/signin',
+    path: '/auth',
     exact: true,
-    component: lazy(() => import('../components/pages/Authorization/Authorization')),
-    fallback: null
+    component: lazy(() => import('../components/pages/Authorization')),
+    fallback: null,
+    pageName: 'Auth',
   },
   {
     path: '/forum',
     exact: true,
     component: lazy(() => import('../components/pages/Forum')),
-    fallback: null
+    fallback: null,
+    pageName: 'Forum',
   },
   {
     path: '/leaderboard',
     exact: true,
     component: lazy(() => import('../components/pages/LeaderBoard')),
-    fallback: null
+    fallback: null,
+    pageName: 'Leaderboard',
   },
   {
     path: '/profile',
     exact: true,
     component: lazy(() => import('../components/pages/Profile')),
-    fallback: null
+    fallback: null,
+    pageName: 'Profile',
   },
   {
     path: '/game',
     exact: true,
     component: lazy(() => import('../components/pages/Game')),
-    fallback: null
+    fallback: null,
+    pageName: 'Game',
   }
 ];

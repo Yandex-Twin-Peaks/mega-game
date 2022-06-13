@@ -9,9 +9,9 @@ import { API_HOST, paths } from '../../api/constants';
 import { userMock } from '../mock/userMock';
 
 /** POST Запрос на вход пользователя */
-export const sendSignInRequest = (payload: ISignInRequest): Observable<void> => {
+export const sendSignInRequest = (payload: ISignInRequest): Observable<string> => {
   return Axios.post(`${API_HOST}${paths.SIGN_IN}`, payload)
-    .pipe(map(({ data }: AxiosResponse<void>) => data));
+    .pipe(map(({ data }: AxiosResponse<string>) => data));
 };
 
 /** POST Запрос на регистрацию пользователя */

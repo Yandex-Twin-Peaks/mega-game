@@ -1,52 +1,214 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { sendSignUpRequestPending, sendSignInRequestPending } from '../../../_store/actions/auth.actions';
+import { useDispatch } from 'react-redux';
 import {
-  sendSignUpRequestPending, sendSignInRequestPending, sendGetUserPending, sendUserLogOutPending
-} from '../../../_store/actions/auth.actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { IStore } from '../../../_store';
-import { createdUserMock } from '../../../_store/mock/userMock';
+  Button, Card, TextField
+} from '@mui/material';
+
+import './Authorization.styles.pcss';
 
 const Authorization = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((store: IStore) => store.auth.user);
+  /** ---------------------------- Внутренее состояние ------------------------------------ */
+  /** Вход или регистрация */
+  const [isSignIn, toggleIsSignIn] = useState<boolean>(true);
 
+  /** Данные входа */
+  const [login, setLogin] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  /** Данные для регистрации */
+  const [email, setEmail] = useState<string>('');
+  const [signInLogin, setSignInLogin] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [secondName, setSecondName] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [firstPassword, setFirstPassword] = useState<string>('');
+  const [secondPassword, setSecondPassword] = useState<string>('');
+
+  /** ------------------------- Обработчики событий отправки ------------------------------ */
+  const dispatch = useDispatch();
   const handleSendSignUp = () => {
-    dispatch(sendSignUpRequestPending(createdUserMock));
+    dispatch(sendSignUpRequestPending({
+      email,
+      login: signInLogin,
+      first_name: firstName,
+      second_name: secondName,
+      phone,
+      password: firstPassword
+    }));
   };
 
   const handleSignIn = () => {
     dispatch(sendSignInRequestPending({
-      login: createdUserMock.login,
-      password: createdUserMock.password
+      login,
+      password
     }));
   };
 
-  const handleGetUser = () => {
-    dispatch(sendGetUserPending());
-  };
+  /** ------------------------- JSX разметка элементов ------------------------------------ */
+  const signInJSX = (
+    <>
+      <div className='auth__card-content'>
+        <div className='auth__header-wrapper'>
+          <h1 className='auth__header'>
+            Вход
+          </h1>
+        </div>
+        <div className='auth__inputs-wrapper'>
+          <div className='auth__input-wrapper'>
+            <TextField
+              required
+              label='Логин'
+              variant='standard'
+              placeholder='Логин'
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+              id='login'
+            />
+          </div>
+          <div>
+            <TextField
+              required
+              label='Пароль'
+              variant='standard'
+              placeholder='Пароль'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id='password'
+            />
+          </div>
+        </div>
+        <div className='auth__controls-wrapper'>
+          <Button
+            variant='contained'
+            onClick={() => handleSignIn()}
+          >
+            Авторизоваться
+          </Button>
+          <Button
+            variant='text'
+            onClick={() => toggleIsSignIn(false)}
+          >
+            Нет аккаунта?
+          </Button>
+        </div>
+      </div>
+    </>
+  );
 
-  const handleSignOut = () => {
-    dispatch(sendUserLogOutPending());
-  };
+  const signUpJSX = (
+    <>
+      <div className='auth__card-content'>
+        <div className='auth__header-wrapper'>
+          <h1 className='auth__header'>
+            Регистрация
+          </h1>
+        </div>
+        <div className='auth__inputs-wrapper__sign-in'>
+          <div className='auth__input-wrapper__sign-up'>
+            <TextField
+              required
+              label='Почта'
+              variant='standard'
+              placeholder='Почта'
+              value={login}
+              onChange={(e) => setEmail(e.target.value)}
+              id='email'
+            />
+          </div>
+          <div className='auth__input-wrapper__sign-up'>
+            <TextField
+              required
+              label='Логин'
+              variant='standard'
+              placeholder='Логин'
+              value={signInLogin}
+              onChange={(e) => setSignInLogin(e.target.value)}
+              id='login'
+            />
+          </div>
+          <div className='auth__input-wrapper__sign-up'>
+            <TextField
+              required
+              label='Имя'
+              variant='standard'
+              placeholder='Имя'
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              id='first_name'
+            />
+          </div>
+          <div className='auth__input-wrapper__sign-up'>
+            <TextField
+              required
+              label='Фамилия'
+              variant='standard'
+              placeholder='Фамилия'
+              value={secondName}
+              onChange={(e) => setSecondName(e.target.value)}
+              id='second_name'
+            />
+          </div>
+          <div className='auth__input-wrapper__sign-up'>
+            <TextField
+              required
+              label='Телефон'
+              variant='standard'
+              placeholder='Телефон'
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              id='phone'
+            />
+          </div>
+          <div className='auth__input-wrapper__sign-up'>
+            <TextField
+              required
+              label='Пароль'
+              variant='standard'
+              placeholder='Пароль'
+              value={firstPassword}
+              onChange={(e) => setFirstPassword(e.target.value)}
+              id='password'
+            />
+          </div>
+          <div>
+            <TextField
+              required
+              label='Пароль (ещё раз)'
+              variant='standard'
+              placeholder='Пароль'
+              value={secondPassword}
+              onChange={(e) => setSecondPassword(e.target.value)}
+              id='password2'
+            />
+          </div>
+        </div>
+        <div className='auth__controls-wrapper'>
+          <Button
+            variant='contained'
+            onClick={() => handleSendSignUp()}
+          >
+            Зарегистрироваться
+          </Button>
+          <Button
+            variant='text'
+            onClick={() => toggleIsSignIn(true)}
+          >
+            Войти
+          </Button>
+        </div>
+      </div>
+    </>
+  );
+
+  /** ------------------------- Рендер ---------------------------------------------------- */
 
   return (
-    <>
-      <h1>SIGN IN</h1>
-      <button onClick={() => handleSendSignUp()}>Зарегистрироваться</button>
-      <button onClick={() => handleSignIn()}>Войти</button>
-      <button onClick={() => handleSignOut()}>Выйти</button>
-      {!user && <button onClick={() => handleGetUser()}>Получить данные пользователя</button>}
-      {user && (
-        <div>
-          <p>{user.login}</p>
-          <p>{user.email}</p>
-          <p>{user.display_name}</p>
-          <p>{user.first_name}</p>
-          <p>{user.second_name}</p>
-          <p>{user.phone}</p>
-        </div>
-      )}
-    </>
+    <div className='auth'>
+      <Card variant='outlined'>
+        {isSignIn ? signInJSX : signUpJSX}
+      </Card>
+    </div>
   );
 };
 

@@ -1,26 +1,31 @@
 import { Action } from 'redux-actions';
 import { createTypedHandler, handleTypedActions } from 'redux-actions-ts';
 import {
-  sendGetUserSuccess, sendSignInRequestSuccess, sendSignUpRequestSuccess
+  sendGetUserSuccess, sendSignInRequestSuccess, sendSignUpRequestSuccess, sendUserLogOutSuccess
 } from '../actions/auth.actions';
 import { ISignUpResponse, IUser } from '../types/auth.types';
 
 export interface IAuthState {
   id?: null | number;
   user: null | IUser;
+  isLoggedIn: boolean;
 }
 
 export const initialState: IAuthState = {
   id: null,
-  user: null
+  user: null,
+  isLoggedIn: false
 };
 
 const signInReducer = handleTypedActions(
   [
     /** Вход пользователя */
-    createTypedHandler(sendSignInRequestSuccess, (state: IAuthState): IAuthState => {
+    createTypedHandler(sendSignInRequestSuccess, (state: IAuthState, action: Action<string>): IAuthState => {
 
-      return { ...state };
+      return {
+        ...state,
+        isLoggedIn: action.payload === 'OK'
+      };
     }),
     /** Регистрация пользователя */
     createTypedHandler(sendSignUpRequestSuccess, (state: IAuthState, action: Action<ISignUpResponse>): IAuthState => {
@@ -34,6 +39,13 @@ const signInReducer = handleTypedActions(
       return {
         ...state,
         user: action.payload
+      };
+    }),
+    /** Разлогиниться */
+    createTypedHandler(sendUserLogOutSuccess, (state: IAuthState): IAuthState => {
+      return {
+        ...state,
+        isLoggedIn: false
       };
     }),
   ],
