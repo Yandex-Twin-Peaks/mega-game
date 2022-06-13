@@ -5,15 +5,27 @@ import {
 } from '@mui/material';
 import Input from '../../atoms/Input/Input';
 
+interface IPasswords {
+  old_password: string,
+  new_password: string,
+}
+
+interface IInputs {
+  first_name: string | '',
+  second_name: string,
+  display_name: string,
+  login: string,
+  email: string,
+  phone: string
+}
 
 function UserSettings() {
 
-
-  const [inputs, setInputs]:any = useState({});
-  const [passwords, setPasswords]:any = useState({});
+  const [inputs, setInputs] = useState<IInputs | object | any>({});
+  const [passwords, setPasswords] = useState<IPasswords | object>({});
   const [file, setFile]:any = useState(null);
 
-  const USERSETTINGSINPUTS = [
+  const USER_SETTINGS_INPUTS = [
     'first_name',
     'second_name',
     'display_name',
@@ -22,7 +34,7 @@ function UserSettings() {
     'phone'
   ];
 
-  const USERPASSWORDSINPUTS = ['old_password', 'new_password'];
+  const USER_PASSWORDS_INPUTS = ['old_password', 'new_password'];
 
   function handleUserDataSubmit(event: React.FormEvent<HTMLFormElement>) {
     console.log(inputs);
@@ -82,7 +94,7 @@ function UserSettings() {
       </div>
 
       <form id='user-settings' className='user-settings__settings' onSubmit={handleUserDataSubmit}>
-        {USERSETTINGSINPUTS.map((inputName, index) => <TextField
+        {USER_SETTINGS_INPUTS.map((inputName, index) => <TextField
           style={{
             width: '200px',
             margin: '5px'
@@ -101,7 +113,7 @@ function UserSettings() {
 
       </div>
       <form id='password-form' className='user-settings__passwords' onSubmit={handlePasswordsSubmit}>
-        {USERPASSWORDSINPUTS.map((inputName, index) => <TextField
+        {USER_PASSWORDS_INPUTS.map((inputName, index) => <TextField
           style={{
             width: '200px',
             margin: '5px'
