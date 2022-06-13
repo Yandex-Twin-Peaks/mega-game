@@ -1,10 +1,14 @@
 import React from 'react';
 import Router from './router/Router';
 import { routes } from './router/config';
+import NavBar from './components/organisms/NavBar';
 
 const App = () => {
   return (
-    <Router routes={routes} />
+    <>
+      <NavBar />
+      <Router routes={routes} />
+    </>
   );
 };
 
