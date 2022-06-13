@@ -10,12 +10,33 @@ export interface IInputProps {
   name?: string;
   /** Надпись на инпуте */
   inputValue?: string;
+  /** Класс name */
+  className?: string;
+  /** формат */
+  accept?: string;
   /** Функция-обработчик измений в инпуте */
-  handleChange?: () => void
+  handleChange?: () => void;
 }
 
-function Input({ type = 'text', placeHolder, name, inputValue, handleChange, }:IInputProps) {
-
-  return <input className='input__submit' type={type} value={inputValue} placeholder={placeHolder} name={name} onChange={handleChange} />;
+function Input({
+  type = 'text',
+  accept,
+  className = 'input__submit',
+  placeHolder,
+  name,
+  inputValue,
+  handleChange,
+}: IInputProps) {
+  return (
+    <input
+      className={className}
+      accept={accept}
+      type={type}
+      value={inputValue}
+      placeholder={placeHolder}
+      name={name}
+      onChange={handleChange}
+    />
+  );
 }
 export default Input;

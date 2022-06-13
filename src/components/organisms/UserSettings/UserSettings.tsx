@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './UserSettings.pcss';
-import { TextField } from '@mui/material';
+import {
+  TextField, Avatar, IconButton
+} from '@mui/material';
 import Input from '../../atoms/Input/Input';
 
 
@@ -8,6 +10,8 @@ function UserSettings() {
 
 
   const [inputs, setInputs]:any = useState({});
+  const [passwords, setPasswords]:any = useState({});
+  const [file, setFile]:any = useState(null);
 
   const USERSETTINGSINPUTS = [
     'first_name',
@@ -21,11 +25,16 @@ function UserSettings() {
   const USERPASSWORDSINPUTS = ['old_password', 'new_password'];
 
   function handleUserDataSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
     console.log(inputs);
+    event.preventDefault();
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handlePasswordsSubmit(event: React.FormEvent<HTMLFormElement>) {
+    console.log(passwords);
+    event.preventDefault();
+  }
+
+  function handleChangeUserSettings(event: React.ChangeEvent<HTMLInputElement>) {
     const { name } = event.target as HTMLInputElement;
     const { value } = event.target as HTMLInputElement;
     setInputs((values: object) => ({
@@ -34,53 +43,77 @@ function UserSettings() {
     }));
   }
 
+  function handleChangePassword(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name } = event.target as HTMLInputElement;
+    const { value } = event.target as HTMLInputElement;
+    setPasswords((values: object) => ({
+      ...values,
+      [name]: value
+    }));
+  }
+
+  function handleChangeAvatar(event: React.ChangeEvent<HTMLInputElement>) {
+    const { files } = event.target as HTMLInputElement;
+
+    if (files !== null && files.length > 0) {
+      const file = URL.createObjectURL(files[0]);
+      setFile(file);
+    }
+
+    console.log(file);
+  }
+
   return (
-    <div className='usersettings__container'>
-      <div className='usersettings__avatarsettings'>
-        <form id='user-settings' className='usersettings__settings' onSubmit={handleUserDataSubmit}>
-          <span>Настройки пользователя</span>
-          {USERSETTINGSINPUTS.map((inputName, index) => <TextField
-            style={{
-              width: '200px',
-              margin: '5px'
-            }}
-            type='text'
-            label={inputName}
-            name={inputName}
-            variant='outlined'
-            value={inputs[inputName] || ''}
-            onChange={handleChange}
-            key={index}
-          />)}
-          <Input type={'submit'} inputValue={'Отправить'} />
-        </form>
-        <div className='usersettings__avatar'>
-          <span>avatar</span>
-        </div>
+    <div className='user-settings__container'>
+      <div className='user-settings__avatar'>
+        <input type='file' onChange={handleChangeAvatar} id='upload' accept='image/*' style={{ display: 'none' }}/>
+        <label htmlFor='upload'>
+          <IconButton color='primary' aria-label='upload picture' component='span'>
+            <Avatar id='avatar' src={file}
+              style={{
+
+                width: '90px',
+                height: '90px',
+              }}
+            />
+          </IconButton>
+        </label>
+        <label htmlFor='avatar'/>
       </div>
-      <form id='password-form' className='usersettings__passwords'>
-        <span>Смена пароля</span>
-        <TextField
+
+      <form id='user-settings' className='user-settings__settings' onSubmit={handleUserDataSubmit}>
+        {USERSETTINGSINPUTS.map((inputName, index) => <TextField
           style={{
             width: '200px',
             margin: '5px'
           }}
           type='text'
-          label={'old_password'}
-          name={'old_password'}
+          label={inputName}
+          name={inputName}
           variant='outlined'
-        />
-        <TextField
+          value={inputs[inputName] || ''}
+          onChange={handleChangeUserSettings}
+          key={index}
+        />)}
+        <Input type={'submit'} inputValue={'Изменить данные'} />
+      </form>
+      <div className='user-settings__avatar'>
+
+      </div>
+      <form id='password-form' className='user-settings__passwords' onSubmit={handlePasswordsSubmit}>
+        {USERPASSWORDSINPUTS.map((inputName, index) => <TextField
           style={{
             width: '200px',
             margin: '5px'
           }}
           type='text'
-          label={'new_password'}
-          name={'new_password'}
+          label={inputName}
+          name={inputName}
           variant='outlined'
-        />
-        <Input type={'submit'} inputValue={'Отправить'} />
+          onChange={handleChangePassword}
+          key={index}
+        />)}
+        <Input type={'submit'} inputValue={'Изменить пароль'} />
       </form>
     </div>
   );
