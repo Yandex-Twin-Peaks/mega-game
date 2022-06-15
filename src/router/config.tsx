@@ -69,5 +69,11 @@ export const routes: IRoute[] = [
     component: lazy(() => import('../components/pages/Game')),
     fallback: null,
     pageName: 'Game',
+  },
+  {
+    path: '*',
+    exact: true,
+    component: lazy(() => import('../components/pages/NotFound')),
+    fallback: null
   }
 ];
