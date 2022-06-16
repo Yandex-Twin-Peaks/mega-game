@@ -5,6 +5,9 @@ import { IStore } from './_store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { sendGetUserPending } from './_store/actions/auth.actions';
+import NavBar from './components/organisms/NavBar';
+
+import './App.pcss';
 
 const App = () => {
   /** ----------------------------- Глобальное состояние ---------------------------------- */
@@ -35,7 +38,14 @@ const App = () => {
 
   /** ----------------------------- Рендер компонентов ------------------------------------ */
   return (
-    <Router routes={routes} />
+    <div className='app'>
+      { isLoggedIn && (
+        <div className='app__nav-bar'>
+          <NavBar />
+        </div> )
+      }
+      <Router routes={routes} />
+    </div>
   );
 };
 
