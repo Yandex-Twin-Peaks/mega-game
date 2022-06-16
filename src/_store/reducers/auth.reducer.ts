@@ -38,7 +38,8 @@ const signInReducer = handleTypedActions(
     createTypedHandler(sendGetUserSuccess, (state: IAuthState, action: Action<IUser>): IAuthState => {
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
+        isLoggedIn: true
       };
     }),
     /** Разлогиниться */

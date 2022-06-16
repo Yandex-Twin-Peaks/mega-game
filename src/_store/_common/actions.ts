@@ -3,7 +3,12 @@ import { of } from 'rxjs';
 
 export const errorAction = createTypedAction<void>('[Error]');
 
-export const showErrorMessage = (e: Error) => {
+export const showErrorMessage = (e: any) => {
+  if (e.response.status === 401) {
+    // FIXME: починить # в пути
+    window.location = '#/auth';
+  }
+
   console.log(e.message);
   return of(errorAction());
 };
