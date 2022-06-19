@@ -36,6 +36,7 @@ const Authorization = () => {
       phone,
       password: firstPassword
     }));
+
   };
 
   const handleSignIn = () => {
@@ -111,7 +112,7 @@ const Authorization = () => {
               label='Почта'
               variant='standard'
               placeholder='Почта'
-              value={login}
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               id='email'
             />
