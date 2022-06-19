@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { sendSignUpRequestPending, sendSignInRequestPending } from '../../../_store/actions/auth.actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button, Card, TextField
 } from '@mui/material';
 
 import './Authorization.styles.pcss';
+import { IStore } from '../../../_store';
+import { useHistory } from 'react-router-dom';
 
 const Authorization = () => {
-  /** ---------------------------- Внутренее состояние ------------------------------------ */
+  /** ---------------------------- Глобальное состояние ------------------------------------ */
+  const history = useHistory();
+  const isLoggedIn = useSelector((store: IStore) => store.auth.isLoggedIn);
+
+  /** ---------------------------- Внутреннее состояние ------------------------------------ */
   /** Вход или регистрация */
   const [isSignIn, toggleIsSignIn] = useState<boolean>(true);
 
@@ -44,6 +50,12 @@ const Authorization = () => {
       password
     }));
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push('/home');
+    }
+  }, [isLoggedIn]);
 
   /** ------------------------- JSX разметка элементов ------------------------------------ */
   const signInJSX = (
@@ -202,7 +214,6 @@ const Authorization = () => {
   );
 
   /** ------------------------- Рендер ---------------------------------------------------- */
-
   return (
     <div className='auth'>
       <Card variant='outlined'>

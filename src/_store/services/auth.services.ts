@@ -17,7 +17,7 @@ export const sendSignInRequest = (payload: ISignInRequest): Observable<string> =
 
 /** POST Запрос на регистрацию пользователя */
 export const sendSignUpRequest = (payload: ISignUpRequest): Observable<any> => {
-  return Axios.post(`${API_HOST}${paths.SIGN_UP}`, payload).pipe(map(({ data }: AxiosResponse<ISignUpResponse>) => data));
+  return Axios.post(`${API_HOST}${paths.SIGN_UP}`, payload, axiosConfig).pipe(map(({ data }: AxiosResponse<ISignUpResponse>) => data));
 };
 
 /** GET Запрос на регистрацию пользователя */
@@ -27,6 +27,6 @@ export const sendUserRequest = (): Observable<any> => {
 
 /** GET Запрос на разлогин */
 export const sendLogOutRequest = (): Observable<any> => {
-  return Axios.post(`${API_HOST}${paths.LOG_OUT}`)
+  return Axios.post(`${API_HOST}${paths.LOG_OUT}`, '', axiosConfig)
     .pipe(map(({ data }: AxiosResponse<void>) => data));
 };
