@@ -42,6 +42,7 @@ const Authorization = () => {
       phone,
       password: firstPassword
     }));
+
   };
 
   const handleSignIn = () => {
