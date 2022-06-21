@@ -29,7 +29,6 @@ const Forum = () => {
   };
 
   return (
-
     <Paper sx={{
       width: '100%',
       overflow: 'hidden'
@@ -79,7 +78,6 @@ const Forum = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
-
   );
 };
 
