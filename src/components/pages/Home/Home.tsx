@@ -7,7 +7,7 @@ const Home = () => {
   const history = useHistory();
   return (
     <div className='home__wrapper'>
-      {/* <div id='foglayer_01' className='fog'>
+      <div id='foglayer_01' className='fog'>
         <div className='image01'></div>
         <div className='image02'></div>
       </div>
@@ -24,7 +24,7 @@ const Home = () => {
           <p id='text'>ИГРАТЬ</p>
           <span id='glow'>ИГР</span><span id='blink'>АТЬ</span>
         </p>
-      </div> */}
+      </div>
     </div>
   );
 };
