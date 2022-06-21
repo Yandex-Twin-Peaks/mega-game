@@ -5,6 +5,9 @@ import {
 } from '../actions/auth.actions';
 import { ISignUpResponse, IUser } from '../types/auth.types';
 
+import { IUserSettingsResponse } from '../types/usersettings.types';
+import { sendUserSettingsSuccess } from '../actions/usersettings.actions';
+
 export interface IAuthState {
   id?: null | number;
   user: null | IUser;
@@ -47,6 +50,13 @@ const signInReducer = handleTypedActions(
       return {
         ...state,
         isLoggedIn: false
+      };
+    }),
+    /** Обновить данные пользователя */
+    createTypedHandler(sendUserSettingsSuccess, (state: IAuthState, action: Action<IUserSettingsResponse>): IAuthState => {
+      return {
+        ...state,
+        user: action.payload
       };
     }),
   ],

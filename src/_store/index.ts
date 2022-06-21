@@ -10,6 +10,8 @@ import {
   sendSignInRequestEffect$, sendSignUpRequestEffect$, sendUserLogOutEffect$, sendUserRequestEffect$
 } from './effects/auth.effects';
 
+import { sendUserSettingsRequestEffect$ } from './effects/usersettings.effects';
+
 export interface IStore {
   auth: IAuthState
 }
@@ -29,5 +31,6 @@ observableMiddleware.run(combineEpics(
   sendSignInRequestEffect$,
   sendSignUpRequestEffect$,
   sendUserRequestEffect$,
-  sendUserLogOutEffect$
+  sendUserLogOutEffect$,
+  sendUserSettingsRequestEffect$,
 ));

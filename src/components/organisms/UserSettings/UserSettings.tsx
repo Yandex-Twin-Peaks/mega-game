@@ -4,6 +4,9 @@ import {
   TextField, Avatar, IconButton
 } from '@mui/material';
 import Input from '../../atoms/Input/Input';
+import { useDispatch, useSelector } from 'react-redux';
+import { IStore } from '../../../_store';
+import { sendUserSettingsPending } from '../../../_store/actions/usersettings.actions';
 
 interface IPasswords {
   old_password: string,
@@ -21,7 +24,10 @@ interface IInputs {
 
 function UserSettings() {
 
-  const [inputs, setInputs] = useState<IInputs | object | any>({});
+  const user = useSelector((store: IStore) => store.auth.user);
+  const dispatch = useDispatch();
+
+  const [inputs, setInputs] = useState<IInputs | object | any>(user);
   const [passwords, setPasswords] = useState<IPasswords | object>({});
   const [file, setFile]:any = useState(null);
 
@@ -38,6 +44,7 @@ function UserSettings() {
 
   function handleUserDataSubmit(event: React.FormEvent<HTMLFormElement>) {
     console.log(inputs);
+    dispatch(sendUserSettingsPending(inputs));
     event.preventDefault();
   }
 
