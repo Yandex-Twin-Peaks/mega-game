@@ -2,10 +2,11 @@ import React from 'react';
 import './Fail.pcss';
 import Canvas from '../Canvas';
 import getCanvasPic from '../../../utils/getCanvasPic';
-import Button from '../../atoms/Button';
+import { useHistory } from 'react-router-dom';
 
 function Fail() {
-// TODO: добавить интерфейс для функции
+  const history = useHistory();
+  // TODO: добавить интерфейс для функции
   const draw = (ctx: any) => {
     ctx.fillStyle = 'rgb(200, 0, 0)';
     ctx.fillRect(10, 10, 50, 50);
@@ -15,16 +16,17 @@ function Fail() {
   };
 
   return (
-    <>
+    <div className='fail'>
       <div>Вы проиграли</div>
-      <Canvas draw={draw} heigth={200} width={200} />
-      <Button text={'Начать сначала'} onClick={() => {
-        console.log('сначала');
-      }} />
-      <Button text={'Перейти в Лидерборд'} onClick={() => {
-        console.log('лидерборд');
-      }} />
-    </>
+      <div style={{
+        width: 200,
+        height: 200
+      }}>
+        <Canvas draw={draw} heigth={200} width={200} />
+      </div>
+      <p className='fail__button' onClick={() => document.location.reload()}>Начать сначала</p>
+      <p className='fail__button' onClick={() => history.push('/leaderboard')}>Перейти в Лидерборд</p>
+    </div>
   );
 }
 export default Fail;

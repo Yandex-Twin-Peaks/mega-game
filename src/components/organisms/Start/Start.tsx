@@ -22,7 +22,7 @@ function Start() {
   const [submitted, setSubmit] = useState(false);
 
   const startJSX = <div className='start-container'>
-    <span className='start-container__title'>Игра начинается введите количество буковок</span>
+    <span className='start-container__title'>Приступим. Введите количество букв в слове</span>
     <form className='start-container__form' onSubmit={submitForm}>
       <input
         value={charCount}

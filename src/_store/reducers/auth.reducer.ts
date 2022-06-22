@@ -12,12 +12,14 @@ export interface IAuthState {
   id?: null | number;
   user: null | IUser;
   isLoggedIn: boolean;
+  isLoaded: boolean;
 }
 
 export const initialState: IAuthState = {
   id: null,
   user: null,
-  isLoggedIn: false
+  isLoggedIn: false,
+  isLoaded: false
 };
 
 const signInReducer = handleTypedActions(
@@ -27,7 +29,8 @@ const signInReducer = handleTypedActions(
 
       return {
         ...state,
-        isLoggedIn: action.payload === 'OK'
+        isLoggedIn: action.payload === 'OK',
+        isLoaded: true
       };
     }),
     /** Регистрация пользователя */
@@ -42,7 +45,8 @@ const signInReducer = handleTypedActions(
       return {
         ...state,
         user: action.payload,
-        isLoggedIn: true
+        isLoggedIn: true,
+        isLoaded: true
       };
     }),
     /** Разлогиниться */

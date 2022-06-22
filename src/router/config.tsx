@@ -22,15 +22,15 @@ export interface IRoute {
 }
 
 export const routes: IRoute[] = [
+  // {
+  //   path: '/',
+  //   exact: true,
+  //   redirect: '/home',
+  //   fallback: '...'
+  // },
   {
     path: '/',
     exact: true,
-    redirect: '/home',
-    fallback: '...'
-  },
-  {
-    path: '/home',
-    exact: false,
     component: lazy(() => import('../components/pages/Home')),
     fallback: '...',
     pageName: 'Home',

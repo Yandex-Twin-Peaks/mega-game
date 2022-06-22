@@ -54,45 +54,42 @@ function GameDash({ charCount, category, text }: IGameDash) {
     getCanvasPic(ctx, errorCount);
   };
 
-  const gameJSX = <div className='gamedash'>
-    <Canvas draw={draw} heigth={200} width={200} />
-    <div>Количество ошибок {errorCount}</div>
-    <div>
+  const gameJSX = (
+    <div className='game-dash'>
+      <div className='game-dash__wrapper'>
+        <Canvas draw={draw} heigth={200} width={200} />
+        <div>Количество ошибок {errorCount}</div>
+        <div>
     Загаданное слово (открытое)
-      {finalWord.map((el) => (
-        <div>{el}</div>
-      ))}
-    </div>
-    <div>Категория: {category}</div>
+          {finalWord.map((el) => (
+            <div>{el}</div>
+          ))}
+        </div>
+        <div>Категория: {category}</div>
   Загаданное слово закрытое
-    <div className='gamedash__lettercontainer'>
-      {showText.map((el) => (
-        <OneLetter letter={el} />
-      ))}
-    </div>
-    <div>Введи букву</div>
-    <form onSubmit={checkNextChar}>
-      <input
-        value={word}
-        onChange={(e) => setLetter(e.target.value)}
-        type='text'
-        placeholder='Enter a term'
-        className='gamedash__input'
-      />
-      <button type='submit' className='gamedash__button'>
+        <div className='game_dash__letter-container'>
+          {showText.map((el) => (
+            <OneLetter letter={el} />
+          ))}
+        </div>
+        <div>Введи букву</div>
+        <form onSubmit={checkNextChar}>
+          <input
+            value={word}
+            onChange={(e) => setLetter(e.target.value)}
+            type='text'
+            placeholder='Enter a term'
+            className='gamedash__input'
+          />
+          <button type='submit' className='gamedash__button'>
       Ввод
-      </button>
-    </form>
-  </div>;
-
-  return (
-    <>
-      {gameStatus === 0 ? (
-        gameJSX
-      ) :
-        <Finish gameStatus={gameStatus} />}
-    </>
+          </button>
+        </form>
+      </div>
+    </div>
   );
+
+  return gameStatus === 0 ? gameJSX : <Finish gameStatus={gameStatus} />;
 }
 
 export default GameDash;

@@ -1,12 +1,16 @@
 import React from 'react';
 import Start from '../../organisms/Start/Start';
 
+import './Game.pcss';
+
 const Game = () => {
   return (
-    <>
-      <h1>Игра "Виселица" version 1.1</h1>
+    <div className='game'>
+      <header className='game__header'>
+        <h1>Виселица</h1>
+      </header>
       <Start />
-    </>
+    </div>
   );
 };
 

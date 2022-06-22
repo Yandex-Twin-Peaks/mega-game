@@ -54,7 +54,7 @@ const Authorization = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push('/home');
+      history.push('/');
     }
   }, [isLoggedIn]);
 

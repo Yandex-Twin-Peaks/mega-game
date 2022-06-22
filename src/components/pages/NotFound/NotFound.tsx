@@ -7,7 +7,7 @@ import './NotFound.pcss';
 const NotFound = () => {
   const history = useHistory();
   const handleClick = () => {
-    history.push('/home');
+    history.push('/');
   };
 
   return (

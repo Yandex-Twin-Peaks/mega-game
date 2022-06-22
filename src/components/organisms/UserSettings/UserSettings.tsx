@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './UserSettings.pcss';
-import {
-  TextField, Avatar, IconButton
-} from '@mui/material';
+import { TextField } from '@mui/material';
 import Input from '../../atoms/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { IStore } from '../../../_store';
@@ -29,7 +27,6 @@ function UserSettings() {
 
   const [inputs, setInputs] = useState<IInputs | object | any>(user);
   const [passwords, setPasswords] = useState<IPasswords | object>({});
-  const [file, setFile]:any = useState(null);
 
   const USER_SETTINGS_INPUTS = [
     'first_name',
@@ -71,35 +68,8 @@ function UserSettings() {
     }));
   }
 
-  function handleChangeAvatar(event: React.ChangeEvent<HTMLInputElement>) {
-    const { files } = event.target as HTMLInputElement;
-
-    if (files !== null && files.length > 0) {
-      const file = URL.createObjectURL(files[0]);
-      setFile(file);
-    }
-
-    console.log(file);
-  }
-
   return (
     <div className='user-settings__container'>
-      <div className='user-settings__avatar'>
-        <input type='file' onChange={handleChangeAvatar} id='upload' accept='image/*' style={{ display: 'none' }}/>
-        <label htmlFor='upload'>
-          <IconButton color='primary' aria-label='upload picture' component='span'>
-            <Avatar id='avatar' src={file}
-              style={{
-
-                width: '90px',
-                height: '90px',
-              }}
-            />
-          </IconButton>
-        </label>
-        <label htmlFor='avatar'/>
-      </div>
-
       <form id='user-settings' className='user-settings__settings' onSubmit={handleUserDataSubmit}>
         {USER_SETTINGS_INPUTS.map((inputName, index) => <TextField
           style={{
