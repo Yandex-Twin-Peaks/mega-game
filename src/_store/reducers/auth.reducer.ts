@@ -5,8 +5,8 @@ import {
 } from '../actions/auth.actions';
 import { ISignUpResponse, IUser } from '../types/auth.types';
 
-import { IUserSettingsResponse } from '../types/usersettings.types';
-import { sendUserSettingsSuccess } from '../actions/usersettings.actions';
+import { IUserSettingsResponse, IUserAvatarResponse } from '../types/usersettings.types';
+import { sendUserSettingsSuccess, sendUserAvatarSuccess } from '../actions/usersettings.actions';
 
 export interface IAuthState {
   id?: null | number;
@@ -54,6 +54,13 @@ const signInReducer = handleTypedActions(
     }),
     /** Обновить данные пользователя */
     createTypedHandler(sendUserSettingsSuccess, (state: IAuthState, action: Action<IUserSettingsResponse>): IAuthState => {
+      return {
+        ...state,
+        user: action.payload
+      };
+    }),
+    /** Обновить аватар пользователя */
+    createTypedHandler(sendUserAvatarSuccess, (state: IAuthState, action: Action<IUserAvatarResponse>): IAuthState => {
       return {
         ...state,
         user: action.payload

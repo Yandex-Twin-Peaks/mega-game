@@ -6,7 +6,7 @@ import {
 import Input from '../../atoms/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { IStore } from '../../../_store';
-import { sendUserSettingsPending } from '../../../_store/actions/usersettings.actions';
+import { sendUserSettingsPending, sendUserAvatarPending } from '../../../_store/actions/usersettings.actions';
 
 interface IPasswords {
   old_password: string,
@@ -29,7 +29,7 @@ function UserSettings() {
 
   const [inputs, setInputs] = useState<IInputs | object | any>(user);
   const [passwords, setPasswords] = useState<IPasswords | object>({});
-  const [file, setFile]:any = useState(null);
+  const [file, setFile]:any = useState(user?.avatar);
 
   const USER_SETTINGS_INPUTS = [
     'first_name',
@@ -75,7 +75,10 @@ function UserSettings() {
     const { files } = event.target as HTMLInputElement;
 
     if (files !== null && files.length > 0) {
+      const formData: any = new FormData();
+      formData.append("avatar", files[0]);
       const file = URL.createObjectURL(files[0]);
+      dispatch(sendUserAvatarPending(formData));
       setFile(file);
     }
 
@@ -88,9 +91,8 @@ function UserSettings() {
         <input type='file' onChange={handleChangeAvatar} id='upload' accept='image/*' style={{ display: 'none' }}/>
         <label htmlFor='upload'>
           <IconButton color='primary' aria-label='upload picture' component='span'>
-            <Avatar id='avatar' src={file}
+            <Avatar id='avatar' src={user?.avatar}
               style={{
-
                 width: '90px',
                 height: '90px',
               }}

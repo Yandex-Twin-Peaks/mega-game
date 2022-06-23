@@ -5,5 +5,6 @@ export enum paths {
   SIGN_IN = '/auth/signin',
   GET_USER = '/auth/user',
   LOG_OUT = '/auth/logout',
-  USER_PROFILE = '/user/profile'
+  USER_PROFILE = '/user/profile',
+  USER_AVATAR = '/user/profile/avatar',
 }
