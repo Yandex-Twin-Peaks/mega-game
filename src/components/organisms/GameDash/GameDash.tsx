@@ -4,12 +4,10 @@ import getCanvasPic from '../../../utils/getCanvasPic';
 import Finish from '../../molecules/Finish';
 import OneLetter from '../../molecules/OneLetter';
 import { GAMESTATUS } from '../../../types/enums';
-import { IAbbyy } from '../../../utils/getRandomWord';
 
 import './GameDash.pcss';
 import LetterClicker from '../LetterClicker';
 import { useSelector } from 'react-redux';
-import { IGameState } from '../../../_store/reducers/game.reducer';
 import { IStore } from '../../../_store';
 
 function GameDash() {
