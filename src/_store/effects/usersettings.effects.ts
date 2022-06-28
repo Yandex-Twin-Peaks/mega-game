@@ -11,9 +11,16 @@ import {
   IUserSettingsRequest, IUserSettingsResponse, IUserAvatarResponse
 } from '../types/usersettings.types';
 import {
-  sendUserSettingsPending, sendUserSettingsSuccess, sendUserAvatarPending, sendUserAvatarSuccess
+  sendUserSettingsPending,
+  sendUserSettingsSuccess,
+  sendUserAvatarPending,
+  sendUserAvatarSuccess,
+  sendUserPasswordsPending,
+  sendUserPasswordsSuccess
 } from '../actions/usersettings.actions';
-import { sendUserSettingsRequest, sendUserAvatarRequest } from '../services/usersettings.services';
+import {
+  sendUserSettingsRequest, sendUserAvatarRequest, sendUserPasswordsRequest
+} from '../services/usersettings.services';
 
 /** Эффект, обрабатывающий запрос на обновление данных пользователя */
 export const sendUserSettingsRequestEffect$ = (actions$: Observable<Action<IUserSettingsRequest>>) =>
@@ -26,13 +33,24 @@ export const sendUserSettingsRequestEffect$ = (actions$: Observable<Action<IUser
       ))
   );
 
-/** Эффект, обрабатывающий запрос на обновление аваара пользователя */
+/** Эффект, обрабатывающий запрос на обновление аватара пользователя */
 export const sendUserAvatarRequestEffect$ = (actions$: Observable<Action<any>>) =>
   actions$.pipe(
     ofType(sendUserAvatarPending.toString()),
     switchMap(({ payload }) =>
       sendUserAvatarRequest(payload).pipe(
         map((result: IUserAvatarResponse) => sendUserAvatarSuccess(result)),
+        catchError(showErrorMessage)
+      ))
+  );
+
+/** Эффект, обрабатывающий запрос на обновление пароля пользователя */
+export const sendUserPasswordsRequestEffect$ = (actions$: Observable<Action<any>>) =>
+  actions$.pipe(
+    ofType(sendUserPasswordsPending.toString()),
+    switchMap(({ payload }) =>
+      sendUserPasswordsRequest(payload).pipe(
+        map(() => sendUserPasswordsSuccess()),
         catchError(showErrorMessage)
       ))
   );

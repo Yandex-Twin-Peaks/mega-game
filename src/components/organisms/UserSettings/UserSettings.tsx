@@ -6,11 +6,13 @@ import {
 import Input from '../../atoms/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { IStore } from '../../../_store';
-import { sendUserSettingsPending, sendUserAvatarPending } from '../../../_store/actions/usersettings.actions';
+import {
+  sendUserSettingsPending, sendUserAvatarPending, sendUserPasswordsPending
+} from '../../../_store/actions/usersettings.actions';
 
 interface IPasswords {
-  old_password: string,
-  new_password: string,
+  oldPassword: string,
+  newPassword: string,
 }
 
 interface IInputs {
@@ -23,13 +25,13 @@ interface IInputs {
 }
 
 function UserSettings() {
-
+  const AVATAR_PATH = 'https://ya-praktikum.tech/api/v2/resources/';
   const user = useSelector((store: IStore) => store.auth.user);
   const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState<IInputs | object | any>(user);
   const [passwords, setPasswords] = useState<IPasswords | object>({});
-  const [file, setFile]:any = useState(user?.avatar);
+  const [file, setFile] = useState<string | undefined>(user?.avatar ? AVATAR_PATH + user?.avatar : undefined);
 
   const USER_SETTINGS_INPUTS = [
     'first_name',
@@ -40,16 +42,15 @@ function UserSettings() {
     'phone'
   ];
 
-  const USER_PASSWORDS_INPUTS = ['old_password', 'new_password'];
+  const USER_PASSWORDS_INPUTS = ['oldPassword', 'newPassword'];
 
   function handleUserDataSubmit(event: React.FormEvent<HTMLFormElement>) {
-    console.log(inputs);
     dispatch(sendUserSettingsPending(inputs));
     event.preventDefault();
   }
 
   function handlePasswordsSubmit(event: React.FormEvent<HTMLFormElement>) {
-    console.log(passwords);
+    dispatch(sendUserPasswordsPending(passwords));
     event.preventDefault();
   }
 
@@ -72,17 +73,16 @@ function UserSettings() {
   }
 
   function handleChangeAvatar(event: React.ChangeEvent<HTMLInputElement>) {
+    event.preventDefault();
     const { files } = event.target as HTMLInputElement;
 
     if (files !== null && files.length > 0) {
       const formData: any = new FormData();
-      formData.append("avatar", files[0]);
+      formData.append('avatar', files[0]);
       const file = URL.createObjectURL(files[0]);
       dispatch(sendUserAvatarPending(formData));
       setFile(file);
     }
-
-    console.log(file);
   }
 
   return (
@@ -91,7 +91,7 @@ function UserSettings() {
         <input type='file' onChange={handleChangeAvatar} id='upload' accept='image/*' style={{ display: 'none' }}/>
         <label htmlFor='upload'>
           <IconButton color='primary' aria-label='upload picture' component='span'>
-            <Avatar id='avatar' src={user?.avatar}
+            <Avatar id='avatar' src={file}
               style={{
                 width: '90px',
                 height: '90px',
@@ -101,7 +101,6 @@ function UserSettings() {
         </label>
         <label htmlFor='avatar'/>
       </div>
-
       <form id='user-settings' className='user-settings__settings' onSubmit={handleUserDataSubmit}>
         {USER_SETTINGS_INPUTS.map((inputName, index) => <TextField
           style={{

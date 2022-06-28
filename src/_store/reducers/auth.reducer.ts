@@ -6,7 +6,9 @@ import {
 import { ISignUpResponse, IUser } from '../types/auth.types';
 
 import { IUserSettingsResponse, IUserAvatarResponse } from '../types/usersettings.types';
-import { sendUserSettingsSuccess, sendUserAvatarSuccess } from '../actions/usersettings.actions';
+import {
+  sendUserSettingsSuccess, sendUserAvatarSuccess, sendUserPasswordsSuccess
+} from '../actions/usersettings.actions';
 
 export interface IAuthState {
   id?: null | number;
@@ -65,6 +67,10 @@ const signInReducer = handleTypedActions(
         ...state,
         user: action.payload
       };
+    }),
+    /** Обновить пароль пользователя */
+    createTypedHandler(sendUserPasswordsSuccess, (state: IAuthState): IAuthState => {
+      return { ...state };
     }),
   ],
   initialState

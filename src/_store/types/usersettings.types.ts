@@ -29,3 +29,7 @@ export interface IUserAvatarResponse {
   'avatar': string;
 }
 
+export interface IUserPasswordsRequest {
+  'oldPassword': string;
+  'newPassword': string
+}
