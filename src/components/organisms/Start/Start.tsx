@@ -5,8 +5,12 @@ import getRandomWord from '../../../utils/getRandomWord';
 import { words } from '../../../utils/worddata/abbyy';
 
 import './Start.pcss';
+import { useDispatch } from 'react-redux';
+import { addGameWord } from '../../../_store/actions/game.actions';
 
 function Start() {
+
+  const dispatch = useDispatch();
 
   const r1 = [
     1,
@@ -23,6 +27,7 @@ function Start() {
   function handleLetterCount(count:any) {
     setSubmit(true);
     const newWord = getRandomWord(words, count);
+    dispatch(addGameWord(newWord));
     setOneFinalWord(newWord.text);
     setOneFinalCategory(newWord.category);
     setCharCount(count);
