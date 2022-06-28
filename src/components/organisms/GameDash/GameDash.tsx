@@ -7,6 +7,7 @@ import { GAMESTATUS } from '../../../types/enums';
 import { IAbbyy } from '../../../utils/getRandomWord';
 
 import './GameDash.pcss';
+import LetterClicker from '../LetterClicker';
 
 export interface IGameDash extends IAbbyy {
   /** Количество букв в слове, которое нужно отгадать */
@@ -70,6 +71,8 @@ function GameDash({ charCount, category, text }: IGameDash) {
         <OneLetter letter={el} />
       ))}
     </div>
+
+
     <div>Введи букву</div>
     <form onSubmit={checkNextChar}>
       <input
@@ -83,6 +86,8 @@ function GameDash({ charCount, category, text }: IGameDash) {
       Ввод
       </button>
     </form>
+
+    <LetterClicker />
   </div>;
 
   return (
