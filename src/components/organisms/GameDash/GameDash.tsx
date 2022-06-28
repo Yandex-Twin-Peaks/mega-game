@@ -4,18 +4,17 @@ import getCanvasPic from '../../../utils/getCanvasPic';
 import Finish from '../../molecules/Finish';
 import OneLetter from '../../molecules/OneLetter';
 import { GAMESTATUS } from '../../../types/enums';
-import { IAbbyy } from '../../../utils/getRandomWord';
 
 import './GameDash.pcss';
+import LetterClicker from '../LetterClicker';
+import { useSelector } from 'react-redux';
+import { IStore } from '../../../_store';
 
-export interface IGameDash extends IAbbyy {
-  /** Количество букв в слове, которое нужно отгадать */
-  charCount: number;
-}
+function GameDash() {
 
-function GameDash({ charCount, category, text }: IGameDash) {
+  const { num, category, text }:any = useSelector<IStore>((state) => state.game.gameWord);
 
-  const starArray:Array<string> = new Array(charCount).fill('*');
+  const starArray:Array<string> = new Array(num).fill('*');
   const [showText, setShowText] = useState(starArray);
   const [errorCount, setError] = useState(0);
   const [word, setLetter] = useState('');
@@ -23,8 +22,8 @@ function GameDash({ charCount, category, text }: IGameDash) {
   const finalWord = text.split('');
 
   function checkNextChar(event: React.FormEvent<HTMLFormElement>) {
-    if (finalWord.filter((el) => el === word).length) {
-      finalWord.map((el, index) => {
+    if (finalWord.filter((el:string) => el === word).length) {
+      finalWord.map((el:string, index:number) => {
         if (el === word) {
           showText[index] = word;
           setShowText(showText);
@@ -59,7 +58,7 @@ function GameDash({ charCount, category, text }: IGameDash) {
     <div>Количество ошибок {errorCount}</div>
     <div>
     Загаданное слово (открытое)
-      {finalWord.map((el) => (
+      {finalWord.map((el:string) => (
         <div>{el}</div>
       ))}
     </div>
@@ -70,6 +69,8 @@ function GameDash({ charCount, category, text }: IGameDash) {
         <OneLetter letter={el} />
       ))}
     </div>
+
+
     <div>Введи букву</div>
     <form onSubmit={checkNextChar}>
       <input
@@ -83,6 +84,8 @@ function GameDash({ charCount, category, text }: IGameDash) {
       Ввод
       </button>
     </form>
+
+    <LetterClicker />
   </div>;
 
   return (

@@ -10,14 +10,19 @@ import {
   sendSignInRequestEffect$, sendSignUpRequestEffect$, sendUserLogOutEffect$, sendUserRequestEffect$
 } from './effects/auth.effects';
 
-import { sendUserSettingsRequestEffect$ } from './effects/usersettings.effects';
+import {
+  sendUserAvatarRequestEffect$, sendUserPasswordsRequestEffect$, sendUserSettingsRequestEffect$
+} from './effects/usersettings.effects';
+import gameReducer, { IGameState } from './reducers/game.reducer';
 
 export interface IStore {
   auth: IAuthState
+  game: IGameState
 }
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  game: gameReducer,
   // @ts-ignore
 });
 
@@ -33,4 +38,6 @@ observableMiddleware.run(combineEpics(
   sendUserRequestEffect$,
   sendUserLogOutEffect$,
   sendUserSettingsRequestEffect$,
+  sendUserAvatarRequestEffect$,
+  sendUserPasswordsRequestEffect$,
 ));
