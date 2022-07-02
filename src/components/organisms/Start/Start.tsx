@@ -5,13 +5,13 @@ import getRandomWord from '../../../utils/getRandomWord';
 import { words } from '../../../utils/worddata/abbyy';
 
 import './Start.pcss';
-import { useDispatch } from 'react-redux';
-import { addGameWord } from '../../../_store/actions/game.actions';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addGameWord, addShowText } from '../../../_store/actions/game.actions';
+import { IStore } from '../../../_store';
 function Start() {
 
   const dispatch = useDispatch();
-
+  const { errorCount }:any = useSelector<IStore>((state) => state.game);
   const r1 = [
     1,
     2,
@@ -28,14 +28,8 @@ function Start() {
     setSubmit(true);
     const newWord = getRandomWord(words, count);
     dispatch(addGameWord(newWord));
-    setOneFinalWord(newWord.text);
-    setOneFinalCategory(newWord.category);
-    setCharCount(count);
+    dispatch(addShowText(new Array(newWord.num).fill('*')))
   }
-
-  const [oneFinalWord, setOneFinalWord] = useState('');
-  const [oneFinalCategory, setOneFinalCategory] = useState('');
-  const [charCount, setCharCount] = useState(0);
   const [submitted, setSubmit] = useState(false);
 
   const startJSX = <div className='start-container'>
@@ -57,7 +51,7 @@ function Start() {
   </div>;
 
   return submitted ?
-    <GameDash charCount={charCount} text={oneFinalWord} category={oneFinalCategory} /> :
+    <GameDash errorCount = {errorCount} /> :
     startJSX;
 }
 

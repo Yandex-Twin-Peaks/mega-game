@@ -4,46 +4,94 @@ import getCanvasPic from '../../../utils/getCanvasPic';
 import Finish from '../../molecules/Finish';
 import OneLetter from '../../molecules/OneLetter';
 import { GAMESTATUS } from '../../../types/enums';
+import { addErrorCounter } from '../../../_store/actions/game.actions';
 
 import './GameDash.pcss';
 import LetterClicker from '../LetterClicker';
 import { useSelector } from 'react-redux';
 import { IStore } from '../../../_store';
-
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 function GameDash() {
 
-  const { num, category, text }:any = useSelector<IStore>((state) => state.game.gameWord);
+  const dispatch = useDispatch();
+  const { gameLetters, gameWord, errorCount, showText }:any = useSelector<IStore>((state) => state.game);
+
+  const { num, category, text }:any = gameWord;
 
   const starArray:Array<string> = new Array(num).fill('*');
-  const [showText, setShowText] = useState(starArray);
-  const [errorCount, setError] = useState(0);
-  const [word, setLetter] = useState('');
+  //const [showText, setShowText] = useState(starArray);
+  // const [word, setLetter] = useState('');
   const [gameStatus, setGameStatus] = useState(GAMESTATUS.inGame);
+  // const [errorCount, setErrorCount] = useState(0);
   const finalWord = text.split('');
 
-  function checkNextChar(event: React.FormEvent<HTMLFormElement>) {
-    if (finalWord.filter((el:string) => el === word).length) {
-      finalWord.map((el:string, index:number) => {
-        if (el === word) {
-          showText[index] = word;
-          setShowText(showText);
-        }
-      });
-    } else {
-      setError(errorCount + 1);
+  useEffect(()=>{}, [gameLetters])
 
-      if (errorCount === 6) {
-        setGameStatus(2);
-      }
-    }
 
-    if (!showText.filter((el) => el === '*').length) {
-      setGameStatus(1);
-    }
 
-    setLetter('');
-    event.preventDefault();
+  // if (finalWord.filter((el:string) => el === gameLetters[gameLetters.length - 1]).length) {
+  //   finalWord.map((el:string, index:number) => {
+
+  //     if (el === gameLetters[gameLetters.length - 1]) {
+  //       showText[index] = gameLetters[gameLetters.length - 1];
+  //     }
+  //   });
+  //   setShowText(showText);
+  // } else {
+  //   setErrorCount(errorCount + 1);
+  //   dispatch(addErrorCounter(errorCount));
+
+  // }
+
+  if (errorCount === 6) {
+    // setGameStatus(2);
+    console.log('porazh');
   }
+
+
+  // if (finalWord.filter((el:string) => el === gameLetters[gameLetters.length - 1]).length) {
+  //   finalWord.map((el:string, index:number) => {
+
+  //     if (el === gameLetters[gameLetters.length - 1]) {
+  //       showText[index] = gameLetters[gameLetters.length - 1];
+  //       setShowText(showText);
+  //     }
+  //   });
+  // } else {
+
+  //   // dispatch(addErrorCounter(errorCount + 1));
+  //   // setError(errorCount + 1);
+  //   // console.log(errorCount + 1);
+  //   // if (errorCount === 6) {
+  //   //   setGameStatus(2);
+  //   // }
+  // }
+
+  // if (!showText.filter((el) => el === '*').length) {
+  //   setGameStatus(1);
+  // }
+
+  //   // if (finalWord.filter((el:string) => el === word).length) {
+  //   //   finalWord.map((el:string, index:number) => {
+  //   //     if (el === word) {
+  //   //       showText[index] = word;
+  //   //       setShowText(showText);
+  //   //     }
+  //   });
+  // } else {
+  //   setError(errorCount + 1);
+
+  //   if (errorCount === 6) {
+  //     setGameStatus(2);
+  //   }
+  // }
+
+  // if (!showText.filter((el) => el === '*').length) {
+  //   setGameStatus(1);
+  // }
+
+  // setLetter('');
 
   const draw = (ctx: any) => {
     ctx.fillStyle = 'rgb(200, 0, 0)';
@@ -72,20 +120,7 @@ function GameDash() {
 
 
     <div>Введи букву</div>
-    <form onSubmit={checkNextChar}>
-      <input
-        value={word}
-        onChange={(e) => setLetter(e.target.value)}
-        type='text'
-        placeholder='Enter a term'
-        className='gamedash__input'
-      />
-      <button type='submit' className='gamedash__button'>
-      Ввод
-      </button>
-    </form>
-
-    <LetterClicker />
+    <LetterClicker gameLetters={gameLetters} finalWord = {finalWord} errorCount={errorCount} showText={showText} />
   </div>;
 
   return (
