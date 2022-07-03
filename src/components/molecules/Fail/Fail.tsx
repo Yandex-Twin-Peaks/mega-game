@@ -17,7 +17,7 @@ function Fail() {
   return (
     <>
       <div>Вы проиграли</div>
-      <Canvas draw={draw} heigth={200} width={200} />
+      <Canvas draw={draw} height={400} width={400} />
       <Button text={'Начать сначала'} onClick={() => {
         console.log('сначала');
       }} />

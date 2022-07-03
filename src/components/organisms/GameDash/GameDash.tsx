@@ -10,13 +10,15 @@ import LetterClicker from '../LetterClicker';
 import { useSelector } from 'react-redux';
 import { IStore } from '../../../_store';
 
+
 function GameDash() {
 
   const { gameLetters, gameWord, errorCount, showText, gameStatus }:any = useSelector<IStore>((state) => state.game);
 
-  const { num, category, text }:any = gameWord;
+  const { category, text }:any = gameWord;
 
   const finalWord = text.split('');
+
 
   const draw = (ctx: any) => {
     ctx.fillStyle = 'rgb(200, 0, 0)';
@@ -27,24 +29,21 @@ function GameDash() {
   };
 
   const gameJSX = <div className='gamedash'>
-    <Canvas draw={draw} heigth={200} width={200} />
-    <div>Количество ошибок {errorCount}</div>
-    <div>
-    Загаданное слово (открытое)
+    <div className='gamedash__canvascontainer'>
+      <Canvas draw={draw} height={400} width={400} />
+    </div>
+    {/* <div>
+    Загаданное слово (открытое) для теста
       {finalWord.map((el:string) => (
         <div>{el}</div>
       ))}
-    </div>
-    <div>Категория: {category}</div>
-  Загаданное слово закрытое
+    </div> */}
+    <div className='gamedash__category'>Категория: {category}</div>
     <div className='gamedash__lettercontainer'>
       {showText.map((el: string) => (
         <OneLetter letter={el} />
       ))}
     </div>
-
-
-    <div>Введи букву</div>
     <LetterClicker gameLetters={gameLetters} finalWord = {finalWord} errorCount={errorCount} showText={showText} gameStatus={gameStatus} />
   </div>;
 

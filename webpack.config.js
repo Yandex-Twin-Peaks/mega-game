@@ -39,7 +39,7 @@ const config = {
         ],
       },
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|jpeg)$/,
         use: [
           {
             loader: 'file-loader?limit=10000',

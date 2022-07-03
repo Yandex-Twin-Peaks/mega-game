@@ -11,7 +11,6 @@ const Canvas = ({ draw, height, width }:any) => {
 
   return (
     <>
-      <span>Виселица</span>
       <canvas ref={canvas} height={height} width={width} />
     </>
   );

@@ -12,25 +12,27 @@ import { GAMESTATUS } from '../../../types/enums';
 
 function LetterClicker(props:any) {
 
-  const { gameLetters, finalWord, errorCount, showText } = props;
-
-  console.log(gameLetters);
-
-  const [state, setState] = useState([]);
-  const [shText, setShText] = useState(showText);
+  const { finalWord, errorCount, showText } = props;
   const [letterColor, setLetterColor] = useState(colorsLetter);
   const dispatch = useDispatch();
 
   function handleAddLetter(letter:any) {
     if (finalWord.filter((el:string) => el === letter).length) {
+      setLetterColor({
+        ...letterColor,
+        [letter]: '#00d286'
+      });
       finalWord.map((el:string, index:number) => {
         if (el === letter) {
-          shText[index] = letter;
-
+          showText[index] = letter;
         }
       });
-      dispatch(addShowText(shText));
+      dispatch(addShowText(showText));
     } else {
+      setLetterColor({
+        ...letterColor,
+        [letter]: '#dc143c'
+      });
       dispatch(addErrorCounter(errorCount + 1));
     }
 
@@ -44,6 +46,7 @@ function LetterClicker(props:any) {
       dispatch(addGameStatus(GAMESTATUS.fail));
     }
   }
+
 
   return (
     <div className='footer__letter'>

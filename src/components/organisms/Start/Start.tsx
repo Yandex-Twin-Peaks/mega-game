@@ -30,13 +30,13 @@ function Start() {
     const newWord = getRandomWord(words, count);
     dispatch(clearGameState());
     dispatch(addGameWord(newWord));
-    const starArray = new Array(newWord.num).fill('*');
+    const starArray:any = new Array(newWord.num).fill('*');
     dispatch(addShowText(starArray));
   }
   const [submitted, setSubmit] = useState(false);
 
   const startJSX = <div className='start-container'>
-    <span className='start-container__title'>Игра начинается введите количество буковок</span>
+    <span className='start-container__title'>Игра начинается введите количество буковок:</span>
     <div className='footer__letter'>
       <div className='footer__row'>
         {r1.map((letterCount) => (<p style={{ backgroundColor: '#E2E2E2' }}

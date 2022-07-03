@@ -1,4 +1,4 @@
-export const r1 = [
+export const r1: Array<string> = [
   'й',
   'ц',
   'у',
@@ -13,7 +13,7 @@ export const r1 = [
   'ъ'
 ];
 
-export const r2 = [
+export const r2: Array<string> = [
   'ф',
   'ы',
   'в',
@@ -27,7 +27,7 @@ export const r2 = [
   'э'
 ];
 
-export const r3 = [
+export const r3: Array<string> = [
   'я',
   'ч',
   'с',
@@ -39,7 +39,7 @@ export const r3 = [
   'ю'
 ];
 
-export const colorsLetter = {
+export const colorsLetter: Record<string, string> = {
   'б': '#E2E2E2',
   'а': '#E2E2E2',
   'в': '#E2E2E2',
