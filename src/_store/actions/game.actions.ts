@@ -9,3 +9,6 @@ export const addErrorCounter = createTypedAction<string>('[Success] addErrorCoun
 
 export const addShowText = createTypedAction<string>('[Success] addShowText');
 
+export const clearGameState = createTypedAction<void>('[Success] clearGameState');
+
+export const addGameStatus = createTypedAction<number>('[Success] addGameStatus');

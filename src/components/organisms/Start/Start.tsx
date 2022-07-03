@@ -5,13 +5,14 @@ import getRandomWord from '../../../utils/getRandomWord';
 import { words } from '../../../utils/worddata/abbyy';
 
 import './Start.pcss';
-import { useDispatch, useSelector } from 'react-redux';
-import { addGameWord, addShowText } from '../../../_store/actions/game.actions';
-import { IStore } from '../../../_store';
+import { useDispatch } from 'react-redux';
+import {
+  addGameWord, addShowText, clearGameState
+} from '../../../_store/actions/game.actions';
+
 function Start() {
 
   const dispatch = useDispatch();
-  const { errorCount }:any = useSelector<IStore>((state) => state.game);
   const r1 = [
     1,
     2,
@@ -27,8 +28,10 @@ function Start() {
   function handleLetterCount(count:any) {
     setSubmit(true);
     const newWord = getRandomWord(words, count);
+    dispatch(clearGameState());
     dispatch(addGameWord(newWord));
-    dispatch(addShowText(new Array(newWord.num).fill('*')))
+    const starArray = new Array(newWord.num).fill('*');
+    dispatch(addShowText(starArray));
   }
   const [submitted, setSubmit] = useState(false);
 
@@ -51,7 +54,7 @@ function Start() {
   </div>;
 
   return submitted ?
-    <GameDash errorCount = {errorCount} /> :
+    <GameDash /> :
     startJSX;
 }
 
