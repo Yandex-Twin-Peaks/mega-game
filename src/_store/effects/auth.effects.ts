@@ -35,7 +35,7 @@ export const sendSignUpRequestEffect$ = (actions$: Observable<Action<ISignUpRequ
     ofType(sendSignUpRequestPending.toString()),
     switchMap(({ payload }) =>
       sendSignUpRequest(payload).pipe(
-        map((result: ISignUpResponse) => sendSignUpRequestSuccess(result)),
+        map((result: ISignUpResponse | any) => sendSignUpRequestSuccess(result)),
         catchError(showErrorMessage)
       ))
   );

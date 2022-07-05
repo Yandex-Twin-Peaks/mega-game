@@ -7,11 +7,12 @@ import { useHistory } from 'react-router-dom';
 import { sendGetUserPending } from './_store/actions/auth.actions';
 import NavBar from './components/organisms/NavBar';
 
-import './App.pcss';
+// import './App.pcss';
 
 const App = () => {
   /** ----------------------------- Глобальное состояние ---------------------------------- */
   const { isLoggedIn } = useSelector((store: IStore) => store.auth);
+  const tester = useSelector((store: IStore) => store.game);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -39,11 +40,12 @@ const App = () => {
   /** ----------------------------- Рендер компонентов ------------------------------------ */
   return (
     <div className='app'>
-      { isLoggedIn && (
-        <div className='app__nav-bar'>
-          <NavBar />
-        </div> )
-      }
+      <div>{JSON.stringify(tester)}</div>
+      {/* { isLoggedIn && ( */}
+      <div className='app__nav-bar'>
+        <NavBar />
+      </div> )
+      {/* } */}
       <Router routes={routes} />
     </div>
   );

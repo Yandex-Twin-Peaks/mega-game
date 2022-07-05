@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Switch } from 'react-router-dom';
 import RouteWithSubRoutes from './RouteWithSubRoutes';
 import { IRoute } from './config';

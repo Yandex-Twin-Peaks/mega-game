@@ -1,5 +1,5 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client';
 
 import Main from './Main';
 
@@ -8,5 +8,4 @@ import './styles/normalize.css';
 
 const container = document.getElementById('root')!;
 
-const root = createRoot(container);
-root.render(<Main />);
+hydrateRoot(container, <Main />);

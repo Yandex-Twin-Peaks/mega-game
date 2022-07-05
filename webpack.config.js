@@ -66,10 +66,10 @@ const config = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    }),
-    new MiniCssExtractPlugin()
+    // new HtmlWebpackPlugin({
+    //   template: './src/index.html'
+    // }),
+     new MiniCssExtractPlugin()
   ],
   optimization: {
     minimize: true,
@@ -86,16 +86,16 @@ const config = {
       chunks: 'all',
     },
   },
-  devServer: {
-    hot: true,
-    compress: true,
-    allowedHosts: 'all',
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    port: 8000,
-    historyApiFallback: true,
-  },
+  // devServer: {
+  //   hot: true,
+  //   compress: true,
+  //   allowedHosts: 'all',
+  //   static: {
+  //     directory: path.join(__dirname, 'dist'),
+  //   },
+  //   port: 8000,
+  //   historyApiFallback: true,
+  // },
   performance: {
     hints: false,
   }
@@ -113,8 +113,8 @@ module.exports = (env, argv) => {
   if (argv.mode === 'production') {
     config.devtool = false;
     config.output = {
-      path: path.join(__dirname, "/build"),
-      filename: "[name].js"
+      path: path.join(__dirname, "/public"),
+      filename: "[name].bundle.js"
     }
   }
 

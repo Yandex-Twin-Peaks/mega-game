@@ -58,7 +58,7 @@ const gameReducer = handleTypedActions(
       };
     }),
     /** очистка game стейта */
-    createTypedHandler(clearGameState, (state: IGameState, action: Action<void>): IGameState => {
+    createTypedHandler(clearGameState, (state: IGameState): IGameState => {
 
       return {
         ...state,
