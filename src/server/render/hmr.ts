@@ -1,10 +1,11 @@
 import webpack from 'webpack';
-import devMiddleware from 'webpack-dev-middleware';
+import middleware from 'webpack-dev-middleware';
+// @ts-ignore
+import hotMiddleware from '@gatsbyjs/webpack-hot-middleware';
 // @ts-ignore
 import config from '../../../webpack.config';
 import { render } from './render.js';
 
-console.log(config);
 
 const compiler = webpack({
   ...config,
@@ -14,9 +15,10 @@ const compiler = webpack({
 
 
 export default [
-  devMiddleware(compiler, {
+  middleware(compiler, {
     serverSideRender: true,
     index: false,
   }),
+  hotMiddleware(compiler, { path: '/__webpack_hmr', }),
   render,
 ];

@@ -4,11 +4,14 @@
   "description": "Yandex Practicum Middle Frontend. Twin Peaks Team. Mega Game Project",
   "scripts": {
     "build:server": "tsc --project ./src/server",
-    "start:server": "node ./dist/server/index.js",
+    "start:server": "NODE_ENV=development node ./dist/server/index.js",
     "start": "npm run build && node index.js",
     "dev": "webpack --mode development && cp -R static dist/assets && webpack serve --mode development --open",
     "build": "webpack --mode production && cp -R static build/assets",
     "lint": "eslint --fix --ext .js,.ts src"
+  },
+  "browser": {
+    "[module-name]": false   
   },
   "repository": {
     "url": "git@github.com:Yandex-Twin-Peaks/mega-game.git"

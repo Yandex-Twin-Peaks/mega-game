@@ -3,11 +3,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const { HotModuleReplacementPlugin } = require('webpack');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
+const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
-  entry: './src/index.tsx',
+  entry: [
+    isDev && '@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr', './src/index.tsx'
+  ].filter(Boolean),
   resolve: {
     extensions: [".js", ".ts", ".tsx"],
+  },
+  output: {
+    path: path.join(__dirname, "/public"),
+    filename: "main.bundle.js"
   },
   module: {
     rules: [
@@ -16,7 +26,7 @@ const config = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: {presets: ['@babel/env', '@babel/preset-react', '@babel/preset-typescript']}
+          options: {presets: ['@babel/env', '@babel/preset-react', '@babel/preset-typescript'], plugins: [isDev && 'react-refresh/babel'].filter(Boolean)}
         },
       },
       {
@@ -66,11 +76,12 @@ const config = {
     ],
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: './src/index.html'
-    // }),
+     isDev && new HotModuleReplacementPlugin(),
+     isDev && new ReactRefreshPlugin({overlay: {
+       sockIntegration: 'whm',
+     }}),
      new MiniCssExtractPlugin()
-  ],
+  ].filter(Boolean),
   optimization: {
   //   minimize: true,
   //   minimizer: [
@@ -96,27 +107,27 @@ const config = {
   //   port: 8000,
   //   historyApiFallback: true,
   // },
-  performance: {
-    hints: false,
-  }
+  // performance: {
+  //   hints: false,
+  // }
 };
 
 module.exports = (env, argv) => {
-  if (argv.mode === 'development') {
-    config.devtool = 'eval-source-map';
-    config.output = {
-      path: path.join(__dirname, "/dist"),
-      filename: "[name].js"
-    }
-  }
+  // if (argv.mode === 'development') {
+  //   config.devtool = 'eval-source-map';
+  //   config.output = {
+  //     path: path.join(__dirname, "/public"),
+  //     filename: "main.bundle.js"
+  //   }
+  // }
 
-  if (argv.mode === 'production') {
-    config.devtool = false;
-    config.output = {
-      path: path.join(__dirname, "/public"),
-      filename: "main.bundle.js"
-    }
-  }
+  // if (argv.mode === 'production') {
+  //   config.devtool = false;
+  //   config.output = {
+  //     path: path.join(__dirname, "/public"),
+  //     filename: "main.bundle.js"
+  //   }
+  // }
 
   return config;
 };

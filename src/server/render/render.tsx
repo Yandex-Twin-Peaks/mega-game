@@ -41,7 +41,14 @@ const store = createStore(rootReducer, state);
 
 
 export const render = (req: Request, res: Response) => {
+  let script = 'main.bundle.js';
 
+  if (process.env.NODE_ENV === 'development') {
+    const { devMiddleware } = res.locals.webpack;
+    const jsonWebpackStats = devMiddleware.stats.toJson();
+    const { assetsByChunkName } = jsonWebpackStats;
+    script = assetsByChunkName.main[0];
+  }
 
   const indexHTML:any = readFileSync(resolve(__dirname, '../../../src/index.html'), { encoding: 'utf-8' });
 
@@ -61,7 +68,7 @@ export const render = (req: Request, res: Response) => {
   const result = indexHTML.replace('<div id="root"></div>', `
   <div id="root">${reactHTML}</div>
   <script type="module">window.__INITIAL_STATE__=${JSON.stringify(state)}</script>
-  <script type="module" src="main.bundle.js"></script>
+  <script type="module" src=${script}></script>
   `);
 
   res.send(result);
