@@ -12,7 +12,6 @@ import NavBar from './components/organisms/NavBar';
 const App = () => {
   /** ----------------------------- Глобальное состояние ---------------------------------- */
   const { isLoggedIn } = useSelector((store: IStore) => store.auth);
-  const tester = useSelector((store: IStore) => store.game);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -40,12 +39,11 @@ const App = () => {
   /** ----------------------------- Рендер компонентов ------------------------------------ */
   return (
     <div className='app'>
-      <div>{JSON.stringify(tester)}</div>
-      {/* { isLoggedIn && ( */}
-      <div className='app__nav-bar'>
-        <NavBar />
-      </div> )
-      {/* } */}
+      { isLoggedIn && (
+        <div className='app__nav-bar'>
+          <NavBar />
+        </div> )
+      }
       <Router routes={routes} />
     </div>
   );

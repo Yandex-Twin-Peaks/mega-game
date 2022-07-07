@@ -43,7 +43,7 @@ const store = createStore(rootReducer, state);
 export const render = (req: Request, res: Response) => {
 
 
-  const indexHTML:any = readFileSync(resolve(__dirname, '../../index.html'), { encoding: 'utf-8' });
+  const indexHTML:any = readFileSync(resolve(__dirname, '../../../src/index.html'), { encoding: 'utf-8' });
 
   const location = req.url;
 

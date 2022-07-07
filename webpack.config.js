@@ -72,20 +72,20 @@ const config = {
      new MiniCssExtractPlugin()
   ],
   optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin({
-        terserOptions: {
-          mangle: true,
-          compress: true,
-        },
-        extractComments: false,
-      })],
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
+  //   minimize: true,
+  //   minimizer: [
+  //     new CssMinimizerPlugin(),
+  //     new TerserPlugin({
+  //       terserOptions: {
+  //         mangle: true,
+  //         compress: true,
+  //       },
+  //       extractComments: false,
+  //     })],
+  //   splitChunks: {
+  //     chunks: 'all',
+  //   },
+   },
   // devServer: {
   //   hot: true,
   //   compress: true,
@@ -114,7 +114,7 @@ module.exports = (env, argv) => {
     config.devtool = false;
     config.output = {
       path: path.join(__dirname, "/public"),
-      filename: "[name].bundle.js"
+      filename: "main.bundle.js"
     }
   }
 
