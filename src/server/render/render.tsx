@@ -46,8 +46,9 @@ export const render = (req: Request, res: Response) => {
   if (process.env.NODE_ENV === 'development') {
     const { devMiddleware } = res.locals.webpack;
     const jsonWebpackStats = devMiddleware.stats.toJson();
-    const { assetsByChunkName } = jsonWebpackStats;
-    script = assetsByChunkName.main[0];
+    console.log(jsonWebpackStats, 'gggg')
+    // const { assetsByChunkName } = jsonWebpackStats;
+    // script = assetsByChunkName.main[0];
   }
 
   const indexHTML:any = readFileSync(resolve(__dirname, '../../../src/index.html'), { encoding: 'utf-8' });

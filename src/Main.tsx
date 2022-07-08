@@ -7,8 +7,6 @@ import Error from './components/atoms/Error';
 import { store } from './_store';
 import App from './App';
 
-console.log(store, 'mainstore');
-
 const Main = () => {
   return (
     <ErrorBoundary

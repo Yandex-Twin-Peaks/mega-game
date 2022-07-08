@@ -19,6 +19,10 @@ export default [
     serverSideRender: true,
     index: false,
   }),
-  hotMiddleware(compiler, { path: '/__webpack_hmr', }),
+  hotMiddleware(compiler, {
+    path: '/__webpack_hmr',
+    log: false,
+    heartbeat: 10 * 1000,
+  }),
   render,
 ];

@@ -6,18 +6,23 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
+var hotMiddlewareScript = 'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr'
+
+console.log(hotMiddlewareScript, 'nnnn')
+
 const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
   entry: [
-    isDev && '@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr', './src/index.tsx'
+    isDev && hotMiddlewareScript, './src/index.tsx'
   ].filter(Boolean),
   resolve: {
     extensions: [".js", ".ts", ".tsx"],
   },
   output: {
-    path: path.join(__dirname, "/public"),
-    filename: "main.bundle.js"
+    path: path.join(__dirname, "../public"),
+    filename: "main.bundle.js",
+    publicPath: '/'
   },
   module: {
     rules: [
