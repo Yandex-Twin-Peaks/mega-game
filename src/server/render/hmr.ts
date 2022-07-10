@@ -3,18 +3,14 @@ import devMiddleware from 'webpack-dev-middleware';
 // @ts-ignore
 import hotMiddleware from '@gatsbyjs/webpack-hot-middleware';
 // @ts-ignore
-import config from '../../../webpack.config';
+import config from '../../../webpack/webpack.config';
 import { render } from './render.js';
-
 
 const compiler = webpack({
   ...config,
   mode: 'development',
 
 });
-
-console.log(config, 'test');
-
 
 export default [
   devMiddleware(compiler, {

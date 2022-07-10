@@ -5,9 +5,13 @@
   "scripts": {
     "build:server": "tsc --project ./src/server",
     "start:server": "NODE_ENV=development node ./dist/server/index.js",
-    "start": "npm run build && node index.js",
     "dev": "webpack --mode development && cp -R static dist/assets && webpack serve --mode development --open",
-    "build": "webpack --mode development && cp -R static build/assets",
+    "build:client": "webpack --config webpack/webpack.config.js",
+    "build:client:ssr": "webpack --config ./webpack/ssr.config.js",
+    "watch:client:ssr": "webpack --watch --config ./webpack/ssr.config.js ",
+    "start": "concurrently \"npm run start:server\" \"npm run watch:client:ssr\"",
+    "build:prod": "npm run build:server && npm run build:client:ssr && npm run build:client",
+    "start:prod": "npm run start:server",
     "lint": "eslint --fix --ext .js,.ts src"
   },
   "browser": {
@@ -30,6 +34,7 @@
     "@mui/material": "5.8.3",
     "axios": "0.27.2",
     "axios-observable": "1.5.0",
+    "concurrently": "^7.2.2",
     "cors": "2.8.5",
     "express": "4.18.1",
     "express-history-api-fallback": "2.2.1",
@@ -43,7 +48,8 @@
     "redux": "4.2.0",
     "redux-actions": "2.6.5",
     "redux-actions-ts": "0.1.1",
-    "redux-observable": "2.0.0"
+    "redux-observable": "2.0.0",
+    "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",

@@ -1,8 +1,7 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
@@ -99,20 +98,7 @@ const config = {
   //   splitChunks: {
   //     chunks: 'all',
   //   },
-   },
-  // devServer: {
-  //   hot: true,
-  //   compress: true,
-  //   allowedHosts: 'all',
-  //   static: {
-  //     directory: path.join(__dirname, 'dist'),
-  //   },
-  //   port: 8000,
-  //   historyApiFallback: true,
-  // },
-  // performance: {
-  //   hints: false,
-  // }
+   }
 };
 
 module.exports = config

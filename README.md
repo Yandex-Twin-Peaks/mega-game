@@ -5,3 +5,13 @@
 ---
 
 После того, как мы всё придумаем, здесь появится дополнительная информация
+
+Для запуска dev режима:
+npm run build:server - dev сборка
+npm run start - dev запуск
+
+Для запуска prod режима:
+npm run build:prod - прод сборка
+npm run start:prod - прод запуск
+
+Приложение на localhost:8080

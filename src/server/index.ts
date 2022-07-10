@@ -1,8 +1,6 @@
 import express from 'express';
 import path from 'path';
-// import { render } from './render/render';
 import handler from './render';
-
 
 const app = express();
 
