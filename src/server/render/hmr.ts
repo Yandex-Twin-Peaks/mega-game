@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import middleware from 'webpack-dev-middleware';
+import devMiddleware from 'webpack-dev-middleware';
 // @ts-ignore
 import hotMiddleware from '@gatsbyjs/webpack-hot-middleware';
 // @ts-ignore
@@ -13,11 +13,14 @@ const compiler = webpack({
 
 });
 
+console.log(config, 'test');
+
 
 export default [
-  middleware(compiler, {
+  devMiddleware(compiler, {
     serverSideRender: true,
     index: false,
+    publicPath: config.output?.publicPath,
   }),
   hotMiddleware(compiler, {
     path: '/__webpack_hmr',

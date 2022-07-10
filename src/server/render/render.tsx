@@ -44,9 +44,9 @@ export const render = (req: Request, res: Response) => {
   let script = 'main.bundle.js';
 
   if (process.env.NODE_ENV === 'development') {
-    const { devMiddleware } = res.locals.webpack;
-    const jsonWebpackStats = devMiddleware.stats.toJson();
-    console.log(jsonWebpackStats, 'gggg')
+    //const { devMiddleware } = res.locals.webpack;
+    //const jsonWebpackStats = devMiddleware.stats.toJson();
+    //console.log(jsonWebpackStats, 'gggg')
     // const { assetsByChunkName } = jsonWebpackStats;
     // script = assetsByChunkName.main[0];
   }

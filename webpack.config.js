@@ -6,9 +6,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-var hotMiddlewareScript = 'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr'
-
-console.log(hotMiddlewareScript, 'nnnn')
+var hotMiddlewareScript = '@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr'
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -117,22 +115,4 @@ const config = {
   // }
 };
 
-module.exports = (env, argv) => {
-  // if (argv.mode === 'development') {
-  //   config.devtool = 'eval-source-map';
-  //   config.output = {
-  //     path: path.join(__dirname, "/public"),
-  //     filename: "main.bundle.js"
-  //   }
-  // }
-
-  // if (argv.mode === 'production') {
-  //   config.devtool = false;
-  //   config.output = {
-  //     path: path.join(__dirname, "/public"),
-  //     filename: "main.bundle.js"
-  //   }
-  // }
-
-  return config;
-};
+module.exports = config
