@@ -6,7 +6,8 @@
     "start": "npm run build && node index.js",
     "dev": "webpack --mode development && cp -R static dist/assets && webpack serve --mode development --open",
     "build": "webpack --mode production && cp -R static build/assets",
-    "lint": "eslint --fix --ext .js,.ts src"
+    "lint": "eslint --fix --ext .js,.ts src",
+    "test": "npm audit"
   },
   "repository": {
     "url": "git@github.com:Yandex-Twin-Peaks/mega-game.git"
