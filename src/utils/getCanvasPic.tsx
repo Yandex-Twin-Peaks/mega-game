@@ -5,85 +5,85 @@ export default function getCanvasPic(ctx:any, errorCount:number) {
 
     if (ind === 0) {
       ctx.beginPath();
-      ctx.moveTo(20, 20);
-      ctx.lineTo(20, 180);
+      ctx.moveTo(40, 40);
+      ctx.lineTo(40, 360);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.stroke();
       ctx.closePath();
     }
 
     if (ind === 1) {
       ctx.beginPath();
-      ctx.moveTo(20, 20);
-      ctx.lineTo(180, 20);
+      ctx.moveTo(40, 40);
+      ctx.lineTo(360, 40);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.stroke();
       ctx.closePath();
     }
 
     if (ind === 2) {
       ctx.beginPath();
-      ctx.moveTo(180, 20);
-      ctx.lineTo(180, 180);
+      ctx.moveTo(360, 40);
+      ctx.lineTo(360, 360);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.stroke();
       ctx.closePath();
     }
 
     if (ind === 3) {
       ctx.beginPath();
-      ctx.moveTo(100, 20);
-      ctx.lineTo(100, 40);
+      ctx.moveTo(200, 40);
+      ctx.lineTo(200, 80);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.stroke();
       ctx.closePath();
       ctx.beginPath();
-      ctx.arc(100, 50, 10, 0, 2 * Math.PI);
+      ctx.arc(200, 100, 20, 0, 2 * Math.PI);
       ctx.stroke();
       ctx.closePath();
     }
 
     if (ind === 4) {
       ctx.beginPath();
-      ctx.arc(100, 90, 30, 0, 2 * Math.PI);
+      ctx.arc(200, 180, 60, 0, 2 * Math.PI);
       ctx.stroke();
       ctx.closePath();
     }
 
     if (ind === 5) {
       ctx.beginPath();
-      ctx.moveTo(70, 90);
-      ctx.lineTo(40, 60);
+      ctx.moveTo(140, 180);
+      ctx.lineTo(80, 120);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.stroke();
       ctx.closePath();
       ctx.beginPath();
-      ctx.moveTo(130, 90);
-      ctx.lineTo(160, 60);
+      ctx.moveTo(260, 180);
+      ctx.lineTo(320, 120);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.stroke();
       ctx.closePath();
     }
 
     if (ind === 6) {
       ctx.beginPath();
-      ctx.moveTo(100, 120);
-      ctx.lineTo(70, 150);
+      ctx.moveTo(200, 240);
+      ctx.lineTo(140, 300);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.stroke();
       ctx.closePath();
       ctx.beginPath();
-      ctx.moveTo(100, 120);
-      ctx.lineTo(130, 150);
+      ctx.moveTo(200, 240);
+      ctx.lineTo(260, 300);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.stroke();
       ctx.closePath();
     }

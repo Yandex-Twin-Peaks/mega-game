@@ -8,7 +8,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { sendUserLogOutPending } from '../../../_store/actions/auth.actions';
 
-import './NavBar.pcss';
+// import './NavBar.pcss';
 
 const newLocal = '#063970';
 
@@ -25,7 +25,7 @@ function NavBar() {
           <Tabs
             sx={{ marginLeft: 'auto' }}
             textColor='inherit' value={value}
-            onChange={(e, value) => setPartMenu(value)}
+            onChange={(_e, value) => setPartMenu(value)}
             indicatorColor='secondary'
           >
             {filteredPaths.map((conf, index) => (index === 0 ? <Tab key={index} label={conf.pageName} icon={ <GiGamepad style={{

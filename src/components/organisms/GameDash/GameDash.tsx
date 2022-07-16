@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Canvas from '../../molecules/Canvas';
 import getCanvasPic from '../../../utils/getCanvasPic';
 import Finish from '../../molecules/Finish';
@@ -10,40 +10,15 @@ import LetterClicker from '../LetterClicker';
 import { useSelector } from 'react-redux';
 import { IStore } from '../../../_store';
 
+
 function GameDash() {
 
-  const { num, category, text }:any = useSelector<IStore>((state) => state.game.gameWord);
+  const { gameLetters, gameWord, errorCount, showText, gameStatus }:any = useSelector<IStore>((state) => state.game);
 
-  const starArray:Array<string> = new Array(num).fill('*');
-  const [showText, setShowText] = useState(starArray);
-  const [errorCount, setError] = useState(0);
-  const [word, setLetter] = useState('');
-  const [gameStatus, setGameStatus] = useState(GAMESTATUS.inGame);
+  const { category, text }:any = gameWord;
+
   const finalWord = text.split('');
 
-  function checkNextChar(event: React.FormEvent<HTMLFormElement>) {
-    if (finalWord.filter((el:string) => el === word).length) {
-      finalWord.map((el:string, index:number) => {
-        if (el === word) {
-          showText[index] = word;
-          setShowText(showText);
-        }
-      });
-    } else {
-      setError(errorCount + 1);
-
-      if (errorCount === 6) {
-        setGameStatus(2);
-      }
-    }
-
-    if (!showText.filter((el) => el === '*').length) {
-      setGameStatus(1);
-    }
-
-    setLetter('');
-    event.preventDefault();
-  }
 
   const draw = (ctx: any) => {
     ctx.fillStyle = 'rgb(200, 0, 0)';
@@ -54,43 +29,27 @@ function GameDash() {
   };
 
   const gameJSX = <div className='gamedash'>
-    <Canvas draw={draw} heigth={200} width={200} />
-    <div>Количество ошибок {errorCount}</div>
-    <div>
-    Загаданное слово (открытое)
+    <div className='gamedash__canvascontainer'>
+      <Canvas draw={draw} height={400} width={400} />
+    </div>
+    {/* <div>
+    Загаданное слово (открытое) для теста
       {finalWord.map((el:string) => (
         <div>{el}</div>
       ))}
-    </div>
-    <div>Категория: {category}</div>
-  Загаданное слово закрытое
+    </div> */}
+    <div className='gamedash__category'>Категория: {category}</div>
     <div className='gamedash__lettercontainer'>
-      {showText.map((el) => (
+      {showText.map((el: string) => (
         <OneLetter letter={el} />
       ))}
     </div>
-
-
-    <div>Введи букву</div>
-    <form onSubmit={checkNextChar}>
-      <input
-        value={word}
-        onChange={(e) => setLetter(e.target.value)}
-        type='text'
-        placeholder='Enter a term'
-        className='gamedash__input'
-      />
-      <button type='submit' className='gamedash__button'>
-      Ввод
-      </button>
-    </form>
-
-    <LetterClicker />
+    <LetterClicker gameLetters={gameLetters} finalWord = {finalWord} errorCount={errorCount} showText={showText} gameStatus={gameStatus} />
   </div>;
 
   return (
     <>
-      {gameStatus === 0 ? (
+      {gameStatus === GAMESTATUS.inGame ? (
         gameJSX
       ) :
         <Finish gameStatus={gameStatus} />}

@@ -3,11 +3,19 @@
   "version": "0.0.1",
   "description": "Yandex Practicum Middle Frontend. Twin Peaks Team. Mega Game Project",
   "scripts": {
-    "start": "npm run build && node index.js",
+    "build:server": "tsc --project ./src/server",
+    "start:server": "NODE_ENV=development node ./dist/server/index.js",
     "dev": "webpack --mode development && cp -R static dist/assets && webpack serve --mode development --open",
-    "build": "webpack --mode production && cp -R static build/assets",
-    "lint": "eslint --fix --ext .js,.ts src",
-    "test": "npm audit"
+    "build:client": "webpack --config webpack/webpack.config.js",
+    "build:client:ssr": "webpack --config ./webpack/ssr.config.js",
+    "watch:client:ssr": "webpack --watch --config ./webpack/ssr.config.js ",
+    "start": "concurrently \"npm run start:server\" \"npm run watch:client:ssr\"",
+    "build:prod": "npm run build:server && npm run build:client:ssr && npm run build:client",
+    "start:prod": "npm run start:server",
+    "lint": "eslint --fix --ext .js,.ts src"
+  },
+  "browser": {
+    "[module-name]": false
   },
   "repository": {
     "url": "git@github.com:Yandex-Twin-Peaks/mega-game.git"
@@ -22,27 +30,33 @@
   "dependencies": {
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
+    "@gatsbyjs/webpack-hot-middleware": "github:renrizzolo/webpack-hot-middleware#patch-1",
     "@mui/material": "5.8.3",
     "axios": "0.27.2",
     "axios-observable": "1.5.0",
+    "concurrently": "^7.2.2",
     "cors": "2.8.5",
     "express": "4.18.1",
     "express-history-api-fallback": "2.2.1",
+    "fs": "^0.0.1-security",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-icons": "4.4.0",
     "react-redux": "8.0.2",
+    "react-router": "^5.2.0",
     "react-router-dom": "5.2.0",
     "redux": "4.2.0",
     "redux-actions": "2.6.5",
     "redux-actions-ts": "0.1.1",
-    "redux-observable": "2.0.0"
+    "redux-observable": "2.0.0",
+    "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",
     "@babel/preset-env": "7.18.2",
     "@babel/preset-react": "7.17.12",
     "@babel/preset-typescript": "7.17.12",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
     "@types/react-redux": "7.1.24",
@@ -58,7 +72,7 @@
     "cssnano": "5.1.9",
     "eslint": "8.16.0",
     "eslint-plugin-unused-imports": "2.0.0",
-    "file-loader": "6.2.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "8.0.1",
     "mini-css-extract-plugin": "2.6.0",
@@ -67,6 +81,7 @@
     "postcss-loader": "7.0.0",
     "postcss-nested": "5.0.6",
     "react-error-boundary": "3.1.4",
+    "react-refresh": "^0.14.0",
     "redux-devtools-extension": "2.13.9",
     "sass-loader": "13.0.0",
     "style-loader": "3.3.1",

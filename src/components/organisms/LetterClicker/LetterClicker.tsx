@@ -1,91 +1,72 @@
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './LetterClicker.pcss';
-function LetterClicker() {
+import {
+  addGameLetter, addShowText, addErrorCounter, addGameStatus
+} from '../../../_store/actions/game.actions';
+import {
+  r1, r2, r3, colorsLetter
+} from './alphabet';
+import { GAMESTATUS } from '../../../types/enums';
 
-  const r1 = [
-    'й',
-    'ц',
-    'у',
-    'к',
-    'е',
-    'н',
-    'г',
-    'ш',
-    'щ',
-    'з',
-    'х',
-    'ъ'
-  ];
+function LetterClicker(props:any) {
 
-  const r2 = [
-    'ф',
-    'ы',
-    'в',
-    'а',
-    'п',
-    'р',
-    'о',
-    'л',
-    'д',
-    'ж',
-    'э'
-  ];
+  const { finalWord, errorCount, showText } = props;
+  const [letterColor, setLetterColor] = useState(colorsLetter);
+  const dispatch = useDispatch();
 
-  const r3 = [
-    'я',
-    'ч',
-    'с',
-    'м',
-    'и',
-    'т',
-    'ь',
-    'б',
-    'ю'
-  ];
+  function handleAddLetter(letter:any) {
+    if (finalWord.filter((el:string) => el === letter).length) {
+      setLetterColor({
+        ...letterColor,
+        [letter]: '#00d286'
+      });
+      finalWord.map((el:string, index:number) => {
+        if (el === letter) {
+          showText[index] = letter;
+        }
+      });
+      dispatch(addShowText(showText));
+    } else {
+      setLetterColor({
+        ...letterColor,
+        [letter]: '#dc143c'
+      });
+      dispatch(addErrorCounter(errorCount + 1));
+    }
 
-  const [state, setState] = useState([]);
-  const [letterColor, setLetterColor] = useState({
-    'б': '#E2E2E2',
-    'а': '#E2E2E2',
-    'в': '#E2E2E2',
-    'г': '#E2E2E2',
-    'д': '#E2E2E2',
-    'е': '#E2E2E2',
-    'ё': '#E2E2E2',
-    'ж': '#E2E2E2',
-    'з': '#E2E2E2',
-    'и': '#E2E2E2',
-    'й': '#E2E2E2',
-    'к': '#E2E2E2',
-    'л': '#E2E2E2',
-    'м': '#E2E2E2',
-    'н': '#E2E2E2',
-    'о': '#E2E2E2',
-    'п': '#E2E2E2',
-    'р': '#E2E2E2',
-    'с': '#E2E2E2',
-    'т': '#E2E2E2',
-    'у': '#E2E2E2',
-    'ф': '#E2E2E2',
-    'х': '#E2E2E2',
-    'ц': '#E2E2E2',
-    'ч': '#E2E2E2',
-    'ш': '#E2E2E2',
-    'щ': '#E2E2E2',
-    'ь': '#E2E2E2',
-    'ы': '#E2E2E2',
-    'ъ': '#E2E2E2',
-    'э': '#E2E2E2',
-    'ю': '#E2E2E2',
-    'я': '#E2E2E2',
-  });
+    dispatch(addGameLetter(letter));
+
+    if (!showText.filter((el: string) => el === '*').length) {
+      dispatch(addGameStatus(GAMESTATUS.win));
+    }
+
+    if (errorCount === 6) {
+      dispatch(addGameStatus(GAMESTATUS.fail));
+    }
+  }
+
 
   return (
     <div className='footer__letter'>
       <div className='footer__row'>
         {r1.map((letter) => (<p style={{ backgroundColor: letterColor[letter] }}
-          onClick = {() => {}}>
+          onClick = {() => handleAddLetter(letter)}>
+          {letter}
+        </p>
+        ))}
+      </div>
+      <div className='footer__row'>
+        {r2.map((letter) => (<p style={{ backgroundColor: letterColor[letter] }}
+          onClick = {() => handleAddLetter(letter)}>
+          {letter}
+        </p>
+        ))}
+      </div>
+      <div className='footer__row'>
+        {r3.map((letter) => (<p style={{ backgroundColor: letterColor[letter] }}
+          onClick = {() => handleAddLetter(letter)}>
           {letter}
         </p>
         ))}

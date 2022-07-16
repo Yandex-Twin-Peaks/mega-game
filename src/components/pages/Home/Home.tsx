@@ -7,7 +7,7 @@ const Home = () => {
   const history = useHistory();
   return (
     <div className='home__wrapper'>
-      <div id='foglayer_01' className='fog'>
+      {/* <div id='foglayer_01' className='fog'>
         <div className='image01'></div>
         <div className='image02'></div>
       </div>
@@ -18,7 +18,7 @@ const Home = () => {
       <div id='foglayer_03' className='fog'>
         <div className='image01'></div>
         <div className='image02'></div>
-      </div>
+      </div> */}
       <div className='home__title-container' onClick={() => history.push('/game')}>
         <p id='shadow'>
           <p id='text'>ИГРАТЬ</p>

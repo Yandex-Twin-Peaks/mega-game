@@ -6,12 +6,13 @@ import { words } from '../../../utils/worddata/abbyy';
 
 import './Start.pcss';
 import { useDispatch } from 'react-redux';
-import { addGameWord } from '../../../_store/actions/game.actions';
+import {
+  addGameWord, addShowText, clearGameState
+} from '../../../_store/actions/game.actions';
 
 function Start() {
 
   const dispatch = useDispatch();
-
   const r1 = [
     1,
     2,
@@ -27,19 +28,15 @@ function Start() {
   function handleLetterCount(count:any) {
     setSubmit(true);
     const newWord = getRandomWord(words, count);
+    dispatch(clearGameState());
     dispatch(addGameWord(newWord));
-    setOneFinalWord(newWord.text);
-    setOneFinalCategory(newWord.category);
-    setCharCount(count);
+    const starArray:any = new Array(newWord.num).fill('*');
+    dispatch(addShowText(starArray));
   }
-
-  const [oneFinalWord, setOneFinalWord] = useState('');
-  const [oneFinalCategory, setOneFinalCategory] = useState('');
-  const [charCount, setCharCount] = useState(0);
   const [submitted, setSubmit] = useState(false);
 
   const startJSX = <div className='start-container'>
-    <span className='start-container__title'>Игра начинается введите количество буковок</span>
+    <span className='start-container__title'>Игра начинается введите количество буковок:</span>
     <div className='footer__letter'>
       <div className='footer__row'>
         {r1.map((letterCount) => (<p style={{ backgroundColor: '#E2E2E2' }}
@@ -57,7 +54,7 @@ function Start() {
   </div>;
 
   return submitted ?
-    <GameDash charCount={charCount} text={oneFinalWord} category={oneFinalCategory} /> :
+    <GameDash /> :
     startJSX;
 }
 
