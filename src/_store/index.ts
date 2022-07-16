@@ -20,24 +20,20 @@ export interface IStore {
   game: IGameState
 }
 
-// @ts-ignore
 const state = window.__INITIAL_STATE__;
 
 export const rootReducer = combineReducers({
   auth: authReducer,
   game: gameReducer,
-  // @ts-ignore
 });
 
 const observableMiddleware = createEpicMiddleware();
 
 export const store = createStore(rootReducer, state, composeWithDevTools(applyMiddleware(observableMiddleware)));
 
-// @ts-ignore
 delete window.__INITIAL_STATE__;
 
 observableMiddleware.run(combineEpics(
-  // @ts-ignore
   sendSignInRequestEffect$,
   sendSignUpRequestEffect$,
   sendUserRequestEffect$,
