@@ -2,8 +2,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "moduleResolution": "node",
-   // "module": "commonjs",
-    "module": "esnext",
+    "module": "commonjs",
+    // "module": "esnext",
     "esModuleInterop": true,
     "target": "es5",
     "noImplicitAny": true,

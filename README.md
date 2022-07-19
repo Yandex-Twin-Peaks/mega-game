@@ -14,4 +14,7 @@ npm run start - dev запуск
 npm run build:prod - прод сборка
 npm run start:prod - прод запуск
 
+Для запуска тестов:
+npm run test
+
 Приложение на localhost:8080
