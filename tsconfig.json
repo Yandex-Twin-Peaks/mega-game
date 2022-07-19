@@ -2,7 +2,9 @@
   "compilerOptions": {
     "outDir": "dist",
     "moduleResolution": "node",
-    "module": "commonjs",
+   // "module": "commonjs",
+    "module": "esnext",
+    "esModuleInterop": true,
     "target": "es5",
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -14,8 +16,10 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react",
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["node", "jest"],
   },
   "exclude": ["node_modules", "dist", "**/*.spec.*"],
   "include": ["src"]
 }
+
