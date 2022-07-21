@@ -27,6 +27,8 @@ interface IInputs {
 function UserSettings() {
   const AVATAR_PATH = 'https://ya-praktikum.tech/api/v2/resources/';
   const user = useSelector((store: IStore) => store.auth.user);
+  const test = useSelector(state=>state);
+  console.log(test, 'gggoodday')
   const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState<IInputs | object | any>(user);

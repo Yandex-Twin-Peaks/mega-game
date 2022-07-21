@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { GAMESTATUS } from '../../types/enums';
 import gameReducer from '../../_store/reducers/game.reducer';
 import authReducer from '../../_store/reducers/auth.reducer';
+import leaderboardReducer from '../../_store/reducers/leaderboard.reducer';
 import { combineReducers, createStore } from 'redux';
 import { resolve } from 'path';
 
@@ -34,14 +35,19 @@ export const gameState: any = {
   showText: [],
   gameStatus: GAMESTATUS.inGame,
 };
+
+export const leaderBoardState: any = { rating: [], };
+
 const state = {
   auth: initialState,
   game: gameState,
+  leaderBoard: leaderBoardState,
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  game: gameReducer
+  game: gameReducer,
+  leaderBoard: leaderboardReducer,
 });
 
 const store = createStore(rootReducer, state);
