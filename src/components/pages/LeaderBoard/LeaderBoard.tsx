@@ -9,7 +9,7 @@ import {
 import { useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 // import { sendAddDataLeaderboardRequest } from '../../../_store/services/leaderboard.services';
-import { getLeaderboardPending, postLeaderboardPending } from '../../../_store/actions/leaderboard.actions';
+import { getLeaderboardPending, /*postLeaderboardPending*/ } from '../../../_store/actions/leaderboard.actions';
 
 const emojiSet = [
   '🎉',
@@ -43,48 +43,27 @@ export default function LeaderBoard() {
 
   useEffect(() => {
 
-    const requestadd: any = {
-      ratingFieldName: 'viselica',
-      teamName: 'twinpeaks',
-      data: {
-        id: 1,
-        userid: 'vasya',
-        viselica: 'ratingtwinpeaks',
-      },
-    };
-
-    dispatch(postLeaderboardPending(requestadd));
-
-
-
-    // const requesgett: any = {
-    //   ratingFieldName: 'ratingtwinpeaks',
-    //   limit: 10,
-    //   cursor: 0,
+    // const requestadd: any = {
+    //   ratingFieldName: 'viselica',
+    //   teamName: 'twinpeaks',
+    //   data: {
+    //     id: 1,
+    //     userid: 'vasya',
+    //     viselica: 'ratingtwinpeaks',
+    //   },
     // };
 
-    // dispatch(getLeaderboardPending(requesgett));
-
-    // fetch('ya-praktikum.tech/game/api/v2/leaderboard/twinpeaks', {
-    //   method: 'POST',
-    //   body: {
-    //     data: { user: 7 },
-    //     ratingFieldName: 'viseli',
-    //     teamName: 'twinpeaks'
-    //   }
-    // })
-    //   .then(response => response.json()).then(data => console.log(data));
+    // dispatch(postLeaderboardPending(requestadd));
 
 
-    // fetch('ya-praktikum.tech/game/api/v2/leaderboard/twinpeaks', {
-    //   method: 'POST',
-    //   body: {
-    //     ratingFieldName: 'viseli',
-    //     cursor: 0,
-    //     limit: 10
-    //   }
-    // })
-    //   .then(response => response.text()).then(data => console.log(data));
+
+    const requesgett: any = {
+      ratingFieldName: 'viselica',
+      limit: 10,
+      cursor: 0,
+    };
+
+    dispatch(getLeaderboardPending(requesgett));
   });
 
   function createData(

@@ -2,7 +2,7 @@ import { Action } from 'redux-actions';
 import { createTypedHandler, handleTypedActions } from 'redux-actions-ts';
 import { IAbbyy } from '../../utils/getRandomWord';
 import {
-  addGameWord, addGameLetter, addErrorCounter, addShowText, clearGameState, addGameStatus
+  addGameWord, addGameLetter, addErrorCounter, addShowText, clearGameState, addGameStatus, addSubmittedFlag
 } from '../actions/game.actions';
 import { GAMESTATUS } from '../../types/enums';
 
@@ -12,6 +12,7 @@ export interface IGameState {
   errorCount?: number;
   showText?: any | Array<string>;
   gameStatus?: number;
+  submitted?: boolean;
 }
 
 
@@ -21,6 +22,7 @@ export const initialState: IGameState = {
   errorCount: 0,
   showText: [],
   gameStatus: GAMESTATUS.inGame,
+  submitted: false,
 };
 
 const gameReducer = handleTypedActions(
@@ -67,6 +69,7 @@ const gameReducer = handleTypedActions(
         errorCount: 0,
         showText: [],
         gameStatus: GAMESTATUS.inGame,
+        submitted: state.submitted,
       };
     }),
     /** добавление статуса игры */
@@ -75,6 +78,14 @@ const gameReducer = handleTypedActions(
       return {
         ...state,
         gameStatus: action.payload
+      };
+    }),
+    /** флаг начала игры */
+    createTypedHandler(addSubmittedFlag, (state: IGameState, action: Action<any>): IGameState => {
+
+      return {
+        ...state,
+        submitted: action.payload
       };
     }),
 

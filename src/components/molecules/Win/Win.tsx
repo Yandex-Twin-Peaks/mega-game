@@ -1,17 +1,23 @@
 import React from 'react';
 import './Win.pcss';
 import Button from '../../atoms/Button';
+import { useDispatch } from 'react-redux';
+import { addSubmittedFlag } from '../../../_store/actions/game.actions';
+import { Link } from 'react-router-dom';
+
 
 function Win() {
+  const dispatch = useDispatch();
   return (
     <>
-      <div>Вы выиграли</div>
+      <div>Вы выиграли  <img style={{ width: '150px' }} src = './../../../assets/svg/winner.svg' alt='WinSVG'/></div>
       <Button text={'Начать сначала'} onClick={() => {
-        console.log('сначала');
+        dispatch(addSubmittedFlag(false));
       }} />
-      <Button text={'Перейти в Лидерборд'} onClick={() => {
-        console.log('лидерборд');
-      }} />
+      <Link to='/leaderboard'>
+        <Button text={'Перейти в Лидерборд'} onClick={() => {
+        }} />
+      </Link>
     </>
   );
 }

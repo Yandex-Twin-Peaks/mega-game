@@ -2,7 +2,9 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import Axios from 'axios-observable';
 import { AxiosResponse } from 'axios';
-import { API_HOST, paths, TEAM_NAME } from '../../api/constants';
+import {
+  API_HOST, paths, TEAM_NAME
+} from '../../api/constants';
 import { IAddLeaderboardRequest, IGetLeaderboardRequest } from '../types/leaderboard.types';
 
 const axiosConfig = { withCredentials: true };

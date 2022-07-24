@@ -3,7 +3,7 @@ import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action } from 'redux-actions';
 import {
-  addGameWord, addGameLetter, addErrorCounter, addShowText, clearGameState, addGameStatus
+  addGameWord, addGameLetter, addErrorCounter, addShowText, clearGameState, addGameStatus, addSubmittedFlag
 } from '../actions/game.actions';
 
 
@@ -49,6 +49,14 @@ export const clearGameStateEffect$ = (actions$: Observable<Action<string>>) =>
 export const addGameStatusEffect$ = (actions$: Observable<Action<string>>) =>
   actions$.pipe(
     ofType(addGameStatus.toString()),
+    switchMap(({ payload }) =>
+      payload )
+  );
+
+/** Эффект, для старта игры */
+export const addSubmittedFlagEffect$ = (actions$: Observable<Action<string>>) =>
+  actions$.pipe(
+    ofType(addSubmittedFlag.toString()),
     switchMap(({ payload }) =>
       payload )
   );

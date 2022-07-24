@@ -12,3 +12,5 @@ export const addShowText = createTypedAction<string>('[Success] addShowText');
 export const clearGameState = createTypedAction<void>('[Success] clearGameState');
 
 export const addGameStatus = createTypedAction<number>('[Success] addGameStatus');
+
+export const addSubmittedFlag = createTypedAction<boolean>('[Success] addSubmittedFlag');

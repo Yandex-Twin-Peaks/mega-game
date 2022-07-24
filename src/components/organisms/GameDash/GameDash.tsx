@@ -32,12 +32,6 @@ function GameDash() {
     <div className='gamedash__canvascontainer'>
       <Canvas draw={draw} height={400} width={400} />
     </div>
-    {/* <div>
-    Загаданное слово (открытое) для теста
-      {finalWord.map((el:string) => (
-        <div>{el}</div>
-      ))}
-    </div> */}
     <div className='gamedash__category'>Категория: {category}</div>
     <div className='gamedash__lettercontainer'>
       {showText.map((el: string) => (

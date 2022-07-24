@@ -34,6 +34,7 @@ export const gameState: any = {
   errorCount: 0,
   showText: [],
   gameStatus: GAMESTATUS.inGame,
+  submitted: false,
 };
 
 export const leaderBoardState: any = { rating: [], };

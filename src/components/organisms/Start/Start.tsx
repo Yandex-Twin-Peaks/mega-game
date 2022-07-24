@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import GameDash from '../GameDash';
 
 import getRandomWord from '../../../utils/getRandomWord';
 import { words } from '../../../utils/worddata/abbyy';
 
 import './Start.pcss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  addGameWord, addShowText, clearGameState
+  addGameWord, addShowText, addSubmittedFlag, clearGameState
 } from '../../../_store/actions/game.actions';
+import { IGameState } from '../../../_store/reducers/game.reducer';
 
 function Start() {
 
@@ -24,16 +25,16 @@ function Start() {
     8
   ];
 
+  const gameSubmit = useSelector(state => state.game.submitted);
 
   function handleLetterCount(count:any) {
-    setSubmit(true);
+    dispatch(addSubmittedFlag(!gameSubmit));
     const newWord = getRandomWord(words, count);
     dispatch(clearGameState());
     dispatch(addGameWord(newWord));
     const starArray:any = new Array(newWord.num).fill('*');
     dispatch(addShowText(starArray));
   }
-  const [submitted, setSubmit] = useState(false);
 
   const startJSX = <div className='start-container'>
     <span className='start-container__title'>Игра начинается введите количество буковок:</span>
@@ -53,7 +54,7 @@ function Start() {
 
   </div>;
 
-  return submitted ?
+  return gameSubmit ?
     <GameDash /> :
     startJSX;
 }
