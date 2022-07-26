@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addGameWord, addShowText, addSubmittedFlag, clearGameState
 } from '../../../_store/actions/game.actions';
-import { IGameState } from '../../../_store/reducers/game.reducer';
+import { IStore } from '../../../_store';
 
 function Start() {
 
@@ -25,14 +25,14 @@ function Start() {
     8
   ];
 
-  const gameSubmit = useSelector(state => state.game.submitted);
+  const gameSubmit = useSelector<IStore>(state => state.game.submitted);
 
-  function handleLetterCount(count:any) {
+  function handleLetterCount(count: any) {
     dispatch(addSubmittedFlag(!gameSubmit));
     const newWord = getRandomWord(words, count);
     dispatch(clearGameState());
     dispatch(addGameWord(newWord));
-    const starArray:any = new Array(newWord.num).fill('*');
+    const starArray: any = new Array(newWord.num).fill('*');
     dispatch(addShowText(starArray));
   }
 
@@ -40,16 +40,14 @@ function Start() {
     <span className='start-container__title'>Игра начинается введите количество буковок:</span>
     <div className='footer__letter'>
       <div className='footer__row'>
-        {r1.map((letterCount) => (<p style={{ backgroundColor: '#E2E2E2' }}
-          onClick = {() => {
+        {r1.map((letterCount, index) => (<p key={index} style={{ backgroundColor: '#E2E2E2' }}
+          onClick={() => {
             handleLetterCount(letterCount);
           }}>
           {letterCount}
         </p>
         ))}
       </div>
-
-
     </div>
 
   </div>;

@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addSubmittedFlag } from '../../../_store/actions/game.actions';
 
+
 function Fail() {
 // TODO: добавить интерфейс для функции
   const draw = (ctx: any) => {

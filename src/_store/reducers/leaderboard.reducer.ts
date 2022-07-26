@@ -13,13 +13,13 @@ const leaderboardReducer = handleTypedActions(
   [
     /** Добавить в leaderboard */
     createTypedHandler(postLeaderboardSuccess, (state: IleaderBoardState): IleaderBoardState => {
-      return { ...state, };
+      return { ...state };
     }),
     /** Получить из leaderboard */
     createTypedHandler(getLeaderboardSuccess, (state: IleaderBoardState, action: Action<IGetLeaderboardRequest>): IleaderBoardState => {
       return {
         ...state,
-        ...action.payload,
+        rating: [action.payload]
       };
     }),
   ],

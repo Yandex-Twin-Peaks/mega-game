@@ -6,6 +6,7 @@ export interface IAddLeaderboardRequest {
 
 export interface IGetLeaderboardRequest
   {
+    [x: string]: any;
     ratingFieldName: string,
     cursor: number,
     limit: number

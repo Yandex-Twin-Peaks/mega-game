@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 var hotMiddlewareScript = '@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr'
 
@@ -82,6 +83,7 @@ const config = {
      isDev && new ReactRefreshPlugin({overlay: {
        sockIntegration: 'whm',
      }}),
+     new CopyPlugin({ patterns: [{ from: path.resolve(__dirname, '../src/assets'), to: path.resolve(__dirname, 'dist/assets') }] }),
      new MiniCssExtractPlugin()
   ].filter(Boolean),
   optimization: {

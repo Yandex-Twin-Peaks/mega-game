@@ -1,6 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const configSSR = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -63,7 +64,8 @@ const configSSR = {
       }
     ],
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [new MiniCssExtractPlugin(), 
+      new CopyPlugin({ patterns: [{ from: path.resolve(__dirname, '../src/assets'), to: path.resolve(__dirname, '../dist/assets') }] })],
   externals:
 [nodeExternals()],
 };
