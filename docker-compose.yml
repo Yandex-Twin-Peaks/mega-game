@@ -3,7 +3,9 @@ version: '3.7'
 services:
   mega-game:
     build: .
-    ports:
-      - "8083:3000"
     command: npm start
     restart: always
+
+networks:
+  ingress-net:
+    driver: bridge
