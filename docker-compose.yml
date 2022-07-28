@@ -7,5 +7,5 @@ services:
     restart: always
 
 networks:
-  ingress-net:
-    driver: bridge
+  default:
+    name: ingress-net
