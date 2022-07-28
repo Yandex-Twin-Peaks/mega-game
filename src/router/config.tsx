@@ -1,5 +1,8 @@
 import {
-  ComponentType, lazy, LazyExoticComponent, ReactNode
+  //ComponentType, 
+  lazy,
+  // LazyExoticComponent,
+    ReactNode
 } from 'react';
 
 export interface IRoute {
@@ -10,7 +13,7 @@ export interface IRoute {
   /** Защищенный роут */
   private?: boolean;
   /** Компонент */
-  component?: LazyExoticComponent<ComponentType<any>>;
+  component?: any;//LazyExoticComponent<ComponentType<any>>;
   /** Дочерние роуты */
   routes?: IRoute[];
   /** Редирект*/
@@ -20,6 +23,8 @@ export interface IRoute {
   /** Наименование страницы */
   pageName?: string;
 }
+
+const auth = import('../components/pages/Authorization');
 
 export const routes: IRoute[] = [
   {
@@ -38,7 +43,7 @@ export const routes: IRoute[] = [
   {
     path: '/auth',
     exact: true,
-    component: lazy(() => import('../components/pages/Authorization')),
+    component: auth,
     fallback: null,
     pageName: 'Auth',
   },

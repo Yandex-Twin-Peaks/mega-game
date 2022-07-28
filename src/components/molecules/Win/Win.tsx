@@ -10,7 +10,8 @@ function Win() {
   const dispatch = useDispatch();
   return (
     <>
-      <div>Вы выиграли  <img style={{ width: '150px' }} src = '../../../assets/svg/winner.svg' alt='WinSVG'/></div>
+      <div>Вы выиграли  <img style={{ width: '150px' }}
+        src = '../../../assets/svg/winner.svg' alt='WinSVG'/></div>
       <Button text={'Начать сначала'} onClick={() => {
         dispatch(addSubmittedFlag(false));
       }} />
