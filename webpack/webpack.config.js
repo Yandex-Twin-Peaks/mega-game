@@ -1,10 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const TerserPlugin = require('terser-webpack-plugin');
-// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
 
 var hotMiddlewareScript = '@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr'
 
@@ -72,7 +69,7 @@ const config = {
       {
         test: /\.woff(2)?$/,
         use: {
-          loader: 'file-loader-loader',
+          loader: 'file-loader',
           options: {name: 'assets/fonts/[name].[ext]'}
         }
       }
@@ -83,24 +80,8 @@ const config = {
      isDev && new ReactRefreshPlugin({overlay: {
        sockIntegration: 'whm',
      }}),
-     new CopyPlugin({ patterns: [{ from: path.resolve(__dirname, '../src/assets'), to: path.resolve(__dirname, 'dist/assets') }] }),
      new MiniCssExtractPlugin()
-  ].filter(Boolean),
-  optimization: {
-  //   minimize: true,
-  //   minimizer: [
-  //     new CssMinimizerPlugin(),
-  //     new TerserPlugin({
-  //       terserOptions: {
-  //         mangle: true,
-  //         compress: true,
-  //       },
-  //       extractComments: false,
-  //     })],
-  //   splitChunks: {
-  //     chunks: 'all',
-  //   },
-   }
+  ].filter(Boolean)
 };
 
 module.exports = config

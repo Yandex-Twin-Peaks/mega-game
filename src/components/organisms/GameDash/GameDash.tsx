@@ -4,11 +4,13 @@ import getCanvasPic from '../../../utils/getCanvasPic';
 import Finish from '../../molecules/Finish';
 import OneLetter from '../../molecules/OneLetter';
 import { GAMESTATUS } from '../../../types/enums';
-
 import './GameDash.pcss';
 import LetterClicker from '../LetterClicker';
 import { useSelector } from 'react-redux';
 import { IStore } from '../../../_store';
+// @ts-ignore
+import coverIMG from './viselicaback.jpeg';
+import MaxView from '../../molecules/MaxView.pcss/MaxView';
 
 
 function GameDash() {
@@ -29,16 +31,19 @@ function GameDash() {
   };
 
   const gameJSX = <div className='gamedash'>
-    <div className='gamedash__canvascontainer'>
-      <Canvas draw={draw} height={400} width={400} />
-    </div>
-    <div className='gamedash__category'>Категория: {category}</div>
-    <div className='gamedash__lettercontainer'>
-      {showText.map((el: string) => (
-        <OneLetter letter={el} />
-      ))}
-    </div>
-    <LetterClicker gameLetters={gameLetters} finalWord = {finalWord} errorCount={errorCount} showText={showText} gameStatus={gameStatus} />
+    <MaxView backgroundColor='#efefef'>
+      <div style={{ backgroundImage: `url(${coverIMG})` }} className='gamedash__canvascontainer'>
+        <Canvas draw={draw} height={400} width={400} />
+      </div>
+      <div className='gamedash__category'>Категория: {category}</div>
+      <div className='gamedash__lettercontainer'>
+        {showText.map((el: string) => (
+          <OneLetter letter={el} />
+        ))}
+      </div>
+      <LetterClicker gameLetters={gameLetters} finalWord = {finalWord}
+        errorCount={errorCount} showText={showText} gameStatus={gameStatus} />
+    </MaxView>
   </div>;
 
   return (

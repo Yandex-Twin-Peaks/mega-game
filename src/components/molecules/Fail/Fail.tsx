@@ -6,6 +6,8 @@ import Button from '../../atoms/Button';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addSubmittedFlag } from '../../../_store/actions/game.actions';
+// @ts-ignore
+import failImg from '../Fail/loose.svg';
 
 
 function Fail() {
@@ -22,7 +24,7 @@ function Fail() {
 
   return (
     <>
-      <div>Вы проиграли <img style={{ width: '150px' }} src = './../../../assets/svg/loose.svg' alt='LooseSVG'/></div>
+      <div>Вы проиграли <img style={{ width: '150px' }} src = {failImg} alt='LooseSVG'/></div>
       <Canvas draw={draw} height={400} width={400} />
       <Button text={'Начать сначала'} onClick={() => {
         dispatch(addSubmittedFlag(false));

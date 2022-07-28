@@ -1,8 +1,8 @@
 import {
-  //ComponentType, 
+  ComponentType,
   lazy,
-  // LazyExoticComponent,
-    ReactNode
+  LazyExoticComponent,
+  ReactNode
 } from 'react';
 
 export interface IRoute {
@@ -13,7 +13,7 @@ export interface IRoute {
   /** Защищенный роут */
   private?: boolean;
   /** Компонент */
-  component?: any;//LazyExoticComponent<ComponentType<any>>;
+  component?: LazyExoticComponent<ComponentType<any>>;
   /** Дочерние роуты */
   routes?: IRoute[];
   /** Редирект*/
@@ -24,7 +24,7 @@ export interface IRoute {
   pageName?: string;
 }
 
-const auth = import('../components/pages/Authorization');
+// const auth = import('../components/pages/Authorization');
 
 export const routes: IRoute[] = [
   {
@@ -43,7 +43,7 @@ export const routes: IRoute[] = [
   {
     path: '/auth',
     exact: true,
-    component: auth,
+    component: lazy(() => import('../components/pages/Authorization')),
     fallback: null,
     pageName: 'Auth',
   },
@@ -82,3 +82,48 @@ export const routes: IRoute[] = [
     fallback: null
   }
 ];
+
+
+// import {
+//   // ComponentType,
+//   // lazy,
+//   // LazyExoticComponent,
+//   ReactNode
+// } from 'react';
+// import Home from '../components/pages/Home';
+// import Authorization from '../components/pages/Authorization';
+// import Forum from '../components/pages/Forum';
+// import LeaderBoard from '../components/pages/LeaderBoard';
+// import Profile from '../components/pages/Profile';
+// import Game from '../components/pages/Game';
+// import NotFound from '../components/pages/NotFound';
+
+// export interface IRoute {
+//   /** Адрес */
+//   path: string;
+//   /** Точность совпадения */
+//   exact: boolean;
+//   /** Защищенный роут */
+//   private?: boolean;
+//   /** Компонент */
+//   component?: any; // LazyExoticComponent<ComponentType<any>>;
+//   /** Дочерние роуты */
+//   routes?: IRoute[];
+//   /** Редирект*/
+//   redirect?: string;
+//   /** Прелоудер ф*/
+//   fallback: NonNullable<ReactNode> | null;
+//   /** Наименование страницы */
+//   pageName?: string;
+// }
+
+// // const auth = import('../components/pages/Authorization');
+
+
+// // const home = import('../components/pages/Home');
+// // const auth = import('../components/pages/Authorization');
+// // const forum = import('../components/pages/Forum');
+// // const leaderBoard = import('../components/pages/LeaderBoard');
+// // const Profile = import('../components/pages/Profile');
+// // const Game = import('../components/pages/Game');
+// // const notFound = import('../components/pages/NotFound');
