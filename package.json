@@ -48,7 +48,8 @@
     "redux-actions": "2.6.5",
     "redux-actions-ts": "0.1.1",
     "redux-observable": "2.0.0",
-    "webpack-node-externals": "3.0.0"
+    "webpack-node-externals": "3.0.0",
+    "url": "0.11.0"
   },
   "devDependencies": {
     "@babel/core": "7.18.9",
