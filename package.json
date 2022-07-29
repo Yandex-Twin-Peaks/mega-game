@@ -9,6 +9,7 @@
     "build:client:ssr": "webpack --config ./webpack/ssr.config.js",
     "watch:client:ssr": "webpack --watch --config ./webpack/ssr.config.js ",
     "start": "npm run build:prod && npm run start:prod",
+    "dev": "npm run build:server && npm run start:server & npm run watch:client:ssr",
     "build:prod": "npm run build:server && npm run build:client:ssr && npm run build:client",
     "start:prod": "npm run start:server",
     "lint": "eslint --fix --ext .js,.ts src",
