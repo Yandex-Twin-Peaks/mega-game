@@ -15,6 +15,7 @@
 ```bash
 git clone git@github.com:Yandex-Twin-Peaks/mega-game.git
 cd mega-game
+npm i
 ```
 
 Для запуска **dev** режима:
