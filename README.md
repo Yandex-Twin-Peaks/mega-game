@@ -1,20 +1,41 @@
 # Веб-приложение «Виселица»
+
 ## Команда Twin Peaks
+
 Учебный проект по курсу **Мидл фронтенд-разработчик** от Яндекс.Практикума
 
 ---
 
-После того, как мы всё придумаем, здесь появится дополнительная информация
+Игра располагается по адресу:
 
-Для запуска dev режима:
-npm run build:server - dev сборка
-npm run start - dev запуск
+[https://twinpeaks14.ya-praktikum.tech](https://twinpeaks14.ya-praktikum.tech)
 
-Для запуска prod режима:
-npm run build:prod - прод сборка
-npm run start:prod - прод запуск
+#### Установка:
 
-Для запуска тестов:
+```bash
+git clone git@github.com:Yandex-Twin-Peaks/mega-game.git
+cd mega-game
+```
+
+Для запуска **dev** режима:
+
+```bash
+npm run dev
+```
+
+Для запуска **prod** режима:
+
+```bash
+npm start
+```
+
+Для запуска **тестов**:
+
+```bash
 npm run test
+```
 
-Приложение на localhost:8080
+Приложение запустится на двух портах:
+
+- [localhost:8080](http://localhost:8080) - Front, static assets
+- [localhost:3000](http://localhost:3000) - Back, SSR, DB
