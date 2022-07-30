@@ -1,6 +1,12 @@
-import {
-  ComponentType, lazy, LazyExoticComponent, ReactNode
-} from 'react';
+import { ReactNode } from 'react';
+
+import homePage from '../components/pages/Home';
+import authPage from '../components/pages/Authorization';
+import forumPage from '../components/pages/Forum';
+import leaderBoardPage from '../components/pages/LeaderBoard';
+import profilePage from '../components/pages/Profile';
+import gamePage from '../components/pages/Game';
+import notFoundPage from '../components/pages/NotFound';
 
 export interface IRoute {
   /** Адрес */
@@ -10,7 +16,7 @@ export interface IRoute {
   /** Защищенный роут */
   private?: boolean;
   /** Компонент */
-  component?: LazyExoticComponent<ComponentType<any>>;
+  component?: () => JSX.Element;
   /** Дочерние роуты */
   routes?: IRoute[];
   /** Редирект*/
@@ -31,49 +37,49 @@ export const routes: IRoute[] = [
   {
     path: '/home',
     exact: false,
-    component: lazy(() => import('../components/pages/Home')),
+    component: homePage,
     fallback: '...',
     pageName: 'Home',
   },
   {
     path: '/auth',
     exact: true,
-    component: lazy(() => import('../components/pages/Authorization')),
+    component: authPage,
     fallback: null,
     pageName: 'Auth',
   },
   {
     path: '/forum',
     exact: true,
-    component: lazy(() => import('../components/pages/Forum')),
+    component: forumPage,
     fallback: null,
     pageName: 'Forum',
   },
   {
     path: '/leaderboard',
     exact: true,
-    component: lazy(() => import('../components/pages/LeaderBoard')),
+    component: leaderBoardPage,
     fallback: null,
     pageName: 'Leaderboard',
   },
   {
     path: '/profile',
     exact: true,
-    component: lazy(() => import('../components/pages/Profile')),
+    component: profilePage,
     fallback: null,
     pageName: 'Profile',
   },
   {
     path: '/game',
     exact: true,
-    component: lazy(() => import('../components/pages/Game')),
+    component: gamePage,
     fallback: null,
     pageName: 'Game',
   },
   {
     path: '*',
     exact: true,
-    component: lazy(() => import('../components/pages/NotFound')),
+    component: notFoundPage,
     fallback: null
   }
 ];

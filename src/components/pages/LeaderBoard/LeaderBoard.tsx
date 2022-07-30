@@ -6,6 +6,11 @@ import {
   TableHead, Paper, Box, Avatar,
   TableCell, tableCellClasses, styled
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getLeaderboardPending } from '../../../_store/actions/leaderboard.actions';
+import { IStore } from '../../../_store';
+import { IleaderBoardState } from '../../../_store/reducers/leaderboard.reducer';
 
 const emojiSet = [
   '🎉',
@@ -20,7 +25,11 @@ const emojiSet = [
   '🥂'
 ];
 
+
 export default function LeaderBoard() {
+
+  const { rating } = useSelector<IStore, IleaderBoardState>( state => state.leaderBoard );
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.info.dark,
@@ -34,25 +43,21 @@ export default function LeaderBoard() {
     '&:last-child td, &:last-child th': { border: 0, },
   }));
 
-  function createData(
-    avatarURL: string,
-    name: string,
-    score: number,
-  ) {
-    return {
-      avatarURL,
-      name,
-      score,
-    };
-  }
 
-  const rows = [
-    createData('https://mui.com/static/images/avatar/', 'Frozen yoghurt', 159),
-    createData('https://mui.com/static/images/avatar/', 'Ice cream sandwich', 237),
-    createData('https://mui.com/static/images/avatar/', 'Eclair', 262),
-    createData('https://mui.com/static/images/avatar/', 'Cupcake', 305),
-    createData('https://mui.com/static/images/avatar/', 'Gingerbread', 356),
-  ];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    const getLeaderBoardRequest: any = {
+      ratingFieldName: 'viselicatwin',
+      limit: 10,
+      cursor: 0,
+    };
+
+    dispatch(getLeaderboardPending(getLeaderBoardRequest));
+  }, []);
+
+  const AVATAR_PATH = 'https://ya-praktikum.tech/api/v2/resources/';
 
   return (
     <React.Fragment>
@@ -83,8 +88,8 @@ export default function LeaderBoard() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, i) => (
-                <StyledTableRow key={row.name}>
+              {rating[0] && rating[0].map((row:any, i:number) => (
+                <StyledTableRow key={row.data.userName}>
                   <StyledTableCell component='th' scope='row' align='center'>
                     <Typography variant='h5'>
                       {i + 1}.
@@ -95,16 +100,20 @@ export default function LeaderBoard() {
                       p: 1,
                       display: 'flex'
                     }} alignContent='center'>
-                      <Avatar variant='rounded' alt={row.name} src={row.avatarURL + i + '.jpg'} sx={{
-                        width: 56,
-                        height: 56
-                      }} aria-label='recipe'/>
-                      <Typography paddingLeft={1} variant='h5' gutterBottom>{row.name}</Typography>
+                      <Avatar variant='rounded' alt={row.data.userName}
+                        src={row.data.avatar ?
+                          AVATAR_PATH + row.data.avatar :
+                          'https://ichef.bbci.co.uk/news/800/cpsprodpb/14236/production/_104368428_gettyimages-543560762.jpg.webp'}
+                        sx={{
+                          width: 56,
+                          height: 56
+                        }} aria-label='recipe'/>
+                      <Typography paddingLeft={1} variant='h5' gutterBottom>{row.data.userName}</Typography>
                     </Box>
                   </StyledTableCell>
                   <StyledTableCell align='right'>
                     <Typography variant='h5'>
-                      {row.score} {emojiSet[row.score % 10]}
+                      {row.data.rating} {emojiSet[row.data.rating % 10]}
                     </Typography>
                   </StyledTableCell>
                 </StyledTableRow>

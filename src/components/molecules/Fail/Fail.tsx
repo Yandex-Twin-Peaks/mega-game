@@ -3,6 +3,12 @@ import './Fail.pcss';
 import Canvas from '../Canvas';
 import getCanvasPic from '../../../utils/getCanvasPic';
 import Button from '../../atoms/Button';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { addSubmittedFlag } from '../../../_store/actions/game.actions';
+// @ts-ignore
+import failImg from '../Fail/loose.svg';
+
 
 function Fail() {
 // TODO: добавить интерфейс для функции
@@ -14,16 +20,19 @@ function Fail() {
     getCanvasPic(ctx, 7);
   };
 
+  const dispatch = useDispatch();
+
   return (
     <>
-      <div>Вы проиграли</div>
+      <div>Вы проиграли <img style={{ width: '150px' }} src = {failImg} alt='LooseSVG'/></div>
       <Canvas draw={draw} height={400} width={400} />
       <Button text={'Начать сначала'} onClick={() => {
-        console.log('сначала');
+        dispatch(addSubmittedFlag(false));
       }} />
-      <Button text={'Перейти в Лидерборд'} onClick={() => {
-        console.log('лидерборд');
-      }} />
+      <Link to='/leaderboard'>
+        <Button text={'Перейти в Лидерборд'} onClick={() => {
+        }} />
+      </Link>
     </>
   );
 }

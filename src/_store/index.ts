@@ -14,10 +14,13 @@ import {
   sendUserAvatarRequestEffect$, sendUserPasswordsRequestEffect$, sendUserSettingsRequestEffect$
 } from './effects/usersettings.effects';
 import gameReducer, { IGameState } from './reducers/game.reducer';
+import leaderboardReducer, { IleaderBoardState } from './reducers/leaderboard.reducer';
+import { sendAddDataLeaderboardRequestEffect$, sendLeaderboardDataRequestEffect$ } from './effects/leaderboard.effects';
 
 export interface IStore {
   auth: IAuthState
   game: IGameState
+  leaderBoard: IleaderBoardState
 }
 
 const state = window.__INITIAL_STATE__;
@@ -25,6 +28,7 @@ const state = window.__INITIAL_STATE__;
 export const rootReducer = combineReducers({
   auth: authReducer,
   game: gameReducer,
+  leaderBoard: leaderboardReducer,
 });
 
 const observableMiddleware = createEpicMiddleware();
@@ -41,4 +45,6 @@ observableMiddleware.run(combineEpics(
   sendUserSettingsRequestEffect$,
   sendUserAvatarRequestEffect$,
   sendUserPasswordsRequestEffect$,
+  sendLeaderboardDataRequestEffect$,
+  sendAddDataLeaderboardRequestEffect$,
 ));

@@ -1,7 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const TerserPlugin = require('terser-webpack-plugin');
-// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
@@ -71,7 +69,7 @@ const config = {
       {
         test: /\.woff(2)?$/,
         use: {
-          loader: 'file-loader-loader',
+          loader: 'file-loader',
           options: {name: 'assets/fonts/[name].[ext]'}
         }
       }
@@ -83,22 +81,7 @@ const config = {
        sockIntegration: 'whm',
      }}),
      new MiniCssExtractPlugin()
-  ].filter(Boolean),
-  optimization: {
-  //   minimize: true,
-  //   minimizer: [
-  //     new CssMinimizerPlugin(),
-  //     new TerserPlugin({
-  //       terserOptions: {
-  //         mangle: true,
-  //         compress: true,
-  //       },
-  //       extractComments: false,
-  //     })],
-  //   splitChunks: {
-  //     chunks: 'all',
-  //   },
-   }
+  ].filter(Boolean)
 };
 
 module.exports = config
