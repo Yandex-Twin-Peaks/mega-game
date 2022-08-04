@@ -80,7 +80,7 @@ const config = {
      isDev && new ReactRefreshPlugin({overlay: {
        sockIntegration: 'whm',
      }}),
-     new MiniCssExtractPlugin()
+     new MiniCssExtractPlugin({filename: "styles.css"})
   ].filter(Boolean)
 };
 

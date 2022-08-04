@@ -85,6 +85,7 @@ export const render = (req: Request, res: Response) => {
   <div id="root">${reactHTML}</div>
   <script type="module">window.__INITIAL_STATE__=${JSON.stringify(state)}</script>
   <script type="module" src=${script}></script>
+  <link rel="stylesheet" type="text/css" href="./styles.css" />
   `);
 
   res.send(result);

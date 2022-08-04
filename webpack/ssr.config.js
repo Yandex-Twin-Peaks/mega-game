@@ -64,7 +64,7 @@ const configSSR = {
       }
     ],
   },
-  plugins: [new MiniCssExtractPlugin(), 
+  plugins: [new MiniCssExtractPlugin({filename: "styles.css"}), 
     ],
   externals:
 [nodeExternals()],
