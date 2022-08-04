@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import Error from './components/atoms/Error';
 
@@ -14,9 +14,9 @@ const Main = () => {
       onReset={() => {}}
     >
       <Provider store={store}>
-        <HashRouter>
-          <App />
-        </HashRouter>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
       </Provider>
     </ErrorBoundary>
   );

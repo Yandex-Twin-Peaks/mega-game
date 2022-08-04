@@ -3,17 +3,18 @@
   "version": "0.0.1",
   "description": "Yandex Practicum Middle Frontend. Twin Peaks Team. Mega Game Project",
   "scripts": {
-    "build:server": "tsc --project ./src/server",
-    "start:server": "NODE_ENV=development node ./dist/server/index.js",
-    "build:client": "webpack --config webpack/webpack.config.js",
-    "build:client:ssr": "webpack --config ./webpack/ssr.config.js",
-    "watch:client:ssr": "webpack --watch --config ./webpack/ssr.config.js ",
-    "start": "npm run build:prod && npm run start:prod",
-    "dev": "npm run build:server && npm run start:server & npm run watch:client:ssr",
     "build:prod": "npm run build:server && npm run build:client:ssr && npm run build:client",
-    "start:prod": "npm run start:server",
+    "build:server": "tsc --project ./src/server",
+    "build:client": "webpack --config ./webpack/webpack.config.js && cp ./static/* ./dist/assets",
+    "build:client:ssr": "webpack --config ./webpack/ssr.config.js",
+    "start:server": "NODE_ENV=development node ./dist/server/index.js",
+    "start:prod": "NODE_ENV=production node ./dist/server/index.js",
+    "watch:client:ssr": "webpack --watch --config ./webpack/ssr.config.js ",
     "lint": "eslint --fix --ext .js,.ts src",
-    "test": "jest -u"
+    "test": "jest -u",
+    "clean": "rm -rf build dist public",
+    "start": "npm run build:prod && npm run start:prod",
+    "dev": "npm run build:server && npm run start:server & npm run watch:client:ssr"
   },
   "browser": {
     "[module-name]": false
@@ -31,6 +32,7 @@
   "dependencies": {
     "@babel/plugin-syntax-flow": "7.18.6",
     "@emotion/react": "11.9.3",
+    "@emotion/server": "^11.10.0",
     "@emotion/styled": "11.9.3",
     "@gatsbyjs/webpack-hot-middleware": "github:renrizzolo/webpack-hot-middleware#patch-1",
     "@mui/material": "5.9.2",
@@ -49,8 +51,8 @@
     "redux-actions": "2.6.5",
     "redux-actions-ts": "0.1.1",
     "redux-observable": "2.0.0",
-    "webpack-node-externals": "3.0.0",
-    "url": "0.11.0"
+    "url": "0.11.0",
+    "webpack-node-externals": "3.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.18.9",
@@ -67,7 +69,7 @@
     "@types/react-dom": "18.0.6",
     "@types/react-redux": "7.1.24",
     "@types/react-router-dom": "5.3.3",
-    "@types/react-test-renderer": "^18.0.0",
+    "@types/react-test-renderer": "18.0.0",
     "@types/redux-actions": "2.6.2",
     "@types/testing-library__jest-dom": "5.14.5",
     "@typescript-eslint/eslint-plugin": "5.26.0",

@@ -3,21 +3,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-var hotMiddlewareScript = '@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr'
+const hotMiddlewareScript = '@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr';
 
 const isDev = process.env.NODE_ENV === 'development';
+const assetsDir = path.join(__dirname, '../dist/assets');
 
 const config = {
+  mode: !isDev ? 'production' : 'development',
   entry: [
     isDev && hotMiddlewareScript, './src/index.tsx'
   ].filter(Boolean),
   resolve: {
-    extensions: [".js", ".ts", ".tsx"],
+    extensions: ['.js', '.ts', '.tsx'],
   },
   output: {
-    path: path.join(__dirname, "../public"),
-    filename: "main.bundle.js",
-    publicPath: '/'
+    path: assetsDir,
+    filename: 'main.bundle.js',
+    publicPath: '/assets/'
   },
   module: {
     rules: [
@@ -53,7 +55,7 @@ const config = {
         use: [
           {
             loader: 'file-loader?limit=10000',
-            options: {name: 'assets/img/[name].[ext]'}
+            options: { name: assetsDir + '/img/[name].[ext]' }
           }
         ]
       },
@@ -62,7 +64,7 @@ const config = {
         use: [
           {
             loader: 'file-loader',
-            options: {name: 'assets/svg/[name].[ext]'}
+            options: { name: assetsDir + '/svg/[name].[ext]' }
           }
         ]
       },
@@ -70,7 +72,7 @@ const config = {
         test: /\.woff(2)?$/,
         use: {
           loader: 'file-loader',
-          options: {name: 'assets/fonts/[name].[ext]'}
+          options: { name: assetsDir + '/fonts/[name].[ext]' }
         }
       }
     ],
@@ -80,7 +82,7 @@ const config = {
      isDev && new ReactRefreshPlugin({overlay: {
        sockIntegration: 'whm',
      }}),
-     new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin()
   ].filter(Boolean)
 };
 

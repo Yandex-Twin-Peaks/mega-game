@@ -1,7 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const CopyPlugin = require("copy-webpack-plugin");
 
 const configSSR = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -10,8 +9,8 @@ const configSSR = {
   resolve: { extensions: ['.js', '.ts', '.tsx'], },
   output: {
     filename: 'ssr.bundle.js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/',
+    path: path.join(__dirname, '../dist/assets'),
+    publicPath: '/assets/',
     libraryTarget: 'commonjs2'
   },
   module: {
@@ -64,10 +63,10 @@ const configSSR = {
       }
     ],
   },
-  plugins: [new MiniCssExtractPlugin(), 
-    ],
+  plugins: [new MiniCssExtractPlugin(),
+  ],
   externals:
-[nodeExternals()],
+    [nodeExternals()],
 };
 
 module.exports = configSSR;

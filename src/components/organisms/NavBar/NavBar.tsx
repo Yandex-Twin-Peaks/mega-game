@@ -8,7 +8,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { sendUserLogOutPending } from '../../../_store/actions/auth.actions';
 
-// import './NavBar.pcss';
+import './NavBar.pcss';
 
 const newLocal = '#063970';
 

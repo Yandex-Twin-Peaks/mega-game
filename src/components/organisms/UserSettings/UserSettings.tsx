@@ -111,7 +111,7 @@ function UserSettings() {
           label={inputName}
           name={inputName}
           variant='outlined'
-          value={inputs[inputName] || ''}
+          value={(!!inputs && inputs.hasOwnProperty(inputName)) ? inputs[inputName] : ''}
           onChange={handleChangeUserSettings}
           key={index}
         />)}
