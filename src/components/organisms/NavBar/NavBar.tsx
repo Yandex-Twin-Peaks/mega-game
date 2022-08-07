@@ -7,8 +7,8 @@ import {
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { sendUserLogOutPending } from '../../../_store/actions/auth.actions';
-
-// import './NavBar.pcss';
+import Theme from '../../molecules/Theme/Theme';
+import './NavBar.pcss';
 
 const newLocal = '#063970';
 
@@ -34,6 +34,7 @@ function NavBar() {
             }} />} component={Link} to={conf.path} sx = {{ marginRight: '100px' }} /> :
               <Tab key={index} label={conf.pageName} component={Link} to={conf.path} />))}
           </Tabs>
+          <Theme />
           <Button
             sx={{ marginLeft: 'auto' }}
             variant='contained'
