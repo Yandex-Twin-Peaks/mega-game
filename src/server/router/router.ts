@@ -7,10 +7,12 @@ import handler from '../render';
 // import { userRoutes } from './userRoutes';
 
 import { themesRoutes } from './themeRoutes';
+import { topicsRoutes } from './topicsRoutes';
 
 const router = express.Router();
 
 themesRoutes(router);
+topicsRoutes(router);
 // userRoutes(router);
 router.get('/*', handler);
 

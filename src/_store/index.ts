@@ -16,11 +16,14 @@ import {
 import gameReducer, { IGameState } from './reducers/game.reducer';
 import leaderboardReducer, { IleaderBoardState } from './reducers/leaderboard.reducer';
 import { sendAddDataLeaderboardRequestEffect$, sendLeaderboardDataRequestEffect$ } from './effects/leaderboard.effects';
+import themeReducer from './reducers/theme.reducer';
+import { sendGetThemeRequestEffect$, sendPutThemeRequestEffect$ } from './effects/theme.effects';
 
 export interface IStore {
   auth: IAuthState
   game: IGameState
-  leaderBoard: IleaderBoardState
+  leaderBoard: IleaderBoardState,
+  theme: any
 }
 
 const state = window.__INITIAL_STATE__;
@@ -29,6 +32,7 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   game: gameReducer,
   leaderBoard: leaderboardReducer,
+  theme: themeReducer,
 });
 
 const observableMiddleware = createEpicMiddleware();
@@ -47,4 +51,6 @@ observableMiddleware.run(combineEpics(
   sendUserPasswordsRequestEffect$,
   sendLeaderboardDataRequestEffect$,
   sendAddDataLeaderboardRequestEffect$,
+  sendGetThemeRequestEffect$,
+  sendPutThemeRequestEffect$,
 ));

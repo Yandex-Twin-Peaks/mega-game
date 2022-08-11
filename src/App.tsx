@@ -7,11 +7,13 @@ import { useHistory } from 'react-router-dom';
 import { sendGetUserPending } from './_store/actions/auth.actions';
 import NavBar from './components/organisms/NavBar';
 
-// import './App.pcss';
+import './App.pcss';
+import { getThemePending } from './_store/actions/theme.actions';
 
 const App = () => {
   /** ----------------------------- Глобальное состояние ---------------------------------- */
   const { isLoggedIn } = useSelector((store: IStore) => store.auth);
+  const { user } = useSelector((store: IStore) => store.auth);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -33,6 +35,12 @@ const App = () => {
     if (!isLoggedIn) {
       history.push('/auth');
     }
+
+    if (user) {
+      dispatch(getThemePending({ ownerId: user?.id }));
+    }
+
+
   }, [isLoggedIn]);
 
 

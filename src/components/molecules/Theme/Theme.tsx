@@ -1,13 +1,30 @@
 
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { putThemePending } from '../../../_store/actions/theme.actions';
 import './Theme.pcss';
-
-function handleTheme() {
-  console.log('тема изменена');
-}
 
 
 function Theme() {
+
+  const { theme }:any = useSelector<any>(((state):any => {
+    return state.theme;
+  } ));
+
+  const { user }:any = useSelector<any>(state => state.auth );
+
+  console.log(theme, user);
+
+  const dispatch = useDispatch();
+
+  function handleTheme(event:any) {
+    dispatch(putThemePending({
+      ownerId: user.id,
+      theme: theme.theme === 'light' ? 'dark' : 'light'
+    }));
+    console.log('тема изменена');
+    event.preventDefault();
+  }
 
 
   return <button onClick={handleTheme}>☼☀</button>;

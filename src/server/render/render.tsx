@@ -10,6 +10,7 @@ import authReducer from '../../_store/reducers/auth.reducer';
 import leaderboardReducer from '../../_store/reducers/leaderboard.reducer';
 import { combineReducers, createStore } from 'redux';
 import { resolve } from 'path';
+import themeReducer from '../../_store/reducers/theme.reducer';
 
 if (process.env.NODE_ENV === 'development') {
   // @ts-ignore
@@ -39,16 +40,20 @@ export const gameState: any = {
 
 export const leaderBoardState: any = { rating: [], };
 
+export const themeState: any = { theme: null };
+
 const state = {
   auth: initialState,
   game: gameState,
   leaderBoard: leaderBoardState,
+  theme: themeState
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   game: gameReducer,
   leaderBoard: leaderboardReducer,
+  theme: themeReducer,
 });
 
 const store = createStore(rootReducer, state);

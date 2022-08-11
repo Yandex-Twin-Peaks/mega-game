@@ -5,18 +5,28 @@ import { Link } from 'react-router-dom';
 import {
   AppBar, Tab, Tabs, Toolbar, Button
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sendUserLogOutPending } from '../../../_store/actions/auth.actions';
 import Theme from '../../molecules/Theme/Theme';
 import './NavBar.pcss';
 
-const newLocal = '#063970';
+let newLocal = '#063970';
 
 function NavBar() {
   const dispatch = useDispatch();
   const [value, setPartMenu] = useState(0);
 
+  const { theme }:any = useSelector<any>(((state):any => {
+    return state.theme;
+  } ));
+
+  console.log('mytheme', theme);
+
   const filteredPaths = routes.filter(pathItem => pathItem.pageName !== 'Auth');
+
+  if (theme) {
+    newLocal = theme.theme === 'light' ? '#063970' : theme.theme === 'dark' ? '#808080' : '#FF0000';
+  }
 
   return (
     <>

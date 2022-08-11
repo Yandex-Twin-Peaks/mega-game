@@ -1,6 +1,8 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 // import { UserTheme, User, Topic, Comment } from '@/server/models';
-import { UserTheme, User } from './models';
+import {
+  UserTheme, User, Topics
+} from './models';
 
 
 const proc = {
@@ -26,7 +28,7 @@ const sequelizeOptions: SequelizeOptions = {
 };
 
 export const sequelize = new Sequelize(sequelizeOptions);
-sequelize.addModels([User, UserTheme /* , Topic, Comment*/]);
+sequelize.addModels([User, UserTheme, Topics /* , Topic, Comment*/]);
 
 export async function dbConnect() {
   try {

@@ -1,11 +1,13 @@
 import { UserTheme } from '../db/models';
 
 const getThemeByOwnerId = (req:any, res:any) => {
+  console.log(req, 'mybody');
   try {
-    UserTheme.findOne({ where: { ownerId: req.body.ownerId } }).then((usertheme) => {
+    UserTheme.findOne({ where: { ownerId: req.query.ownerId } }).then((usertheme) => {
+
       if (usertheme === null) {
         return UserTheme.create({
-          ownerId: req.body.ownerId,
+          ownerId: req.query.ownerId,
           theme: 'light'
         });
       }
