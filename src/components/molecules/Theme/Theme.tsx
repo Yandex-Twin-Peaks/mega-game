@@ -13,7 +13,6 @@ function Theme() {
 
   const { user }:any = useSelector<any>(state => state.auth );
 
-  console.log(theme, user);
 
   const dispatch = useDispatch();
 
@@ -22,7 +21,6 @@ function Theme() {
       ownerId: user.id,
       theme: theme.theme === 'light' ? 'dark' : 'light'
     }));
-    console.log('тема изменена');
     event.preventDefault();
   }
 

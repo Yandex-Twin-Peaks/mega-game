@@ -13,12 +13,11 @@ import Input from '../../atoms/Input/Input';
 
 
 function AddTopic(props:any) {
-  const { handleAddTopic } = props
-  // const dispatch = useDispatch();
+  const { handleAddTopic, name } = props;
 
   const [inputs, setInputs] = useState<any | object | any>('');
 
-  function handleChangeUserSettings(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name } = event.target as HTMLInputElement;
     const { value } = event.target as HTMLInputElement;
     setInputs((values: object) => ({
@@ -26,14 +25,6 @@ function AddTopic(props:any) {
       [name]: value
     }));
   }
-
-  // function handleAddTopicSubmit(event:any) {
-  //   event.preventDefault();
-  //   axios.post('/topic', {
-  //     title: inputs['addTopic'],
-  //     userId
-  //   })
-  // }
 
   return (
     <form id='user-settings' className='user-settings__settings' onSubmit={handleAddTopic}>
@@ -43,14 +34,14 @@ function AddTopic(props:any) {
           margin: '5px'
         }}
         type='text'
-        label={'addTopic'}
-        name={'addTopic'}
+        label={name}
+        name={name}
         variant='outlined'
-        value={inputs['addTopic'] || ''}
-        onChange={handleChangeUserSettings}
+        value={inputs[name] || ''}
+        onChange={handleChange}
         // key={index}
       />
-      <Input type={'submit'} inputValue={'Изменить данные'} />
+      <Input type={'submit'} inputValue={'Добавить'} />
     </form>
   );
 }

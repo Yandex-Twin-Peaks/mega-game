@@ -1,5 +1,8 @@
 import React, {
-  useState, ChangeEvent, useEffect
+  useState,
+  // ChangeEvent,
+
+  useEffect
 } from 'react';
 
 import { useSelector } from 'react-redux';
@@ -13,19 +16,19 @@ import TopicCard from '../../molecules/TopicCard';
 
 const Forum = () => {
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
   const [topics, setTopics] = useState([]);
   const userId = useSelector<any>((state: { auth: { user: { id: any; }; }; }) => state.auth.user.id);
 
-  const handleChangePage = (_event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+  // const handleChangePage = (_event: unknown, newPage: number) => {
+  //   setPage(newPage);
+  // };
 
-  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
 
   function handleAddTopicSubmit(event:any) {
     event.preventDefault();
@@ -48,12 +51,10 @@ const Forum = () => {
 
 
   function handleDeleteOneTopic(event:any) {
-    console.log(event.target.dataset.topicId);
     axios.delete(`/topic/${event.target.dataset.topicId}`).then(() => getTopics());
 
   }
 
-  console.log(topics, 'final topics');
 
   // @ts-ignore
   const topicArr: any = topics.data;
@@ -67,7 +68,7 @@ const Forum = () => {
         ))}
       </div>
 
-      <AddTopic handleAddTopic={handleAddTopicSubmit} />
+      <AddTopic name={'addTopic'} handleAddTopic={handleAddTopicSubmit} />
     </>
   );
 };

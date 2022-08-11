@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import   { getAllTopics,
-getOneTopicById,
-deleteOneTopicById, postOneTopic} from '../controllers/TopicController'
+import {
+  getAllTopics,
+  getOneTopicById,
+  deleteOneTopicById, postOneTopic
+} from '../controllers/TopicController';
 
 
 export const topicsRoutes = (router: Router) => {
@@ -11,7 +13,7 @@ export const topicsRoutes = (router: Router) => {
     .get('/', getAllTopics)
     .get('/:id', getOneTopicById)
     .delete('/:id', deleteOneTopicById)
-    .post('/', postOneTopic)
+    .post('/', postOneTopic);
 
 
   router.use('/topic', topicsRouter);

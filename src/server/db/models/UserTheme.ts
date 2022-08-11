@@ -27,12 +27,12 @@ export class UserTheme extends Model<UserThemeAttributes, UserThemeCreationAttri
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
-  id: number;
+    id: number;
 
   @Default('dark')
   @AllowNull(false)
   @Column(DataType.STRING)
-  theme: string;
+    theme: string;
 
   @ForeignKey(() => User)
   @AllowNull(false)
@@ -40,5 +40,5 @@ export class UserTheme extends Model<UserThemeAttributes, UserThemeCreationAttri
     type: DataType.INTEGER,
     field: 'owner_id'
   })
-  ownerId: number;
+    ownerId: number;
 }

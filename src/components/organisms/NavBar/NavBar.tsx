@@ -20,9 +20,8 @@ function NavBar() {
     return state.theme;
   } ));
 
-  console.log('mytheme', theme);
+  const filteredPaths = routes.filter(pathItem => pathItem.pageName !== 'Auth' && pathItem.pageName !== 'OneTopic');
 
-  const filteredPaths = routes.filter(pathItem => pathItem.pageName !== 'Auth');
 
   if (theme) {
     newLocal = theme.theme === 'light' ? '#063970' : theme.theme === 'dark' ? '#808080' : '#FF0000';

@@ -18,7 +18,6 @@ const getOneTopicById = (req:any, res:any) => {
 };
 
 const deleteOneTopicById = (req:any, res:any) => {
-  console.log(req)
   try {
     Topics.destroy({ where: { id: req.params.id } }).then(oneTopic => res.json(oneTopic));
   } catch (error) {
@@ -27,7 +26,6 @@ const deleteOneTopicById = (req:any, res:any) => {
 };
 
 const postOneTopic = (req:any, res:any) => {
-  console.log(req.body, 'test1');
   try {
     Topics.create({
       title: req.body.title,

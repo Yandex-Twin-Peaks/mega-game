@@ -8,21 +8,19 @@ export interface ITopicCardProps {
   id: number,
   title: string,
   ownerId: number,
-  handleDelete: any,
+  handleDelete?: any,
 }
-
 
 
 function TopicCard({ id, title, ownerId, handleDelete }: ITopicCardProps) {
   return (
-    <div className='topiccard topiccard-1'>
+    <div className='topiccard topiccard-1' >
       <div className='topiccard__icon'><i className='fas fa-bolt'></i></div>
       <p className='topiccard__exit'><i className='fas fa-times'>ИД пользователя: {ownerId}</i></p>
-      <Link to={`forum/${id}`}><h2 className='topiccard__title'>{id}{title}</h2></Link>
+      <Link to={`forum/${id}`}><h2 className='topiccard__title'>{title}</h2></Link>
       <p className='topiccard__apply'>
         <div className='topiccard__link' data-topic-id={id} onClick={handleDelete}>
-           Удалить пост <i className='fas fa-arrow-right'></i></div>
-        {/* <div>Удалить топик</div> */}
+           Удалить <i className='fas fa-arrow-right'></i></div>
       </p>
     </div>
   );

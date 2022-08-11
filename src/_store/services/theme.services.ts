@@ -18,6 +18,5 @@ export const sendPutThemeRequest = (payload: any): Observable<string> => {
 
 /** GET Запрос на регистрацию пользователя */
 export const sendGetThemeRequest = (params: any): Observable<any> => {
-  console.log(params, 'test');
   return Axios.get(`${paths.THEME}`, { params }).pipe(map(({ data }: AxiosResponse<any>) => data));
 };

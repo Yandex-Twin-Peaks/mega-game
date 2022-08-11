@@ -6,6 +6,7 @@ import forumPage from '../components/pages/Forum';
 import leaderBoardPage from '../components/pages/LeaderBoard';
 import profilePage from '../components/pages/Profile';
 import gamePage from '../components/pages/Game';
+import oneTopic from '../components/pages/OneTopic';
 // import notFoundPage from '../components/pages/NotFound';
 
 export interface IRoute {
@@ -75,6 +76,13 @@ export const routes: IRoute[] = [
     component: gamePage,
     fallback: null,
     pageName: 'Game',
+  },
+  {
+    path: '/forum/:Id',
+    exact: true,
+    component: oneTopic,
+    fallback: null,
+    pageName: 'OneTopic',
   },
   // {
   //   path: '*',
