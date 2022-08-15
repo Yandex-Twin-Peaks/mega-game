@@ -43,7 +43,7 @@
       "error",
       {
         "multiline": true,
-        "minItems": 4
+        "minItems": 3
       }
     ],
     "block-spacing": "error",

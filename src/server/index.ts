@@ -1,15 +1,20 @@
 import express from 'express';
-import path from 'path';
-import handler from './render';
+import * as path from 'path';
+import hotReload from './hmr';
+import { render } from './render';
 
-const PORT = process.env.PORT || 8080;
-
+const isDev = process.env.MODE === 'development';
+const PORT = isDev ? 3000 : 8080;
 const app = express();
-const staticDir = path.resolve(__dirname, '../../dist/assets');
 
-app.use('/assets/', express.static(staticDir));
-app.use(handler);
+app.use('/assets/', express.static(path.join(__dirname, '/../../assets/')));
+
+if (isDev) {
+  app.use(hotReload);
+} else {
+  app.use(render);
+}
 
 app.listen(PORT, () => {
-  console.log(`App is started on: http://localhost:${PORT}\nStatic Directory: ${staticDir}`);
+  console.log(`App on http://localhost:${PORT}\n--- ${isDev ? 'DEVELOPER' : 'PRODUCTION'} MODE ---\n`);
 });

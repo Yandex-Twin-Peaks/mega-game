@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "module": "CommonJS",
+    "target": "es2020",
     "moduleResolution": "node",
-    "module": "commonjs",
     "esModuleInterop": true,
-    "target": "es5",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react",
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "types": ["node", "jest"],
+    "types": [
+      "node",
+      "jest"
+    ]
   },
   "exclude": ["node_modules", "dist", "**/*.spec.*"],
   "include": ["src"]
 }
-
