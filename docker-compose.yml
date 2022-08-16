@@ -1,8 +1,21 @@
-version: '3.7'
+version: '4'
 
 services:
+
+  postgres:
+    build: postgres
+    env_file:
+      - ../.env.mega-game
+    volumes:
+      - ../.data/postgres:/var/lib/postgresql/data
+    restart: always
+
   mega-game:
     build: .
+    depends_on:
+      - postgres
+    env_file:
+      - ../.env.mega-game
     command: npm start
     ports:
       - "8080:8080"

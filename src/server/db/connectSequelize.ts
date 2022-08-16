@@ -3,26 +3,12 @@ import {
   UserTheme, User, Topics, Comments
 } from './models';
 
-
-const proc = {
-  env: {
-    HOST: '127.0.0.1',
-    BD_PORT: 5432,
-    USERNAME: 'polzovatel',
-    PASSWORD: '1234',
-    DATABASE: 'sequelize_project_development',
-    PORT: 8080
-
-  }
-};
-
-
 const sequelizeOptions: SequelizeOptions = {
-  host: proc.env.HOST,
-  port: Number(proc.env.BD_PORT),
-  username: proc.env.USERNAME,
-  password: proc.env.PASSWORD,
-  database: proc.env.DATABASE,
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   dialect: 'postgres'
 };
 
