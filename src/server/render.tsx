@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 import { Provider } from 'react-redux';
 import { defaultStore } from './initStore';
 
@@ -12,11 +12,11 @@ const html = fs.readFileSync(path.join(__dirname, '../../src/index.html'), { enc
 
 export function render(req: Request, res: Response) {
   if (process.env.MODE === 'development') {
-    delete require.cache[require.resolve('../../assets/ssr.bundle')];
+    delete require.cache[require.resolve('../../ssr.bundle')];
   }
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const App = require('../../assets/ssr.bundle').default;
+  const App = require('../../ssr.bundle').default;
 
   const reactHTML = ReactDOMServer.renderToString(<Provider store={defaultStore}>
     <StaticRouter location={req.url}>

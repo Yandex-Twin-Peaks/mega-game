@@ -3,12 +3,12 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export default {
   mode: 'production',
-  entry: './src/index.tsx',
+  entry: './src/components/index.tsx',
   target: 'web',
   output: {
     filename: 'client.bundle.js',
-    path: path.join(__dirname, '../build/assets/'),
-    publicPath: '/assets/'
+    path: path.join(__dirname, '../build/'),
+    publicPath: '/'
   },
   resolve: {
     extensions: [

@@ -12,7 +12,7 @@ export default [
   devMiddleware(compiler, {
     serverSideRender: true,
     index: false,
-    publicPath: '/assets/'
+    publicPath: '/'
   }),
   hotMiddleware(compiler, {
     path: '/__webpack_hmr',

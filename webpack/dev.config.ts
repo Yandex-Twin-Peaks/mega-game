@@ -5,12 +5,12 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export default {
   mode: 'development',
-  entry: ['@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr', './src/index.tsx'],
+  entry: ['@gatsbyjs/webpack-hot-middleware/client?path=/__webpack_hmr', './src/components/index.tsx'],
   target: 'web',
   output: {
     filename: 'client.bundle.js',
-    path: path.join(__dirname, '../dist/assets/'),
-    publicPath: '/assets/'
+    path: path.join(__dirname, '../dist/'),
+    publicPath: '/'
   },
   resolve: {
     extensions: [

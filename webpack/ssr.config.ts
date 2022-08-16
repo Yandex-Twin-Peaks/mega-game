@@ -5,12 +5,12 @@ import prodConfig from './prod.config';
 export default {
   ...prodConfig,
   mode: 'production',
-  entry: './src/App.tsx',
+  entry: './src/components/App.tsx',
   target: 'node',
   output: {
     filename: 'ssr.bundle.js',
-    path: path.join(__dirname, '../build/assets/'),
-    publicPath: '/assets/',
+    path: path.join(__dirname, '../build/'),
+    publicPath: '/',
     libraryTarget: 'commonjs2'
   },
   externals: [nodeExternals()]
