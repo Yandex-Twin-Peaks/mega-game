@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { sendSignUpRequestPending, sendSignInRequestPending } from '../../../_store/actions/auth.actions';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Button, Card, TextField
 } from '@mui/material';
@@ -52,6 +53,15 @@ const Authorization = () => {
     }));
   };
 
+  const CLIENT_ID = '42a6859b167b459f9097c0543efd7684';
+  const REDIRECT_URI = 'http://localhost:8080';
+
+  function handleOAuthSignIn(e:any) {
+    e.preventDefault();
+    window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
+    console.log('test');
+  }
+
   useEffect(() => {
     if (isLoggedIn) {
       history.push('/home');
@@ -97,6 +107,12 @@ const Authorization = () => {
             onClick={() => handleSignIn()}
           >
             Авторизоваться
+          </Button>
+          <Button
+            variant='contained'
+            onClick={handleOAuthSignIn}
+          >
+            Яндекс авторизация
           </Button>
           <Button
             variant='text'
