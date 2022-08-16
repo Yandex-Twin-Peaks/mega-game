@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import { dbConnect } from './db/connectSequelize';
 import router from './router/router';
 
-
 const jsonParser = bodyParser.json();
 
 const app = express();
