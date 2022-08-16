@@ -1,7 +1,6 @@
 import { UserTheme } from '../db/models';
 
 const getThemeByOwnerId = (req:any, res:any) => {
-  console.log(req, 'mybody');
   try {
     UserTheme.findOne({ where: { ownerId: req.query.ownerId } }).then((usertheme) => {
 
