@@ -112,7 +112,7 @@ const Authorization = () => {
   async function handleOAuthSignIn(e:any) {
     e.preventDefault();
     const { data } = await axios.get('https://ya-praktikum.tech/api/v2/oauth/yandex/service-id', { params: { redirect_uri: REDIRECT_URI } });
-
+    console.log(data);
     // data.service_id
     window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
 
