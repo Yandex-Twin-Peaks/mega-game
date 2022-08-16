@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { sendSignUpRequestPending, sendSignInRequestPending } from '../../../_store/actions/auth.actions';
+import {
+  sendSignUpRequestPending, sendSignInRequestPending, sendGetUserPending
+} from '../../../_store/actions/auth.actions';
 import { useDispatch, useSelector } from 'react-redux';
+import axios
+, { AxiosRequestConfig }
+  from 'axios';
 
 import {
   Button, Card, TextField
@@ -8,12 +13,58 @@ import {
 
 import './Authorization.styles.pcss';
 import { IStore } from '../../../_store';
-import { useHistory } from 'react-router-dom';
+import {
+  useHistory
+  ,
+  useLocation
+}
+  from 'react-router-dom';
+
+const baseConfig: AxiosRequestConfig = {
+  timeout: 3000,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Access-Control-Allow-Origin': '*',
+  }
+};
+
+
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
 
 const Authorization = () => {
   /** ---------------------------- Глобальное состояние ------------------------------------ */
   const history = useHistory();
   const isLoggedIn = useSelector((store: IStore) => store.auth.isLoggedIn);
+
+  const CLIENT_ID = '42a6859b167b459f9097c0543efd7684';
+  const REDIRECT_URI = 'http://localhost:8080/auth';
+
+
+  const query = useQuery();
+
+
+  useEffect(() => {
+    const yaCode = query.get('code');
+
+    if (yaCode) {
+      try {
+        axios.post('https://ya-praktikum.tech/api/v2/oauth/yandex', {
+          code: yaCode,
+          redirect_uri: REDIRECT_URI
+        }, baseConfig).then(data => console.log(data));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+
+  }, []);
+
 
   /** ---------------------------- Внутреннее состояние ------------------------------------ */
   /** Вход или регистрация */
@@ -51,15 +102,21 @@ const Authorization = () => {
       login,
       password
     }));
+
+    dispatch(sendGetUserPending());
+
+
   };
 
-  const CLIENT_ID = '42a6859b167b459f9097c0543efd7684';
-  const REDIRECT_URI = 'http://localhost:8080';
 
-  function handleOAuthSignIn(e:any) {
+  async function handleOAuthSignIn(e:any) {
     e.preventDefault();
+    const { data } = await axios.get('https://ya-praktikum.tech/api/v2/oauth/yandex/service-id', { params: { redirect_uri: REDIRECT_URI } });
+
+    // data.service_id
     window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
-    console.log('test');
+
+    // });
   }
 
   useEffect(() => {

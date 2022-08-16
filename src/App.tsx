@@ -3,7 +3,7 @@ import Router from './router/Router';
 import { routes } from './router/config';
 import { IStore } from './_store';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { sendGetUserPending } from './_store/actions/auth.actions';
 import NavBar from './components/organisms/NavBar';
 
@@ -17,9 +17,8 @@ const App = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const code = useParams();
 
-  console.log(code);
+  
 
   /** ----------------------------- Эффекты для запросов ---------------------------------- */
   /** При первой загрузке приложения отправляем запрос на юзера
