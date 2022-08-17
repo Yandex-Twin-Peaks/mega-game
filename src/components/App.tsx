@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { sendGetUserPending } from '../_store/actions/auth.actions';
 import NavBar from '../components/organisms/NavBar';
 
+import './App.pcss';
 import { getThemePending } from '../_store/actions/theme.actions';
 
 const App = () => {

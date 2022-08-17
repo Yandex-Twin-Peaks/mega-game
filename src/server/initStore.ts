@@ -27,8 +27,8 @@ export const defaultStore = create({
     errorCount: 0,
     showText: [],
     gameStatus: GAMESTATUS.inGame,
-    submitted: false,
+    submitted: false
   },
   leaderBoard: { rating: [] },
-  theme: null
+  theme: { theme: null }
 });

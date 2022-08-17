@@ -7,8 +7,8 @@ export default {
   target: 'web',
   output: {
     filename: 'client.bundle.js',
-    path: path.join(__dirname, '../build/'),
-    publicPath: '/'
+    path: path.join(__dirname, '../build/assets/'),
+    publicPath: '/assets/'
   },
   resolve: {
     extensions: [
@@ -50,7 +50,7 @@ export default {
         use: [
           {
             loader: 'file-loader?limit=10000',
-            options: { name: '/img/[name].[ext]' }
+            options: { name: '/assets/img/[name].[ext]' }
           }
         ]
       },
@@ -59,7 +59,7 @@ export default {
         use: [
           {
             loader: 'file-loader',
-            options: { name: '/svg/[name].[ext]' }
+            options: { name: '/assets/svg/[name].[ext]' }
           }
         ]
       },
@@ -67,10 +67,10 @@ export default {
         test: /\.woff(2)?$/,
         use: {
           loader: 'file-loader',
-          options: { name: '/fonts/[name].[ext]' }
+          options: { name: '/assets/fonts/[name].[ext]' }
         }
       }
     ]
   },
-  plugins: [new MiniCssExtractPlugin({ filename: 'main.css' })]
+  plugins: [new MiniCssExtractPlugin({ filename: 'assets/main.css' })]
 };

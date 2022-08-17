@@ -13,8 +13,6 @@ import { store } from '../_store';
 import '../styles/index.pcss';
 import '../styles/normalize.css';
 // @ts-ignore
-delete window.__PRELOADED_STATE__;
-
 
 ReactDOM.hydrateRoot(
   rootElement,
