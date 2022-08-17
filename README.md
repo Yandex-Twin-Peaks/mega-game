@@ -24,7 +24,7 @@ DB_PORT=5432
 DB_USER=polzovatel
 DB_PASSWORD=1234
 DB_NAME=sequelize_project_development
-PORT=8080
+MG_PORT=8080
 ```
 
 #### Первый вариант:
@@ -81,3 +81,6 @@ docker compose up --build -d
 
 Обратите внимание, что на этом же уровне появится директория `.mega-game` для сохранения состояния контейнера с
 Postgres.
+
+
+[https://github.com/Yandex-Twin-Peaks/mega-game](https://github.com/Yandex-Twin-Peaks/mega-game)
