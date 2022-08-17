@@ -8,7 +8,7 @@ import { render } from './render';
 
 const jsonParser = bodyParser.json();
 const isDev = process.env.MODE === 'development';
-const PORT = isDev ? 3000 : 8080;
+const PORT = isDev ? 3000 : process.env.MG_PORT || 8080;
 const app = express();
 
 app
