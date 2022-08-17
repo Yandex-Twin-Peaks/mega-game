@@ -55,7 +55,8 @@ function OneTopic() {
       {topic && <TopicCard id={topic.id} title={topic.title} ownerId={topic.userId} />}
       <div>комментарии</div>
       <div className='onetopic__comments'>
-        {comments && comments.map((el:any) => <TopicCard id={el.id} title={el.text} ownerId={el.userId} handleDelete={handleDeleteOneComment} />)}
+        {comments && comments.map((el: any) =>
+          <TopicCard id={el.id} title={el.text} ownerId={el.userId} handleDelete={handleDeleteOneComment}/>)}
       </div>
 
       <AddTopic name={'addComment'} handleAddTopic={handleAddCommentSubmit} />
