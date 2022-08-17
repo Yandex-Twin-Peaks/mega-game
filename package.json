@@ -17,7 +17,9 @@
     "build:clean": "rm -rf build",
     "clean": "npm run dev:clean && npm run build:clean",
     "dev": "npm run dev:clean && npm run dev:build:server && npm run dev:build:client && npm run dev:start:server & npm run dev:watch:client",
-    "start": "npm run build:clean && npm run build:server && npm run build:client && npm run build:ssr && npm run start:server"
+    "start": "npm run build:clean && npm run build:server && npm run build:client && npm run build:ssr && npm run start:server",
+    "lint": "eslint --fix --ext .tsx,.ts,.jsx,.js src",
+    "test": "jest -u"
   },
   "browser": {
     "[module-name]": false
