@@ -7,7 +7,7 @@ import leaderBoardPage from '../components/pages/LeaderBoard';
 import profilePage from '../components/pages/Profile';
 import gamePage from '../components/pages/Game';
 import oneTopic from '../components/pages/OneTopic';
-// import notFoundPage from '../components/pages/NotFound';
+import notFoundPage from '../components/pages/NotFound';
 
 export interface IRoute {
   /** Адрес */
@@ -33,13 +33,13 @@ export const routes: IRoute[] = [
     path: '/',
     exact: true,
     redirect: '/home',
-    fallback: '...'
+    fallback: null
   },
   {
     path: '/home',
     exact: false,
     component: homePage,
-    fallback: '...',
+    fallback: null,
     pageName: 'Home',
   },
   {
@@ -85,9 +85,16 @@ export const routes: IRoute[] = [
     pageName: 'OneTopic',
   },
   // {
-  //   path: '*',
+  //   path: '/oauth',
   //   exact: true,
-  //   component: notFoundPage,
-  //   fallback: null
-  // }
+  //   component: getOAuthInfo,
+  //   fallback: null,
+  //   pageName: 'OAuth',
+  // },
+  {
+    path: '*',
+    exact: true,
+    component: notFoundPage,
+    fallback: null
+  }
 ];
