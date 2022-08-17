@@ -41,9 +41,8 @@ const Authorization = () => {
   const history = useHistory();
   const isLoggedIn = useSelector((store: IStore) => store.auth.isLoggedIn);
 
-  const CLIENT_ID = '42a6859b167b459f9097c0543efd7684';
-  const REDIRECT_URI = 'http://localhost:8080/auth';
-
+  const CLIENT_ID = '45c1958bbe6049fb862a72aa00f90001';
+  const REDIRECT_URI = 'https://twinpeaks14.ya-praktikum.tech/oauth';
 
   const query = useQuery();
 
@@ -111,7 +110,10 @@ const Authorization = () => {
 
   async function handleOAuthSignIn(e:any) {
     e.preventDefault();
-    const { data } = await axios.get('https://ya-praktikum.tech/api/v2/oauth/yandex/service-id', { params: { redirect_uri: REDIRECT_URI } });
+    const { data } = await axios.get(
+      'https://ya-praktikum.tech/api/v2/oauth/yandex/service-id',
+      { params: { redirect_uri: REDIRECT_URI } }
+    );
     console.log(data);
     // data.service_id
     window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
