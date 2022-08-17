@@ -6,7 +6,8 @@ import forumPage from '../components/pages/Forum';
 import leaderBoardPage from '../components/pages/LeaderBoard';
 import profilePage from '../components/pages/Profile';
 import gamePage from '../components/pages/Game';
-import notFoundPage from '../components/pages/NotFound';
+import oneTopic from '../components/pages/OneTopic';
+// import notFoundPage from '../components/pages/NotFound';
 
 export interface IRoute {
   /** Адрес */
@@ -77,9 +78,16 @@ export const routes: IRoute[] = [
     pageName: 'Game',
   },
   {
-    path: '*',
+    path: '/forum/:Id',
     exact: true,
-    component: notFoundPage,
-    fallback: null
-  }
+    component: oneTopic,
+    fallback: null,
+    pageName: 'OneTopic',
+  },
+  // {
+  //   path: '*',
+  //   exact: true,
+  //   component: notFoundPage,
+  //   fallback: null
+  // }
 ];

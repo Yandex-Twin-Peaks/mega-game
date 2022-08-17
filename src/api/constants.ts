@@ -1,4 +1,5 @@
 export const API_HOST = 'https://ya-praktikum.tech/api/v2';
+export const LOCAL_HOST = 'localhost:8080';
 
 export const TEAM_NAME = '/twinpeaks';
 
@@ -10,5 +11,6 @@ export enum paths {
   USER_PROFILE = '/user/profile',
   USER_AVATAR = '/user/profile/avatar',
   USER_PASSWORDS = '/user/password',
-  LEADERBOARD = '/leaderboard'
+  LEADERBOARD = '/leaderboard',
+  THEME = '/theme'
 }

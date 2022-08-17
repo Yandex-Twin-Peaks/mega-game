@@ -1,13 +1,22 @@
 import express from 'express';
 import path from 'path';
-import handler from './render';
+import bodyParser from 'body-parser';
+import { dbConnect } from './db/connectSequelize';
+import router from './router/router';
+
+const jsonParser = bodyParser.json();
 
 const app = express();
 
-app.use(express.static(path.resolve(__dirname, '../../public')));
 
-app.use(handler);
+app
+  .use(express.static(path.resolve(__dirname, '../../public')))
+  .use(jsonParser)
+  .use(router);
 
-app.listen(8080, () => {
-  console.log('app is started');
+dbConnect().then(() => {
+  const port = 8080;
+  app.listen(port, () => {
+    console.log(`app is started on localhost:${port}`);
+  });
 });

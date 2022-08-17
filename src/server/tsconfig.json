@@ -4,5 +4,8 @@
     "outDir": "../../dist",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "es6",
   }
 }
