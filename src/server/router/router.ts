@@ -1,5 +1,4 @@
 import express from 'express';
-import handler from '../render';
 
 import { themesRoutes } from './themeRoutes';
 import { topicsRoutes } from './topicsRoutes';
@@ -13,6 +12,5 @@ themesRoutes(router);
 topicsRoutes(router);
 commentsRoutes(router);
 oauth(router);
-router.get('/*', handler);
 
 export default router;

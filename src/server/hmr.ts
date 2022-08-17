@@ -17,7 +17,6 @@ export default [
   hotMiddleware(compiler, {
     path: '/__webpack_hmr',
     log: false,
-
   }),
   render
 ];

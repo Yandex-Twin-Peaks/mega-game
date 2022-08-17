@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { defaultStore } from './initStore';
 
