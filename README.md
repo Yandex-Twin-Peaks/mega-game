@@ -72,8 +72,12 @@ npm run test
 файле `.env.mega-game`.
 
 ```bash
-git clone git@github.com:Yandex-Twin-Peaks/mega-game.git
+rm -rf ./mega-game
+git clone -b main git@github.com:Yandex-Twin-Peaks/mega-game.git
+cp .env.mega-game mega-game/.env
 cd mega-game
+export $(grep -v '^#' .env | xargs -d '\n')
+sed 's/{DB_USER}/'$DB_USER'/g' -i postgres/init.sql && sed 's/{DB_PASSWORD}/'$DB_PASSWORD'/g' -i postgres/init.sql && sed 's/{DB_NAME}/'$DB_NAME'/g' -i postgres/init.sql
 docker compose up --build -d
 ```
 
